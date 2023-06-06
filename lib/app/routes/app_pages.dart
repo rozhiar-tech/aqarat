@@ -22,16 +22,22 @@ class AppPages {
 
   static final routes = [
     GetPage(
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 500),
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
+      transitionDuration: const Duration(milliseconds: 500),
+      transition: Transition.rightToLeftWithFade,
       name: _Paths.CHAT_ROOM,
       page: () => const ChatRoomView(),
       binding: ChatRoomBinding(),
     ),
     GetPage(
+      transition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 500),
       name: _Paths.FAVOURITE,
       page: () => const FavouriteView(),
       binding: FavouriteBinding(),

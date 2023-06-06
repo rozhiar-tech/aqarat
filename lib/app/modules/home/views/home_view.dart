@@ -144,20 +144,21 @@ class HomeView extends GetView<HomeController> {
                                   ],
                                 ),
                                 child: Row(children: [
-                                  AnimatedContainer(
-                                    duration: const Duration(seconds: 1),
-                                    height: Get.height * 0.1,
-                                    width: Get.width * 0.4,
-                                    decoration: BoxDecoration(
-                                      color: controller.isPressed.value
-                                          ? AppColors.greenColor
-                                          : AppColors.goldColor,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        controller.isPressedChange();
-                                      },
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller.isPressedChange();
+                                    },
+                                    child: AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      height: Get.height * 0.1,
+                                      width: Get.width * 0.4,
+                                      decoration: BoxDecoration(
+                                        color: controller.isPressed.value
+                                            ? AppColors.greenColor
+                                            : AppColors.goldColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                       child: Center(
                                         child: Text('Buy',
                                             style: TextStyle(
@@ -172,20 +173,21 @@ class HomeView extends GetView<HomeController> {
                                       ),
                                     ),
                                   ),
-                                  AnimatedContainer(
-                                    duration: const Duration(seconds: 1),
-                                    height: Get.height * 0.1,
-                                    width: Get.width * 0.4,
-                                    decoration: BoxDecoration(
-                                      color: controller.isPressed.value
-                                          ? AppColors.goldColor
-                                          : AppColors.greenColor,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        controller.isPressedChange();
-                                      },
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller.isPressedChange();
+                                    },
+                                    child: AnimatedContainer(
+                                      duration:
+                                          const Duration(microseconds: 500),
+                                      height: Get.height * 0.1,
+                                      width: Get.width * 0.4,
+                                      decoration: BoxDecoration(
+                                        color: controller.isPressed.value
+                                            ? AppColors.goldColor
+                                            : AppColors.greenColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                       child: Center(
                                         child: Text(
                                           'Rent',
@@ -227,27 +229,30 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 child: Row(
                                   children: [
-                                    AnimatedContainer(
-                                      duration: const Duration(seconds: 1),
-                                      height: Get.height * 0.09,
-                                      width: Get.width * 0.3,
-                                      decoration: BoxDecoration(
-                                        color: controller.isPressed2.value
-                                            ? AppColors.greenColor
-                                            : AppColors.goldColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          controller.isPressedChange2();
-                                        },
+                                    GestureDetector(
+                                      onTap: () {
+                                        controller.buttonIndexChange(0);
+                                      },
+                                      child: AnimatedContainer(
+                                        duration: const Duration(seconds: 1),
+                                        height: Get.height * 0.09,
+                                        width: Get.width * 0.3,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              controller.buttonIndex.value == 0
+                                                  ? AppColors.greenColor
+                                                  : AppColors.goldColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
                                         child: Center(
                                           child: Text('Appartments',
                                               style: TextStyle(
-                                                color:
-                                                    controller.isPressed2.value
-                                                        ? AppColors.goldColor
-                                                        : AppColors.greenColor,
+                                                color: controller.buttonIndex
+                                                            .value ==
+                                                        0
+                                                    ? AppColors.goldColor
+                                                    : AppColors.greenColor,
                                                 fontFamily: GoogleFonts
                                                         .robotoCondensed()
                                                     .fontFamily,
@@ -256,27 +261,31 @@ class HomeView extends GetView<HomeController> {
                                         ),
                                       ),
                                     ),
-                                    AnimatedContainer(
-                                      duration: const Duration(seconds: 1),
-                                      height: Get.height * 0.09,
-                                      width: Get.width * 0.3,
-                                      decoration: BoxDecoration(
-                                        color: controller.isPressed2.value
-                                            ? AppColors.goldColor
-                                            : AppColors.greenColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          controller.isPressedChange2();
-                                        },
+                                    GestureDetector(
+                                      onTap: () {
+                                        controller.buttonIndexChange(1);
+                                      },
+                                      child: AnimatedContainer(
+                                        duration: const Duration(seconds: 1),
+                                        height: Get.height * 0.09,
+                                        width: Get.width * 0.3,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              controller.buttonIndex.value == 1
+                                                  ? AppColors.greenColor
+                                                  : AppColors.goldColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
                                         child: Center(
                                           child: Text(
                                             'Houses',
                                             style: TextStyle(
-                                              color: controller.isPressed2.value
-                                                  ? AppColors.greenColor
-                                                  : AppColors.goldColor,
+                                              color: controller
+                                                          .buttonIndex.value ==
+                                                      1
+                                                  ? AppColors.goldColor
+                                                  : AppColors.greenColor,
                                               fontFamily:
                                                   GoogleFonts.robotoCondensed()
                                                       .fontFamily,
@@ -286,25 +295,29 @@ class HomeView extends GetView<HomeController> {
                                         ),
                                       ),
                                     ),
-                                    AnimatedContainer(
-                                      duration: const Duration(seconds: 1),
-                                      height: Get.height * 0.09,
-                                      width: Get.width * 0.3,
-                                      decoration: BoxDecoration(
-                                        color: controller.isPressed2.value
-                                            ? AppColors.greenColor
-                                            : AppColors.goldColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          controller.isPressedChange2();
-                                        },
+                                    GestureDetector(
+                                      onTap: () {
+                                        controller.buttonIndexChange(2);
+                                      },
+                                      child: AnimatedContainer(
+                                        duration: const Duration(seconds: 1),
+                                        height: Get.height * 0.09,
+                                        width: Get.width * 0.3,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              controller.buttonIndex.value == 2
+                                                  ? AppColors.greenColor
+                                                  : AppColors.goldColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
                                         child: Center(
                                           child: Text(
                                             'Villas',
                                             style: TextStyle(
-                                              color: controller.isPressed2.value
+                                              color: controller
+                                                          .buttonIndex.value ==
+                                                      2
                                                   ? AppColors.goldColor
                                                   : AppColors.greenColor,
                                               fontFamily:
@@ -533,7 +546,7 @@ class HomeView extends GetView<HomeController> {
                               width: Get.width,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: 12,
+                                itemCount: controller.properties.length,
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
                                   return Row(
@@ -571,8 +584,11 @@ class HomeView extends GetView<HomeController> {
                                                         Radius.circular(10),
                                                   ),
                                                   image: DecorationImage(
-                                                    image: AssetImage(
-                                                        'assets/house.jpg'),
+                                                    image: NetworkImage(
+                                                      controller
+                                                              .properties[index]
+                                                          ['photo'],
+                                                    ),
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
@@ -592,7 +608,10 @@ class HomeView extends GetView<HomeController> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        '12,00 USD',
+                                                        controller
+                                                            .properties[index]
+                                                                ['price']
+                                                            .toString(),
                                                         style: TextStyle(
                                                           color: AppColors
                                                               .greenColor,
@@ -605,7 +624,8 @@ class HomeView extends GetView<HomeController> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        'House',
+                                                        controller.properties[
+                                                            index]['type'],
                                                         style: TextStyle(
                                                           color: AppColors
                                                               .greenColor,
@@ -618,7 +638,8 @@ class HomeView extends GetView<HomeController> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        'Rent',
+                                                        controller.properties[
+                                                            index]['category'],
                                                         style: TextStyle(
                                                           color: AppColors
                                                               .greenColor,
