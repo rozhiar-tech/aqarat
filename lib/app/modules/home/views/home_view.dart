@@ -20,13 +20,13 @@ class HomeView extends GetView<HomeController> {
                   child: AppBar(
                       title: Text(
                         controller.title.value,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.greenColor,
                           fontSize: 20,
                         ),
                       ),
-                      actions: [
-                        const Padding(
+                      actions: const [
+                        Padding(
                           padding: EdgeInsets.all(8.0),
                           child: CircleAvatar(
                             backgroundImage: NetworkImage(
@@ -104,7 +104,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 backgroundColor: Colors.white,
-                body: Container(
+                body: SizedBox(
                   height: Get.height,
                   width: Get.width,
                   child: SingleChildScrollView(
@@ -179,7 +179,7 @@ class HomeView extends GetView<HomeController> {
                                     },
                                     child: AnimatedContainer(
                                       duration:
-                                          const Duration(microseconds: 500),
+                                          const Duration(microseconds: 300),
                                       height: Get.height * 0.1,
                                       width: Get.width * 0.4,
                                       decoration: BoxDecoration(
@@ -234,7 +234,8 @@ class HomeView extends GetView<HomeController> {
                                         controller.buttonIndexChange(0);
                                       },
                                       child: AnimatedContainer(
-                                        duration: const Duration(seconds: 1),
+                                        duration:
+                                            const Duration(milliseconds: 300),
                                         height: Get.height * 0.09,
                                         width: Get.width * 0.3,
                                         decoration: BoxDecoration(
@@ -266,7 +267,8 @@ class HomeView extends GetView<HomeController> {
                                         controller.buttonIndexChange(1);
                                       },
                                       child: AnimatedContainer(
-                                        duration: const Duration(seconds: 1),
+                                        duration:
+                                            const Duration(milliseconds: 300),
                                         height: Get.height * 0.09,
                                         width: Get.width * 0.3,
                                         decoration: BoxDecoration(
@@ -300,7 +302,8 @@ class HomeView extends GetView<HomeController> {
                                         controller.buttonIndexChange(2);
                                       },
                                       child: AnimatedContainer(
-                                        duration: const Duration(seconds: 1),
+                                        duration:
+                                            const Duration(milliseconds: 300),
                                         height: Get.height * 0.09,
                                         width: Get.width * 0.3,
                                         decoration: BoxDecoration(
@@ -337,7 +340,7 @@ class HomeView extends GetView<HomeController> {
                               height: Get.height * 0.02,
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 24, top: 10),
+                              padding: const EdgeInsets.only(left: 24, top: 10),
                               child: ElevatedButton(
                                 onPressed: () {
                                   Get.toNamed('/search');
@@ -515,147 +518,211 @@ class HomeView extends GetView<HomeController> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'New Properties',
-                                    style: TextStyle(
-                                      color: AppColors.greenColor,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: GoogleFonts.robotoCondensed()
-                                          .fontFamily,
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Text(
-                                    'View All',
-                                    style: TextStyle(
-                                      color: AppColors.greenColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: GoogleFonts.robotoCondensed()
-                                          .fontFamily,
-                                    ),
-                                  ),
-                                ],
+                              child: Text(
+                                'New Properties',
+                                style: TextStyle(
+                                  color: AppColors.greenColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily:
+                                      GoogleFonts.robotoCondensed().fontFamily,
+                                ),
                               ),
                             ),
                             SizedBox(
-                              height: Get.height * 0.5,
+                              height: Get.height * 0.4,
                               width: Get.width,
                               child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
+                                scrollDirection: Axis.vertical,
                                 itemCount: controller.properties.length,
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  return Row(
+                                  return Column(
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          height: Get.height * 0.4,
-                                          width: Get.width * 0.5,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.2),
-                                                spreadRadius: 2,
-                                                blurRadius: 7,
-                                                offset: const Offset(0, 3),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                height: Get.height * 0.3,
-                                                width: Get.width * 0.5,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(10),
-                                                    topRight:
-                                                        Radius.circular(10),
-                                                  ),
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(
-                                                      controller
-                                                              .properties[index]
-                                                          ['photo'],
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Get.toNamed('/single-property',
+                                                arguments: [
+                                                  controller.properties[index]
+                                                      ['photos'] as List,
+                                                  controller.properties[index]
+                                                      ['price'],
+                                                  controller.properties[index]
+                                                      ['type'],
+                                                  controller.properties[index]
+                                                      ['location'],
+                                                  controller.properties[index]
+                                                      ['description'],
+                                                ]);
+                                          },
+                                          child: Container(
+                                            height: Get.height * 0.33,
+                                            width: Get.width,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.2),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.2),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 7,
+                                                  offset: const Offset(0, 3),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: Get.height * 0.33,
+                                                  width: Get.width * 0.4,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    image: DecorationImage(
+                                                      image: NetworkImage(
+                                                          controller.properties[
+                                                                  index]
+                                                              ['photos'][0]),
+                                                      fit: BoxFit.cover,
                                                     ),
-                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0),
-                                                child: Container(
-                                                  height: Get.height * 0.1,
-                                                  width: Get.width * 0.5,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
                                                   child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text(
-                                                        controller
-                                                            .properties[index]
-                                                                ['price']
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                          color: AppColors
-                                                              .greenColor,
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: GoogleFonts
-                                                                  .robotoCondensed()
-                                                              .fontFamily,
-                                                        ),
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            Ionicons
+                                                                .cash_outline,
+                                                            color: AppColors
+                                                                .greenColor,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            controller
+                                                                .properties[
+                                                                    index]
+                                                                    ['price']
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                              color: AppColors
+                                                                  .greenColor,
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily: GoogleFonts
+                                                                      .robotoCondensed()
+                                                                  .fontFamily,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Text(
-                                                        controller.properties[
-                                                            index]['type'],
-                                                        style: TextStyle(
-                                                          color: AppColors
-                                                              .greenColor,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: GoogleFonts
-                                                                  .robotoCondensed()
-                                                              .fontFamily,
-                                                        ),
+                                                      SizedBox(
+                                                        height: 10,
                                                       ),
-                                                      Text(
-                                                        controller.properties[
-                                                            index]['category'],
-                                                        style: TextStyle(
-                                                          color: AppColors
-                                                              .greenColor,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: GoogleFonts
-                                                                  .robotoCondensed()
-                                                              .fontFamily,
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            Ionicons
+                                                                .home_outline,
+                                                            color: AppColors
+                                                                .greenColor,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            controller
+                                                                    .properties[
+                                                                index]['type'],
+                                                            style: TextStyle(
+                                                              color: AppColors
+                                                                  .greenColor,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily: GoogleFonts
+                                                                      .robotoCondensed()
+                                                                  .fontFamily,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            Ionicons
+                                                                .location_outline,
+                                                            color: AppColors
+                                                                .greenColor,
+                                                          ),
+                                                          Text(
+                                                            controller.properties[
+                                                                    index]
+                                                                ['location'],
+                                                            style: TextStyle(
+                                                              color: AppColors
+                                                                  .greenColor,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily: GoogleFonts
+                                                                      .robotoCondensed()
+                                                                  .fontFamily,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Container(
+                                                        height:
+                                                            Get.height * 0.13,
+                                                        width: Get.width * 0.4,
+                                                        child: Text(
+                                                          controller
+                                                              .properties[index]
+                                                                  [
+                                                                  'description']
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            color: AppColors
+                                                                .greenColor,
+                                                            fontSize: 11,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily: GoogleFonts
+                                                                    .robotoCondensed()
+                                                                .fontFamily,
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                              ),
-                                            ],
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),

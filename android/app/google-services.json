@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "548052095349-82rc4q82ug01e2kidta9vk2epnqfjvu6.apps.googleusercontent.com",
+          "client_id": "548052095349-eu6r5f1436unm8irot7bkudeqvth3et5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "aqarat.aqarat",
+            "certificate_hash": "de6e2843b56e4ac5669cf607cd41675354ff6330"
+          }
+        },
+        {
+          "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "548052095349-82rc4q82ug01e2kidta9vk2epnqfjvu6.apps.googleusercontent.com",
+              "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "548052095349-pbtj2kfdeepeoij59eukriaik2dgvcic.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "aqarat.aqarat"
+              }
             }
           ]
         }
@@ -43,7 +58,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "548052095349-82rc4q82ug01e2kidta9vk2epnqfjvu6.apps.googleusercontent.com",
+          "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -56,8 +71,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "548052095349-82rc4q82ug01e2kidta9vk2epnqfjvu6.apps.googleusercontent.com",
+              "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "548052095349-pbtj2kfdeepeoij59eukriaik2dgvcic.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "aqarat.aqarat"
+              }
             }
           ]
         }

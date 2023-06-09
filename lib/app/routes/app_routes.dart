@@ -9,6 +9,8 @@ abstract class Routes {
   static const SINGLE_PROPERTY = _Paths.SINGLE_PROPERTY;
   static const FEAUTURED_PROPERTIES = _Paths.FEAUTURED_PROPERTIES;
   static const ALL_PROPERTIES = _Paths.ALL_PROPERTIES;
+  static const LOGIN = _Paths.LOGIN;
+  static const CHAT = _Paths.CHAT;
 }
 
 abstract class _Paths {
@@ -19,4 +21,6 @@ abstract class _Paths {
   static const SINGLE_PROPERTY = '/single-property';
   static const FEAUTURED_PROPERTIES = '/feautured-properties';
   static const ALL_PROPERTIES = '/all-properties';
+  static const LOGIN = '/login';
+  static const CHAT = '/chat';
 }

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/all_properties/bindings/all_properties_binding.dart';
 import '../modules/all_properties/views/all_properties_view.dart';
+import '../modules/chat/bindings/chat_binding.dart';
+import '../modules/chat/views/chat_view.dart';
 import '../modules/chatRoom/bindings/chat_room_binding.dart';
 import '../modules/chatRoom/views/chat_room_view.dart';
 import '../modules/favourite/bindings/favourite_binding.dart';
@@ -10,6 +12,8 @@ import '../modules/feautured_properties/bindings/feautured_properties_binding.da
 import '../modules/feautured_properties/views/feautured_properties_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/login/bindings/login_binding.dart';
+import '../modules/login/views/login_view.dart';
 import '../modules/single_property/bindings/single_property_binding.dart';
 import '../modules/single_property/views/single_property_view.dart';
 
@@ -22,7 +26,7 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      transition: Transition.rightToLeftWithFade,
+      transition: Transition.native,
       transitionDuration: const Duration(milliseconds: 500),
       name: _Paths.HOME,
       page: () => const HomeView(),
@@ -30,13 +34,13 @@ class AppPages {
     ),
     GetPage(
       transitionDuration: const Duration(milliseconds: 500),
-      transition: Transition.rightToLeftWithFade,
+      transition: Transition.native,
       name: _Paths.CHAT_ROOM,
       page: () => const ChatRoomView(),
       binding: ChatRoomBinding(),
     ),
     GetPage(
-      transition: Transition.rightToLeftWithFade,
+      transition: Transition.native,
       transitionDuration: const Duration(milliseconds: 500),
       name: _Paths.FAVOURITE,
       page: () => const FavouriteView(),
@@ -56,6 +60,16 @@ class AppPages {
       name: _Paths.ALL_PROPERTIES,
       page: () => const AllPropertiesView(),
       binding: AllPropertiesBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOGIN,
+      page: () => const LoginView(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () => const ChatView(),
+      binding: ChatBinding(),
     ),
   ];
 }

@@ -8,18 +8,15 @@ class HomeController extends GetxController {
 
   RxBool isPressed = false.obs;
   RxList properties = [].obs;
-  
   RxInt buttonIndex = 0.obs;
 
-   buttonIndexChange(int index) {
+  buttonIndexChange(int index) {
     buttonIndex.value = index;
   }
 
   isPressedChange() {
     isPressed.value = !isPressed.value;
   }
-
- 
 
   Future fetchProperties() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
