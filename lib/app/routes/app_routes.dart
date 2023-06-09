@@ -11,6 +11,7 @@ abstract class Routes {
   static const ALL_PROPERTIES = _Paths.ALL_PROPERTIES;
   static const LOGIN = _Paths.LOGIN;
   static const CHAT = _Paths.CHAT;
+  static const FILTERED_PROPERTIES = _Paths.FILTERED_PROPERTIES;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const ALL_PROPERTIES = '/all-properties';
   static const LOGIN = '/login';
   static const CHAT = '/chat';
+  static const FILTERED_PROPERTIES = '/filtered-properties';
 }

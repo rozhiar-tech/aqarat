@@ -10,7 +10,10 @@ class ChatRoomController extends GetxController {
   // lets get the Id from the previous screen with arguments
   RxString userId = ''.obs;
   final arguments = Get.arguments;
- 
+  RxList chatRooms = [].obs;
+  RxString userImage = ''.obs;
+  RxString userName = ''.obs;
+
   // create a function to check if the user is looged in or not with firebase
   Future checkIfUserIsLoggedIn() async {
     User? user = FirebaseAuth.instance.currentUser;
@@ -52,10 +55,41 @@ class ChatRoomController extends GetxController {
     }
   }
 
+  Future getChatsBasedOnUser() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('chatrooms')
+        .where('users', arrayContains: userId.value)
+        .get();
+    chatRooms.value = querySnapshot.docs;
+  }
+
+  Future fetchChatsInsideChatRoom() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('chatrooms')
+        .doc('${userId.value}xA5lRs5krEa3LKEeVhvT}')
+        .collection('chats')
+        .orderBy('time', descending: true)
+        .get();
+    return querySnapshot.docs;
+  }
+
+  Future getUserData() async {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc('xA5lRs5krEa3LKEeVhvT')
+        .get();
+    userImage.value = documentSnapshot['profilePic'];
+    userName.value = documentSnapshot['name'];
+  }
+
   final count = 0.obs;
   @override
-  void onInit() {
-   
+  Future<void> onInit() async {
+    await checkIfUserIsLoggedIn();
+    await getChatsBasedOnUser();
+    await getUserData();
+    // await fetchChatsInsideChatRoom();
+
     super.onInit();
   }
 

@@ -1,15 +1,17 @@
 import 'package:get/get.dart';
 
-class FeauturedPropertiesController extends GetxController {
-  //TODO: Implement FeauturedPropertiesController
-  RxList feauturedPropertiesItems = [].obs;
-  RxString title = 'Feautured Properties'.obs;
+class FilteredPropertiesController extends GetxController {
+  //TODO: Implement FilteredPropertiesController
+  RxList filteredPropertiesItems = [].obs;
   final argument = Get.arguments;
+  RxString title = 'Filter'.obs;
+
+
 
   final count = 0.obs;
   @override
   void onInit() {
-    feauturedPropertiesItems.value = argument;
+    filteredPropertiesItems.value = argument;
     super.onInit();
   }
 

@@ -25,12 +25,14 @@ class HomeView extends GetView<HomeController> {
                           fontSize: 20,
                         ),
                       ),
-                      actions: const [
+                      actions: [
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: CircleAvatar(
                             backgroundImage: NetworkImage(
-                              'https://firebasestorage.googleapis.com/v0/b/happy-47972.appspot.com/o/pro.jpg?alt=media&token=e56be66f-aea0-494a-b260-8ddc3e2a3557&_gl=1*176jevk*_ga*MTAzODkwODYxNS4xNjY4OTQ5NDIz*_ga_CW55HF8NVT*MTY4NTg2ODUwOS4yMC4xLjE2ODU4Njg1MjcuMC4wLjA.',
+                              controller.userImage.value == ''
+                                  ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
+                                  : controller.userImage.value,
                             ),
                           ),
                         ),
@@ -46,30 +48,134 @@ class HomeView extends GetView<HomeController> {
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: [
-                      const DrawerHeader(
-                        decoration: BoxDecoration(
+                      DrawerHeader(
+                        decoration: const BoxDecoration(
                           color: AppColors.goldColor,
                         ),
-                        child: Text(
-                          'Drawer Header',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'Aqarat',
+                                    style: TextStyle(
+                                      color: AppColors.greenColor,
+                                      fontSize: 24,
+                                      fontFamily: GoogleFonts.robotoCondensed()
+                                          .fontFamily,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                      controller.userImage.value == ''
+                                          ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
+                                          : controller.userImage.value,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    controller.userName.value,
+                                    style: GoogleFonts.robotoCondensed(
+                                      color: AppColors.greenColor,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                controller.userEmail.value,
+                                style: GoogleFonts.robotoCondensed(
+                                  color: AppColors.greenColor,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                       ListTile(
-                        title: const Text('Item 1'),
+                        title: Row(
+                          children: [
+                            const Icon(
+                              Ionicons.language_outline,
+                              color: AppColors.greenColor,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Change Language',
+                              style: TextStyle(
+                                color: AppColors.greenColor,
+                                fontSize: 16,
+                                fontFamily:
+                                    GoogleFonts.robotoCondensed().fontFamily,
+                              ),
+                            ),
+                          ],
+                        ),
                         onTap: () {
-                          // Update the state of the app.
-                          // ...
+                          Get.defaultDialog(
+                            title: 'Change Language',
+                            content: Column(
+                              children: [
+                                ListTile(
+                                  title: const Text('English'),
+                                  onTap: () {
+                                    // controller.changeLanguage('en');
+                                    Get.back();
+                                  },
+                                ),
+                                ListTile(
+                                  title: const Text('Arabic'),
+                                  onTap: () {
+                                    // controller.changeLanguage('ar');
+                                    Get.back();
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
                       ListTile(
-                        title: const Text('Item 2'),
+                        title: Row(
+                          children: [
+                            const Icon(
+                              Ionicons.log_out_outline,
+                              color: AppColors.greenColor,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Logout',
+                              style: TextStyle(
+                                color: AppColors.greenColor,
+                                fontSize: 16,
+                                fontFamily:
+                                    GoogleFonts.robotoCondensed().fontFamily,
+                              ),
+                            ),
+                          ],
+                        ),
                         onTap: () {
-                          // Update the state of the app.
-                          // ...
+                          controller.logout();
                         },
                       ),
                     ],
@@ -87,12 +193,12 @@ class HomeView extends GetView<HomeController> {
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Ionicons.chatbubbles_outline),
-                        label: 'Business',
+                        label: 'Chats',
                         backgroundColor: Colors.white,
                       ),
                       BottomNavigationBarItem(
                         icon: Icon(Ionicons.heart_circle),
-                        label: 'School',
+                        label: 'Favorites',
                         backgroundColor: Colors.white,
                       ),
                     ],
@@ -119,7 +225,7 @@ class HomeView extends GetView<HomeController> {
                                 'Welcome to Aqarat Lets find your dream home',
                                 style: TextStyle(
                                   color: AppColors.greenColor,
-                                  fontSize: 22,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   fontFamily:
                                       GoogleFonts.robotoCondensed().fontFamily,
@@ -147,6 +253,10 @@ class HomeView extends GetView<HomeController> {
                                   GestureDetector(
                                     onTap: () {
                                       controller.isPressedChange();
+                                      if (controller.isPressed.value) {
+                                        controller.buyRentButton('Buy');
+                                        print(controller.buyRentButton.value);
+                                      }
                                     },
                                     child: AnimatedContainer(
                                       duration:
@@ -176,6 +286,10 @@ class HomeView extends GetView<HomeController> {
                                   GestureDetector(
                                     onTap: () {
                                       controller.isPressedChange();
+                                      if (!controller.isPressed.value) {
+                                        controller.buyRentButton('Rent');
+                                        print(controller.buyRentButton.value);
+                                      }
                                     },
                                     child: AnimatedContainer(
                                       duration:
@@ -232,6 +346,7 @@ class HomeView extends GetView<HomeController> {
                                     GestureDetector(
                                       onTap: () {
                                         controller.buttonIndexChange(0);
+                                        controller.propertyType('Residential');
                                       },
                                       child: AnimatedContainer(
                                         duration:
@@ -247,7 +362,7 @@ class HomeView extends GetView<HomeController> {
                                               BorderRadius.circular(10),
                                         ),
                                         child: Center(
-                                          child: Text('Appartments',
+                                          child: Text('Residential',
                                               style: TextStyle(
                                                 color: controller.buttonIndex
                                                             .value ==
@@ -265,6 +380,7 @@ class HomeView extends GetView<HomeController> {
                                     GestureDetector(
                                       onTap: () {
                                         controller.buttonIndexChange(1);
+                                        controller.propertyType('Commercial');
                                       },
                                       child: AnimatedContainer(
                                         duration:
@@ -281,7 +397,7 @@ class HomeView extends GetView<HomeController> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            'Houses',
+                                            'Commercial',
                                             style: TextStyle(
                                               color: controller
                                                           .buttonIndex.value ==
@@ -300,6 +416,7 @@ class HomeView extends GetView<HomeController> {
                                     GestureDetector(
                                       onTap: () {
                                         controller.buttonIndexChange(2);
+                                        controller.propertyType('Tourism');
                                       },
                                       child: AnimatedContainer(
                                         duration:
@@ -316,7 +433,7 @@ class HomeView extends GetView<HomeController> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            'Villas',
+                                            'Tourism',
                                             style: TextStyle(
                                               color: controller
                                                           .buttonIndex.value ==
@@ -343,7 +460,11 @@ class HomeView extends GetView<HomeController> {
                               padding: const EdgeInsets.only(left: 24, top: 10),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Get.toNamed('/search');
+                                  controller.filterProperties(
+                                      buyRentButton:
+                                          controller.buyRentButton.value,
+                                      propertyType:
+                                          controller.propertyType.value);
                                 },
                                 child: Text(
                                   'Show Results',
@@ -388,14 +509,22 @@ class HomeView extends GetView<HomeController> {
                                     ),
                                   ),
                                   Spacer(),
-                                  Text(
-                                    'View All',
-                                    style: TextStyle(
-                                      color: AppColors.greenColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: GoogleFonts.robotoCondensed()
-                                          .fontFamily,
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed('/feautured-properties',
+                                          arguments: controller
+                                              .featuredPropertiesItems);
+                                    },
+                                    child: Text(
+                                      'View All',
+                                      style: TextStyle(
+                                        color: AppColors.greenColor,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            GoogleFonts.robotoCondensed()
+                                                .fontFamily,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -406,108 +535,144 @@ class HomeView extends GetView<HomeController> {
                               width: Get.width,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: 12,
+                                itemCount:
+                                    controller.featuredPropertiesItems.length,
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
                                   return Row(
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          height: Get.height * 0.4,
-                                          width: Get.width * 0.5,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.2),
-                                                spreadRadius: 2,
-                                                blurRadius: 7,
-                                                offset: const Offset(0, 3),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                height: Get.height * 0.3,
-                                                width: Get.width * 0.5,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(10),
-                                                    topRight:
-                                                        Radius.circular(10),
-                                                  ),
-                                                  image: DecorationImage(
-                                                    image: AssetImage(
-                                                        'assets/house.jpg'),
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Get.toNamed('/single-property',
+                                                arguments: [
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['photos'] as List,
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['price'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['type'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['location'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['description'],
+                                                ]);
+                                          },
+                                          child: Container(
+                                            height: Get.height * 0.4,
+                                            width: Get.width * 0.5,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.2),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.2),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 7,
+                                                  offset: const Offset(0, 3),
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0),
-                                                child: Container(
-                                                  height: Get.height * 0.1,
+                                              ],
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  height: Get.height * 0.3,
                                                   width: Get.width * 0.5,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '12,00 USD',
-                                                        style: TextStyle(
-                                                          color: AppColors
-                                                              .greenColor,
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: GoogleFonts
-                                                                  .robotoCondensed()
-                                                              .fontFamily,
-                                                        ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(10),
+                                                      topRight:
+                                                          Radius.circular(10),
+                                                    ),
+                                                    image: DecorationImage(
+                                                      image: NetworkImage(
+                                                        controller
+                                                                .featuredPropertiesItems[
+                                                            index]['photos'][0],
                                                       ),
-                                                      Text(
-                                                        'House',
-                                                        style: TextStyle(
-                                                          color: AppColors
-                                                              .greenColor,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: GoogleFonts
-                                                                  .robotoCondensed()
-                                                              .fontFamily,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        'Rent',
-                                                        style: TextStyle(
-                                                          color: AppColors
-                                                              .greenColor,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: GoogleFonts
-                                                                  .robotoCondensed()
-                                                              .fontFamily,
-                                                        ),
-                                                      ),
-                                                    ],
+                                                      fit: BoxFit.cover,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Container(
+                                                    height: Get.height * 0.1,
+                                                    width: Get.width * 0.5,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          controller
+                                                              .featuredPropertiesItems[
+                                                                  index]
+                                                                  ['price']
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            color: AppColors
+                                                                .greenColor,
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily: GoogleFonts
+                                                                    .robotoCondensed()
+                                                                .fontFamily,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          controller
+                                                                  .featuredPropertiesItems[
+                                                              index]['category'],
+                                                          style: TextStyle(
+                                                            color: AppColors
+                                                                .greenColor,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily: GoogleFonts
+                                                                    .robotoCondensed()
+                                                                .fontFamily,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          controller
+                                                                  .featuredPropertiesItems[
+                                                              index]['type'],
+                                                          style: TextStyle(
+                                                            color: AppColors
+                                                                .greenColor,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily: GoogleFonts
+                                                                    .robotoCondensed()
+                                                                .fontFamily,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),

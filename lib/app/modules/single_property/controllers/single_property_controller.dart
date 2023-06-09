@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -59,10 +60,69 @@ class SinglePropertyController extends GetxController {
     }
   }
 
+  // create a function to favorite a property
+  Future favoriteProperty() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      if (isFavourite.value == true) {
+        Get.snackbar(
+          'Error',
+          'Property already added to favorites',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+        return;
+      }
+      userId.value = user.uid;
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId.value)
+          .collection('favorites')
+          .doc()
+          .set({
+        'images': images.value,
+        'price': price.value,
+        'propertyType': propertyType.value,
+        'address': address.value,
+        'description': description.value,
+      }).then((value) {
+        Get.snackbar(
+          'Success',
+          'Property added to favorites',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      });
+    } else {
+      Get.toNamed('/login');
+    }
+  }
+
+  Future checkIfPropertyIsFavorite() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      userId.value = user.uid;
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId.value)
+          .collection('favorites')
+          .where('address', isEqualTo: address.value)
+          .get()
+          .then((value) {
+        if (value.docs.isNotEmpty) {
+          isFavourite.value = true;
+        }
+      });
+    }
+  }
+
   final count = 0.obs;
   @override
   void onInit() {
     retrieveArguments();
+    checkIfPropertyIsFavorite();
     print('images: $price');
     super.onInit();
   }

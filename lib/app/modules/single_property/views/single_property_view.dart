@@ -142,7 +142,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                               left: Get.width * 0.05,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: controller.images!
+                                children: controller.images
                                     .asMap()
                                     .entries
                                     .map((entry) {
@@ -209,7 +209,8 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: IconButton(
-                                  onPressed: () {
+                                  onPressed: () async {
+                                    await controller.favoriteProperty();
                                     controller.isFavouriteToggle();
                                   },
                                   icon: Icon(
