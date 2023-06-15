@@ -18,6 +18,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/map_view/bindings/map_view_binding.dart';
+import '../modules/map_view/views/map_view_view.dart';
 import '../modules/single_property/bindings/single_property_binding.dart';
 import '../modules/single_property/views/single_property_view.dart';
 
@@ -84,6 +86,12 @@ class AppPages {
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
       binding: DashboardBinding(),
+    ),
+  
+    GetPage(
+      name: _Paths.MAP_VIEW,
+      page: () => const MapViewView(),
+      binding: MapViewBinding(),
     ),
   ];
 }

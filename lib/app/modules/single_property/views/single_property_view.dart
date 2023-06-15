@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../controllers/single_property_controller.dart';
@@ -351,6 +352,45 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             ],
                           ),
                         ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)),
+                          height: Get.height * 0.3,
+                          width: Get.width,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GoogleMap(
+                              mapType: MapType.hybrid,
+                              initialCameraPosition: CameraPosition(
+                                target: LatLng(35.554652, 45.428541),
+                                zoom: 14.4746,
+                              ),
+                              markers: {
+                                Marker(
+                                    markerId: MarkerId('1'),
+                                    position: LatLng(35.554652, 45.428541),
+                                    infoWindow: InfoWindow(
+                                        title: 'Property Location',
+                                        snippet: '5 Star Rating'))
+                              },
+                              circles: {
+                                Circle(
+                                    circleId: CircleId('1'),
+                                    center: LatLng(35.554652, 45.428541),
+                                    radius: 500,
+                                    fillColor: Colors.blue.withOpacity(0.2),
+                                    strokeColor: Colors.blue,
+                                    strokeWidth: 2,
+                                    onTap: () {
+                                      print('Circle tapped');
+                                    },
+                                    consumeTapEvents: true,
+                                    visible: true)
+                              },
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),

@@ -43,6 +43,10 @@ class DashboardView extends GetView<DashboardController> {
                       icon: Ionicons.heart_circle,
                       text: 'Favorite',
                     ),
+                    GButton(
+                      icon: Ionicons.map_outline,
+                      text: 'Map',
+                    ),
                   ],
                   //  selectedIndex: controller.pageIndex.value,
                   //  onTabChange: (index) {
