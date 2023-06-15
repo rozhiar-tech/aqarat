@@ -14,11 +14,17 @@ class ChatRoomController extends GetxController {
   RxString userImage = ''.obs;
   RxString userName = ''.obs;
 
+// send user to the chat Screen with chatroom id
+  void goToChatScreen() {
+    String chatRoomId = '${userId.value}-xA5lRs5krEa3LKEeVhvT';
+    Get.toNamed('/chat', arguments: chatRoomId);
+  }
+
   // create a function to check if the user is looged in or not with firebase
   Future checkIfUserIsLoggedIn() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      userId.value = user.uid;
+      userId.value = user.uid as String;
     } else {
       Get.defaultDialog(
         title: 'Error',
@@ -35,23 +41,6 @@ class ChatRoomController extends GetxController {
           Get.toNamed('/login');
         },
       );
-    }
-  }
-
-  changeIndex(int index) {
-    switch (index) {
-      case 0:
-        Get.toNamed('/home');
-        break;
-      case 1:
-        Get.toNamed('/chat-room');
-        break;
-      case 2:
-        Get.toNamed('/favourite');
-        break;
-
-      default:
-        Get.toNamed('/home');
     }
   }
 
@@ -85,16 +74,16 @@ class ChatRoomController extends GetxController {
   final count = 0.obs;
   @override
   Future<void> onInit() async {
-    await checkIfUserIsLoggedIn();
-    await getChatsBasedOnUser();
-    await getUserData();
     // await fetchChatsInsideChatRoom();
-
+    await checkIfUserIsLoggedIn();
+    await getUserData();
+    await getChatsBasedOnUser();
+    print(chatRooms);
     super.onInit();
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     super.onReady();
   }
 

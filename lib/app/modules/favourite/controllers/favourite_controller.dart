@@ -27,6 +27,7 @@ class FavouriteController extends GetxController {
   Future fetchFavouritProperties() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
+      // don't allow duplicate favourites
       await FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
@@ -42,14 +43,15 @@ class FavouriteController extends GetxController {
 
   final count = 0.obs;
   @override
-  Future<void> onInit() async {
-    await fetchFavouritProperties();
+  void onInit() async {
     
     super.onInit();
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
+    await fetchFavouritProperties();
+
     super.onReady();
   }
 

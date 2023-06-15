@@ -14,17 +14,20 @@ class SinglePropertyController extends GetxController {
   RxString price = ''.obs;
   RxString address = ''.obs;
   RxString propertyType = ''.obs;
+  RxString propertyId = ''.obs;
   RxString userId = ''.obs;
 
   CarouselController carouselController = CarouselController();
 
   retrieveArguments() {
     final arguments = Get.arguments;
+    print(arguments);
     images.value = arguments[0];
     price.value = arguments[1].toString();
     propertyType.value = arguments[2];
     address.value = arguments[3];
     description.value = arguments[4];
+    // propertyId.value = arguments[5];
   }
 
   isFavouriteToggle() {
@@ -33,6 +36,19 @@ class SinglePropertyController extends GetxController {
 
   // create a function to combine the id we got from arguments and the current user id
   Future createChatRoom() async {
+    // if chatroom is already created, then go to chatroom
+    await FirebaseFirestore.instance
+        .collection('chatrooms')
+        .where('users', arrayContains: userId.value)
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        print("chatroom already created");
+        Get.toNamed('/chat', arguments: value.docs[0].id);
+        return;
+      }
+    });
+    // create a chatroom id
     String chatRoomId = '${userId.value}-xA5lRs5krEa3LKEeVhvT';
     print(chatRoomId);
     // create a map to store the chatroom id and the users id
@@ -40,11 +56,13 @@ class SinglePropertyController extends GetxController {
       'users': [userId.value, "xA5lRs5krEa3LKEeVhvT"]
     };
     // create a chatroom with the chatroom id and the map we created
+
     await FirebaseFirestore.instance
         .collection('chatrooms')
         .doc(chatRoomId)
         .set(chatRoomMap)
         .then((value) {
+      print("chatroom created");
       Get.toNamed('/chat', arguments: chatRoomId);
     });
   }
@@ -65,13 +83,26 @@ class SinglePropertyController extends GetxController {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       if (isFavourite.value == true) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId.value)
+            .collection('favorites')
+            .where('images', isEqualTo: images.value)
+            .get()
+            .then((value) {
+          value.docs.forEach((element) {
+            element.reference.delete();
+          });
+        });
+        isFavourite.value = true;
         Get.snackbar(
           'Error',
-          'Property already added to favorites',
+          'Property removed from favorites',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
+
         return;
       }
       userId.value = user.uid;
@@ -86,6 +117,7 @@ class SinglePropertyController extends GetxController {
         'propertyType': propertyType.value,
         'address': address.value,
         'description': description.value,
+        'propertyId': propertyId.value,
       }).then((value) {
         Get.snackbar(
           'Success',
@@ -122,13 +154,13 @@ class SinglePropertyController extends GetxController {
   @override
   void onInit() {
     retrieveArguments();
-    checkIfPropertyIsFavorite();
-    print('images: $price');
+
     super.onInit();
   }
 
   @override
   void onReady() {
+    checkIfPropertyIsFavorite();
     super.onReady();
   }
 

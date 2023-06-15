@@ -9,10 +9,9 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 class LoginController extends GetxController {
   //TODO: Implement LoginController
   RxString title = 'Login'.obs;
-  
-  
+
   // check if user is already logged in
-  
+
   // create a function to Login with google
   Future loginWithGoogle() async {
     try {
@@ -35,7 +34,7 @@ class LoginController extends GetxController {
         'email': userCredential.user!.email,
         'profilePic': userCredential.user!.photoURL,
       });
-      Get.toNamed('/chat-room',arguments: userCredential.user!.uid);
+      Get.toNamed('/dashboard', arguments: userCredential.user!.uid);
     } catch (e) {
       print(e);
     }
@@ -59,13 +58,11 @@ class LoginController extends GetxController {
         'email': userCredential.user!.email,
         'profilePic': userCredential.user!.photoURL,
       });
-      Get.toNamed('/chat-room',arguments: userCredential.user!.uid);
+      Get.toNamed('/dashboard', arguments: userCredential.user!.uid);
     } catch (e) {
       print(e);
     }
   }
-
-
 
   final count = 0.obs;
   @override

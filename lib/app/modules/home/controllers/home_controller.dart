@@ -94,18 +94,17 @@ class HomeController extends GetxController {
 
   final count = 0.obs;
   @override
-  Future<void> onInit() async {
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  Future<void> onReady() async {
     await fetchProperties();
     await fetchFeaturedProperties();
     User? user = await FirebaseAuth.instance.currentUser;
     userId.value = user!.uid;
     await fetchUserData(userId);
-
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
     super.onReady();
   }
 

@@ -10,7 +10,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
   const ChatRoomView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetX(
+    return GetX<ChatRoomController>(
       init: ChatRoomController(),
       builder: (controller) {
         return Scaffold(
@@ -26,34 +26,6 @@ class ChatRoomView extends GetView<ChatRoomController> {
             centerTitle: true,
             backgroundColor: Colors.white,
             elevation: 0,
-          ),
-          bottomNavigationBar: SizedBox(
-            height: Get.height * 0.1,
-            width: Get.width,
-            child: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Ionicons.home),
-                  label: 'Home',
-                  backgroundColor: Colors.white,
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Ionicons.chatbubbles_outline),
-                  label: 'Chats',
-                  backgroundColor: Colors.white,
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Ionicons.heart_circle),
-                  label: 'Favourite',
-                  backgroundColor: Colors.white,
-                ),
-              ],
-              currentIndex: 1,
-              selectedItemColor: AppColors.greenColor,
-              onTap: (index) {
-                controller.changeIndex(index);
-              },
-            ),
           ),
           backgroundColor: Colors.white,
           body: Container(
@@ -72,7 +44,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: AppColors.greenColor,
                           spreadRadius: 0,
                           blurRadius: 2,
                           offset:
@@ -84,10 +56,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Get.toNamed('/chat', arguments: {
-                              'chatRoomId':
-                                  '${controller.userId.value}xA5lRs5krEa3LKEeVhvT',
-                            });
+                            controller.goToChatScreen();
                           },
                           child: Container(
                             height: Get.height * 0.12,
@@ -111,15 +80,18 @@ class ChatRoomView extends GetView<ChatRoomController> {
                           width: Get.width * 0.02,
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              controller.userName.value,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.greenColor,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                controller.userName.value,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.goldColor,
+                                ),
                               ),
                             ),
                             // Text(

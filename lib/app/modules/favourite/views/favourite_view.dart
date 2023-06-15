@@ -29,34 +29,6 @@ class FavouriteView extends GetView<FavouriteController> {
                 elevation: 0,
                 centerTitle: true,
               ),
-              bottomNavigationBar: SizedBox(
-                height: Get.height * 0.1,
-                width: Get.width,
-                child: BottomNavigationBar(
-                  items: const <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                      icon: Icon(Ionicons.home),
-                      label: 'Home',
-                      backgroundColor: Colors.white,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Ionicons.chatbubbles_outline),
-                      label: 'Chats',
-                      backgroundColor: Colors.white,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Ionicons.heart_circle),
-                      label: 'Favourite',
-                      backgroundColor: Colors.white,
-                    ),
-                  ],
-                  currentIndex: 2,
-                  selectedItemColor: AppColors.greenColor,
-                  onTap: (index) {
-                    controller.changeIndex(index);
-                  },
-                ),
-              ),
               body: Container(
                 height: Get.height,
                 width: Get.width,

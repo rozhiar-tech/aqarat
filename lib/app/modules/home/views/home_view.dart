@@ -181,34 +181,6 @@ class HomeView extends GetView<HomeController> {
                     ],
                   ),
                 ),
-                bottomNavigationBar: SizedBox(
-                  height: Get.height * 0.1,
-                  width: Get.width,
-                  child: BottomNavigationBar(
-                    items: const <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
-                        icon: Icon(Ionicons.home),
-                        label: 'Home',
-                        backgroundColor: Colors.white,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Ionicons.chatbubbles_outline),
-                        label: 'Chats',
-                        backgroundColor: Colors.white,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Ionicons.heart_circle),
-                        label: 'Favorites',
-                        backgroundColor: Colors.white,
-                      ),
-                    ],
-                    currentIndex: 0,
-                    selectedItemColor: AppColors.greenColor,
-                    onTap: (index) {
-                      controller.changeIndex(index);
-                    },
-                  ),
-                ),
                 backgroundColor: Colors.white,
                 body: SizedBox(
                   height: Get.height,

@@ -8,12 +8,12 @@ class ChatController extends GetxController {
   RxString title = 'Chat'.obs;
   RxString chatRoomId = ''.obs;
   RxString userId = ''.obs;
-  final arguments = Get.arguments;
   var chatMessages = [].obs;
   TextEditingController messageController = TextEditingController();
 
   @override
   void onInit() {
+    final arguments = Get.arguments;
     chatRoomId.value = arguments;
     User? user = FirebaseAuth.instance.currentUser;
     userId.value = user!.uid;
