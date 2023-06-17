@@ -31,7 +31,7 @@ class FeauturedPropertiesView extends GetView<FeauturedPropertiesController> {
                   onPressed: () {
                     Get.back();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios,
                     color: AppColors.greenColor,
                   ),
@@ -104,11 +104,11 @@ class FeauturedPropertiesView extends GetView<FeauturedPropertiesController> {
                                       children: [
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Ionicons.cash_outline,
                                               color: AppColors.greenColor,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
                                             Text(
@@ -127,16 +127,16 @@ class FeauturedPropertiesView extends GetView<FeauturedPropertiesController> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Ionicons.home_outline,
                                               color: AppColors.greenColor,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
                                             Text(
@@ -154,12 +154,12 @@ class FeauturedPropertiesView extends GetView<FeauturedPropertiesController> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Ionicons.location_outline,
                                               color: AppColors.greenColor,
                                             ),
@@ -178,10 +178,10 @@ class FeauturedPropertiesView extends GetView<FeauturedPropertiesController> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           height: Get.height * 0.13,
                                           width: Get.width * 0.4,
                                           child: Text(

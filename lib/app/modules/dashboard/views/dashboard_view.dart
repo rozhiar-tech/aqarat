@@ -30,7 +30,7 @@ class DashboardView extends GetView<DashboardController> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: GNav(
-                  tabs: [
+                  tabs: const [
                     GButton(
                       icon: Ionicons.home,
                       text: 'Home',
@@ -60,11 +60,11 @@ class DashboardView extends GetView<DashboardController> {
                   activeColor: AppColors.goldColor,
                   iconSize: 20,
                   tabBackgroundColor: AppColors.greenColor.withOpacity(0.3),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  duration: Duration(milliseconds: 200),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  duration: const Duration(milliseconds: 200),
                   tabBorderRadius: 10, curve: Curves.easeInOut,
                   tabMargin:
-                      EdgeInsets.only(top: 0, right: 10, left: 10, bottom: 0),
+                      const EdgeInsets.only(top: 0, right: 10, left: 10, bottom: 0),
                   selectedIndex: controller.pageIndex.value,
                   onTabChange: (index) => controller.pageIndex.value = index,
                 ),

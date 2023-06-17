@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import '../../../../L10n/l10n.dart';
 import '../controllers/home_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class HomeView extends GetView<HomeController> {
           builder: (controller) {
             return Scaffold(
                 appBar: PreferredSize(
-                  preferredSize: const Size.fromHeight(110),
+                  preferredSize: const Size.fromHeight(90),
                   child: AppBar(
                       title: Text(
                         controller.title.value,
@@ -27,7 +29,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                       actions: [
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: CircleAvatar(
                             backgroundImage: NetworkImage(
                               controller.userImage.value == ''
@@ -135,16 +137,32 @@ class HomeView extends GetView<HomeController> {
                             content: Column(
                               children: [
                                 ListTile(
-                                  title: const Text('English'),
+                                  title: Text(
+                                    'English',
+                                    style: TextStyle(
+                                      color: AppColors.greenColor,
+                                      fontSize: 16,
+                                      fontFamily: GoogleFonts.robotoCondensed()
+                                          .fontFamily,
+                                    ),
+                                  ),
                                   onTap: () {
-                                    // controller.changeLanguage('en');
+                                    controller.changeLanguage('en');
                                     Get.back();
                                   },
                                 ),
                                 ListTile(
-                                  title: const Text('Arabic'),
+                                  title: Text(
+                                    'Arabic',
+                                    style: TextStyle(
+                                      color: AppColors.greenColor,
+                                      fontSize: 16,
+                                      fontFamily: GoogleFonts.robotoCondensed()
+                                          .fontFamily,
+                                    ),
+                                  ),
                                   onTap: () {
-                                    // controller.changeLanguage('ar');
+                                    controller.changeLanguage('ar');
                                     Get.back();
                                   },
                                 ),
@@ -192,7 +210,7 @@ class HomeView extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 'Welcome to Aqarat Lets find your dream home',
                                 style: TextStyle(
@@ -205,7 +223,7 @@ class HomeView extends GetView<HomeController> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 39, top: 8),
+                              padding: const EdgeInsets.only(left: 36, top: 8),
                               child: Container(
                                 height: Get.height * 0.07,
                                 width: Get.width * 0.8,
@@ -297,7 +315,7 @@ class HomeView extends GetView<HomeController> {
                               height: Get.height * 0.02,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 24, top: 10),
+                              padding: const EdgeInsets.only(left: 10, top: 10),
                               child: Container(
                                 height: Get.height * 0.07,
                                 width: Get.width * 0.9,
@@ -334,7 +352,7 @@ class HomeView extends GetView<HomeController> {
                                               BorderRadius.circular(10),
                                         ),
                                         child: Center(
-                                          child: Text('Residential',
+                                          child: Text("Residential",
                                               style: TextStyle(
                                                 color: controller.buttonIndex
                                                             .value ==
@@ -429,7 +447,7 @@ class HomeView extends GetView<HomeController> {
                               height: Get.height * 0.02,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 24, top: 10),
+                              padding: const EdgeInsets.only(left: 10, top: 10),
                               child: ElevatedButton(
                                 onPressed: () {
                                   controller.filterProperties(
@@ -480,7 +498,7 @@ class HomeView extends GetView<HomeController> {
                                           .fontFamily,
                                     ),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   GestureDetector(
                                     onTap: () {
                                       Get.toNamed('/feautured-properties',
@@ -561,7 +579,7 @@ class HomeView extends GetView<HomeController> {
                                                   width: Get.width * 0.5,
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.only(
+                                                        const BorderRadius.only(
                                                       topLeft:
                                                           Radius.circular(10),
                                                       topRight:
@@ -740,13 +758,13 @@ class HomeView extends GetView<HomeController> {
                                                     children: [
                                                       Row(
                                                         children: [
-                                                          Icon(
+                                                          const Icon(
                                                             Ionicons
                                                                 .cash_outline,
                                                             color: AppColors
                                                                 .greenColor,
                                                           ),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 5,
                                                           ),
                                                           Text(
@@ -769,18 +787,18 @@ class HomeView extends GetView<HomeController> {
                                                           ),
                                                         ],
                                                       ),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         height: 10,
                                                       ),
                                                       Row(
                                                         children: [
-                                                          Icon(
+                                                          const Icon(
                                                             Ionicons
                                                                 .home_outline,
                                                             color: AppColors
                                                                 .greenColor,
                                                           ),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 5,
                                                           ),
                                                           Text(
@@ -801,12 +819,12 @@ class HomeView extends GetView<HomeController> {
                                                           ),
                                                         ],
                                                       ),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         height: 10,
                                                       ),
                                                       Row(
                                                         children: [
-                                                          Icon(
+                                                          const Icon(
                                                             Ionicons
                                                                 .location_outline,
                                                             color: AppColors
@@ -830,7 +848,7 @@ class HomeView extends GetView<HomeController> {
                                                           ),
                                                         ],
                                                       ),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         height: 10,
                                                       ),
                                                       Container(

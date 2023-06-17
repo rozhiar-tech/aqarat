@@ -32,7 +32,7 @@ class FilteredPropertiesView extends GetView<FilteredPropertiesController> {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(
+              icon: const Icon(
                 Ionicons.chevron_back,
                 color: Colors.black,
               ),
@@ -100,11 +100,11 @@ class FilteredPropertiesView extends GetView<FilteredPropertiesController> {
                                   children: [
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Ionicons.cash_outline,
                                           color: AppColors.greenColor,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Text(
@@ -123,16 +123,16 @@ class FilteredPropertiesView extends GetView<FilteredPropertiesController> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Ionicons.home_outline,
                                           color: AppColors.greenColor,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Text(
@@ -149,12 +149,12 @@ class FilteredPropertiesView extends GetView<FilteredPropertiesController> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Ionicons.location_outline,
                                           color: AppColors.greenColor,
                                         ),
@@ -172,10 +172,10 @@ class FilteredPropertiesView extends GetView<FilteredPropertiesController> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       height: Get.height * 0.13,
                                       width: Get.width * 0.4,
                                       child: Text(

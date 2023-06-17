@@ -16,7 +16,7 @@ class ChatView extends GetView<ChatController> {
             appBar: AppBar(
               title: Text(
                 controller.title.value,
-                style: TextStyle(color: AppColors.greenColor),
+                style: const TextStyle(color: AppColors.greenColor),
               ),
               centerTitle: true,
               backgroundColor: Colors.white,
@@ -39,20 +39,20 @@ class ChatView extends GetView<ChatController> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   color: Colors.white,
                   child: Row(
                     children: [
                       Expanded(
                         child: TextField(
                           controller: controller.messageController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: 'Message',
                               hintStyle: TextStyle(color: Colors.black54),
                               border: InputBorder.none),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       GestureDetector(
@@ -65,7 +65,7 @@ class ChatView extends GetView<ChatController> {
                           decoration: BoxDecoration(
                               color: AppColors.greenColor,
                               borderRadius: BorderRadius.circular(40)),
-                          child: Icon(
+                          child: const Icon(
                             Icons.send,
                             color: Colors.white,
                             size: 20,
@@ -93,19 +93,19 @@ class MessageTile extends StatelessWidget {
     return Container(
       padding:
           EdgeInsets.only(left: sendByMe ? 0 : 24, right: sendByMe ? 24 : 0),
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       width: MediaQuery.of(context).size.width,
       alignment: sendByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         decoration: BoxDecoration(
             color: sendByMe ? AppColors.greenColor : Colors.grey.shade200,
             borderRadius: sendByMe
-                ? BorderRadius.only(
+                ? const BorderRadius.only(
                     topLeft: Radius.circular(23),
                     topRight: Radius.circular(23),
                     bottomLeft: Radius.circular(23))
-                : BorderRadius.only(
+                : const BorderRadius.only(
                     topLeft: Radius.circular(23),
                     topRight: Radius.circular(23),
                     bottomRight: Radius.circular(23))),

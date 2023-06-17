@@ -1,0 +1,6 @@
+{
+    "language": "English",
+    "@language":{
+        "description": "the current language of the application"
+    }
+}

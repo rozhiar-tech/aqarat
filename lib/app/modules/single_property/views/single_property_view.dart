@@ -20,7 +20,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
               bottomNavigationBar: Container(
                 height: Get.height * 0.1,
                 width: Get.width,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(24),
@@ -31,7 +31,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 24,
                         backgroundImage: NetworkImage(
                           'https://firebasestorage.googleapis.com/v0/b/happy-47972.appspot.com/o/pro.jpg?alt=media&token=e56be66f-aea0-494a-b260-8ddc3e2a3557&_gl=1*176jevk*_ga*MTAzODkwODYxNS4xNjY4OTQ5NDIz*_ga_CW55HF8NVT*MTY4NTg2ODUwOS4yMC4xLjE2ODU4Njg1MjcuMC4wLjA.',
@@ -52,7 +52,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                     GoogleFonts.robotoCondensed().fontFamily,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               'Real Estate Agent',
                               style: TextStyle(
@@ -66,7 +66,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                           ],
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       GestureDetector(
                         onTap: () async {
                           await controller.checkIfUserIsLoggedIn();
@@ -124,9 +124,9 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                   enableInfiniteScroll: true,
                                   reverse: false,
                                   autoPlay: false,
-                                  autoPlayInterval: Duration(seconds: 3),
+                                  autoPlayInterval: const Duration(seconds: 3),
                                   autoPlayAnimationDuration:
-                                      Duration(milliseconds: 800),
+                                      const Duration(milliseconds: 800),
                                   autoPlayCurve: Curves.fastOutSlowIn,
                                   enlargeCenterPage: true,
                                   // onPageChanged: callbackFunction,
@@ -153,7 +153,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                     child: Container(
                                       width: Get.height * 0.04,
                                       height: Get.height * 0.004,
-                                      margin: EdgeInsets.symmetric(
+                                      margin: const EdgeInsets.symmetric(
                                           vertical: 14.0, horizontal: 4.0),
                                       decoration: BoxDecoration(
                                           shape: BoxShape.rectangle,
@@ -189,7 +189,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Ionicons.arrow_back,
                                     color: Colors.white,
                                     size: 24,
@@ -238,7 +238,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                   children: [
                                     Text(
                                       '\$${controller.price.value} -',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: AppColors.greenColor,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -248,7 +248,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                     ),
                                     Text(
                                       '\$${controller.price.value} ',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: AppColors.greenColor,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
@@ -260,7 +260,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                 ),
                                 Text(
                                   controller.address.value,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: AppColors.greenColor,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
@@ -303,8 +303,8 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             color: Colors.grey.withOpacity(0.5),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Features",
                             style: TextStyle(
@@ -319,7 +319,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            children: [
+                            children: const [
                               Text('Area: '),
                               Spacer(),
                               Text("etr"),
@@ -332,7 +332,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            children: [
+                            children: const [
                               Text('Bedrooms: '),
                               Spacer(),
                               Text("etr"),
@@ -345,7 +345,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            children: [
+                            children: const [
                               Text('Bathrooms: '),
                               Spacer(),
                               Text("etr"),
@@ -362,12 +362,12 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             padding: const EdgeInsets.all(8.0),
                             child: GoogleMap(
                               mapType: MapType.hybrid,
-                              initialCameraPosition: CameraPosition(
+                              initialCameraPosition: const CameraPosition(
                                 target: LatLng(35.554652, 45.428541),
                                 zoom: 14.4746,
                               ),
                               markers: {
-                                Marker(
+                                const Marker(
                                     markerId: MarkerId('1'),
                                     position: LatLng(35.554652, 45.428541),
                                     infoWindow: InfoWindow(
@@ -376,8 +376,8 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                               },
                               circles: {
                                 Circle(
-                                    circleId: CircleId('1'),
-                                    center: LatLng(35.554652, 45.428541),
+                                    circleId: const CircleId('1'),
+                                    center: const LatLng(35.554652, 45.428541),
                                     radius: 500,
                                     fillColor: Colors.blue.withOpacity(0.2),
                                     strokeColor: Colors.blue,

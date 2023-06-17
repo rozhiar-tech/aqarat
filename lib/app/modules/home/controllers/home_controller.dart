@@ -30,7 +30,7 @@ class HomeController extends GetxController {
     userEmail.value = documentSnapshot['email'];
   }
 
-  changeLanguage(lang) {}
+
 
   buttonIndexChange(int index) {
     buttonIndex.value = index;
@@ -48,23 +48,10 @@ class HomeController extends GetxController {
     properties.value = querySnapshot.docs;
   }
 
-  changeIndex(int index) {
-    switch (index) {
-      case 0:
-        Get.toNamed('/home');
-        break;
-      case 1:
-        Get.toNamed('/chat-room');
-        break;
-      case 2:
-        Get.toNamed('/favourite');
-        break;
-
-      default:
-        Get.toNamed('/home');
-    }
+  //create a function to change the language of the app
+  changeLanguage(lang) {
+    Get.updateLocale(Locale(lang));
   }
-
   // create a function to show the result of the filters and send it to filtered properties page
   Future filterProperties({
     String? propertyType,

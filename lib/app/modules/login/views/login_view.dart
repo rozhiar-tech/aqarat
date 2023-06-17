@@ -22,13 +22,13 @@ class LoginView extends GetView<LoginController> {
                   children: [
                     Text(
                       controller.title.value,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: AppColors.goldColor,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
@@ -36,22 +36,29 @@ class LoginView extends GetView<LoginController> {
                       height: Get.height * 0.3,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           image: AssetImage("assets/house.jpg"),
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Container(
+                    SizedBox(
                       width: 300,
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () async {
                           await controller.loginWithGoogle();
                         },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          onPrimary: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -60,10 +67,10 @@ class LoginView extends GetView<LoginController> {
                               width: 30,
                               height: 30,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
-                            Text(
+                            const Text(
                               'Login with Google',
                               style: TextStyle(
                                 fontSize: 20,
@@ -71,16 +78,9 @@ class LoginView extends GetView<LoginController> {
                             ),
                           ],
                         ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          onPrimary: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     // Container(

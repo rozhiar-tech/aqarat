@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
+import 'package:flutter_localization/flutter_localization.dart';
+import 'L10n/l10n.dart';
 import 'app/routes/app_pages.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,8 +16,15 @@ void main() async {
   );
   runApp(
     GetMaterialApp(
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: L10n.all,
       debugShowCheckedModeBanner: false,
-      title: "Application",
+      title: "Aqarat",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),

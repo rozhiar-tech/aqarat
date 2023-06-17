@@ -1,0 +1,5 @@
+flutter:
+  generate: true
+  arb-dir: lib/L10n
+  template-arb-file: app_en.arb
+  output-localization-file: app_localizations.dart

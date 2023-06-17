@@ -29,7 +29,7 @@ class FavouriteView extends GetView<FavouriteController> {
                 elevation: 0,
                 centerTitle: true,
               ),
-              body: Container(
+              body: SizedBox(
                 height: Get.height,
                 width: Get.width,
                 child: ListView.builder(
@@ -89,11 +89,11 @@ class FavouriteView extends GetView<FavouriteController> {
                                       children: [
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Ionicons.cash_outline,
                                               color: AppColors.greenColor,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
                                             Text(
@@ -111,16 +111,16 @@ class FavouriteView extends GetView<FavouriteController> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Ionicons.home_outline,
                                               color: AppColors.greenColor,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
                                             Text(
@@ -137,12 +137,12 @@ class FavouriteView extends GetView<FavouriteController> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Ionicons.location_outline,
                                               color: AppColors.greenColor,
                                             ),
@@ -160,10 +160,10 @@ class FavouriteView extends GetView<FavouriteController> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           height: Get.height * 0.13,
                                           width: Get.width * 0.4,
                                           child: Text(
