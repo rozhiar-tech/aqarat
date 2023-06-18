@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -18,6 +19,8 @@ class HomeController extends GetxController {
   RxString propertyType = ''.obs;
   RxList filteredPropertiesItems = [].obs;
   RxList featuredPropertiesItems = [].obs;
+  RxString sharedLang = 'English'.obs;
+  RxString welcomeMessage = 'Welcome to Aqarat Lets find your dream home'.obs;
 
   Future fetchUserData(userId) async {
     DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
@@ -29,8 +32,6 @@ class HomeController extends GetxController {
     userImage.value = documentSnapshot['profilePic'];
     userEmail.value = documentSnapshot['email'];
   }
-
-
 
   buttonIndexChange(int index) {
     buttonIndex.value = index;
@@ -49,9 +50,34 @@ class HomeController extends GetxController {
   }
 
   //create a function to change the language of the app
-  changeLanguage(lang) {
+  changeLanguage(lang, {countryCode = ''}) {
     Get.updateLocale(Locale(lang));
+    SharedPreferences.getInstance().then((prefs) {
+      print(lang);
+      if (lang == 'ar' && countryCode == 'IQ') {
+        Get.updateLocale(
+            Locale.fromSubtags(languageCode: 'ar', countryCode: 'IQ'));
+        prefs.setString('lang', 'Arabic');
+      } else if (lang == 'ar' && countryCode == 'EG') {
+        Get.updateLocale(
+            Locale.fromSubtags(languageCode: 'ar', countryCode: 'EG'));
+        prefs.setString('lang', 'Arabic_EG');
+      } else if (lang == 'en') {
+        Get.updateLocale(Locale('en', 'US'));
+        prefs.setString('lang', 'English');
+      }
+    });
+    SharedPreferences.getInstance().then((prefs) {
+      sharedLang.value = prefs.getString('lang') ?? 'English';
+      // Use the retrieved language value
+      print(sharedLang.value);
+    });
   }
+
+  printString() {
+    print(sharedLang.value);
+  }
+
   // create a function to show the result of the filters and send it to filtered properties page
   Future filterProperties({
     String? propertyType,
@@ -92,6 +118,7 @@ class HomeController extends GetxController {
     User? user = await FirebaseAuth.instance.currentUser;
     userId.value = user!.uid;
     await fetchUserData(userId);
+
     super.onReady();
   }
 

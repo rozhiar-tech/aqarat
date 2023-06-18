@@ -7,6 +7,7 @@ import '../../../../L10n/l10n.dart';
 import '../controllers/home_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -153,7 +154,9 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 ListTile(
                                   title: Text(
-                                    'Arabic',
+                                    controller.sharedLang.value == 'Arabic'
+                                        ? 'العربية'
+                                        : 'Arabiccccc',
                                     style: TextStyle(
                                       color: AppColors.greenColor,
                                       fontSize: 16,
@@ -162,7 +165,27 @@ class HomeView extends GetView<HomeController> {
                                     ),
                                   ),
                                   onTap: () {
-                                    controller.changeLanguage('ar');
+                                    controller.changeLanguage('ar',
+                                        countryCode: 'IQ');
+                                    print(controller.sharedLang.value);
+                                    Get.back();
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(
+                                    controller.sharedLang.value == 'Arabic_EG'
+                                        ? 'کوردی'
+                                        : 'Kurdish',
+                                    style: TextStyle(
+                                      color: AppColors.greenColor,
+                                      fontSize: 16,
+                                      fontFamily: GoogleFonts.robotoCondensed()
+                                          .fontFamily,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    controller.changeLanguage('ar',
+                                        countryCode: 'EG');
                                     Get.back();
                                   },
                                 ),
@@ -210,9 +233,13 @@ class HomeView extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                'Welcome to Aqarat Lets find your dream home',
+                                controller.sharedLang.value == 'Arabic'
+                                    ? 'الملف الشخصي'
+                                    : controller.sharedLang.value == 'Arabic_EG'
+                                        ? 'بەخێر بێیت بۆ ڵس ئەقارات با شوێنێکی گونجاوت بۆ بدۆزینەوە'
+                                        : 'Welcome to Aqarat Lets find your dream home',
                                 style: TextStyle(
                                   color: AppColors.greenColor,
                                   fontSize: 18,
@@ -260,7 +287,14 @@ class HomeView extends GetView<HomeController> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Center(
-                                        child: Text('Buy',
+                                        child: Text(
+                                            controller.sharedLang.value ==
+                                                    'Arabic'
+                                                ? 'يشتري'
+                                                : controller.sharedLang.value ==
+                                                        'Arabic_EG'
+                                                    ? 'کڕین'
+                                                    : 'Buy',
                                             style: TextStyle(
                                               color: controller.isPressed.value
                                                   ? AppColors.goldColor
