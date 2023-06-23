@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
-  RxString title = 'Aqarat'.obs;
+  RxString title = 'LS Aqarat'.obs;
 
   RxBool isPressed = false.obs;
   RxList properties = [].obs;
@@ -21,6 +21,7 @@ class HomeController extends GetxController {
   RxList featuredPropertiesItems = [].obs;
   RxString sharedLang = 'English'.obs;
   RxString welcomeMessage = 'Welcome to Aqarat Lets find your dream home'.obs;
+  RxBool isDarkMode = false.obs;
 
   Future fetchUserData(userId) async {
     DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
@@ -35,6 +36,10 @@ class HomeController extends GetxController {
 
   buttonIndexChange(int index) {
     buttonIndex.value = index;
+  }
+
+  isDarkModeChange() {
+    isDarkMode.value = !isDarkMode.value;
   }
 
   isPressedChange() {
@@ -103,6 +108,10 @@ class HomeController extends GetxController {
         .where('vip', isEqualTo: true)
         .get();
     featuredPropertiesItems.value = querySnapshot.docs;
+  }
+
+  changeTheme() {
+    Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
   }
 
   final count = 0.obs;

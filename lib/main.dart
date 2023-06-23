@@ -1,3 +1,5 @@
+import 'package:aqarat/app/theme/dark_theme.dart';
+import 'package:aqarat/app/theme/light_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -22,6 +24,8 @@ void main() async {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      theme: lightTheme,
+      darkTheme: darkTheme,
       supportedLocales: L10n.all,
       debugShowCheckedModeBanner: false,
       title: "Aqarat",

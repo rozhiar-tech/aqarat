@@ -41,7 +41,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ],
                       centerTitle: true,
-                      backgroundColor: Colors.white,
+                      backgroundColor: Theme.of(context).colorScheme.background,
                       elevation: 0,
                       iconTheme: const IconThemeData(
                         color: AppColors.greenColor,
@@ -63,7 +63,7 @@ class HomeView extends GetView<HomeController> {
                               Row(
                                 children: [
                                   Text(
-                                    'Aqarat',
+                                    'LS Aqarat',
                                     style: TextStyle(
                                       color: AppColors.greenColor,
                                       fontSize: 24,
@@ -122,7 +122,11 @@ class HomeView extends GetView<HomeController> {
                               width: 10,
                             ),
                             Text(
-                              'Change Language',
+                              controller.sharedLang.value == 'Arabic'
+                                  ? 'تغيير اللغة'
+                                  : controller.sharedLang.value == 'Arabic_EG'
+                                      ? 'گۆڕینی زمان'
+                                      : 'Change Language',
                               style: TextStyle(
                                 color: AppColors.greenColor,
                                 fontSize: 16,
@@ -134,7 +138,11 @@ class HomeView extends GetView<HomeController> {
                         ),
                         onTap: () {
                           Get.defaultDialog(
-                            title: 'Change Language',
+                            title: controller.sharedLang.value == 'Arabic'
+                                ? 'تغيير اللغة'
+                                : controller.sharedLang.value == 'Arabic_EG'
+                                    ? 'گۆڕینی زمان'
+                                    : 'Change Language',
                             content: Column(
                               children: [
                                 ListTile(
@@ -154,9 +162,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 ListTile(
                                   title: Text(
-                                    controller.sharedLang.value == 'Arabic'
-                                        ? 'العربية'
-                                        : 'Arabiccccc',
+                                    'العربية',
                                     style: TextStyle(
                                       color: AppColors.greenColor,
                                       fontSize: 16,
@@ -167,15 +173,13 @@ class HomeView extends GetView<HomeController> {
                                   onTap: () {
                                     controller.changeLanguage('ar',
                                         countryCode: 'IQ');
-                                    print(controller.sharedLang.value);
+
                                     Get.back();
                                   },
                                 ),
                                 ListTile(
                                   title: Text(
-                                    controller.sharedLang.value == 'Arabic_EG'
-                                        ? 'کوردی'
-                                        : 'Kurdish',
+                                    'کوردی',
                                     style: TextStyle(
                                       color: AppColors.greenColor,
                                       fontSize: 16,
@@ -205,7 +209,11 @@ class HomeView extends GetView<HomeController> {
                               width: 10,
                             ),
                             Text(
-                              'Logout',
+                              controller.sharedLang.value == 'Arabic'
+                                  ? 'تسجيل الخروج'
+                                  : controller.sharedLang.value == 'Arabic_EG'
+                                      ? 'چوونە دەرەوە'
+                                      : 'Logout',
                               style: TextStyle(
                                 color: AppColors.greenColor,
                                 fontSize: 16,
@@ -219,10 +227,94 @@ class HomeView extends GetView<HomeController> {
                           controller.logout();
                         },
                       ),
+                      ListTile(
+                        title: Row(
+                          children: [
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 500),
+                              height: 35,
+                              width: 64,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.grey[300],
+                              ),
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller.isDarkModeChange();
+                                      controller.changeTheme();
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: Duration(milliseconds: 500),
+                                      height: 35,
+                                      width: 32,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: controller.isDarkMode.value
+                                            ? Colors.grey[300]
+                                            : Colors.white,
+                                      ),
+                                      child: Icon(
+                                        Icons.wb_sunny_outlined,
+                                        color: controller.isDarkMode.value
+                                            ? Colors.white
+                                            : Colors.amber,
+                                        size: 17,
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller.isDarkModeChange();
+                                      controller.changeTheme();
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: Duration(milliseconds: 500),
+                                      height: 35,
+                                      width: 32,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: controller.isDarkMode.value
+                                            ? Colors.black
+                                            : Colors.grey[300],
+                                      ),
+                                      child: Icon(
+                                        Ionicons.moon,
+                                        color: controller.isDarkMode.value
+                                            ? Colors.white
+                                            : Colors.black,
+                                        size: 17,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              controller.sharedLang.value == 'Arabic'
+                                  ? 'الوضع الليلي'
+                                  : controller.sharedLang.value == 'Arabic_EG'
+                                      ? 'ڕۆژ و شەوە'
+                                      : 'Dark Mode',
+                              style: TextStyle(
+                                color: AppColors.greenColor,
+                                fontSize: 16,
+                                fontFamily:
+                                    GoogleFonts.robotoCondensed().fontFamily,
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () {},
+                      ),
                     ],
                   ),
                 ),
-                backgroundColor: Colors.white,
+                backgroundColor: Theme.of(context).colorScheme.background,
                 body: SizedBox(
                   height: Get.height,
                   width: Get.width,
@@ -250,7 +342,8 @@ class HomeView extends GetView<HomeController> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 36, top: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 36, vertical: 5),
                               child: Container(
                                 height: Get.height * 0.07,
                                 width: Get.width * 0.8,
@@ -302,7 +395,7 @@ class HomeView extends GetView<HomeController> {
                                               fontFamily:
                                                   GoogleFonts.robotoCondensed()
                                                       .fontFamily,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                             )),
                                       ),
                                     ),
@@ -328,7 +421,13 @@ class HomeView extends GetView<HomeController> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          'Rent',
+                                          controller.sharedLang.value ==
+                                                  'Arabic'
+                                              ? 'يستأجر'
+                                              : controller.sharedLang.value ==
+                                                      'Arabic_EG'
+                                                  ? 'کرێ گرتن'
+                                                  : 'Rent',
                                           style: TextStyle(
                                             color: controller.isPressed.value
                                                 ? AppColors.greenColor
@@ -336,7 +435,7 @@ class HomeView extends GetView<HomeController> {
                                             fontFamily:
                                                 GoogleFonts.robotoCondensed()
                                                     .fontFamily,
-                                            fontSize: 18,
+                                            fontSize: 16,
                                           ),
                                         ),
                                       ),
@@ -349,7 +448,8 @@ class HomeView extends GetView<HomeController> {
                               height: Get.height * 0.02,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
                               child: Container(
                                 height: Get.height * 0.07,
                                 width: Get.width * 0.9,
@@ -386,7 +486,15 @@ class HomeView extends GetView<HomeController> {
                                               BorderRadius.circular(10),
                                         ),
                                         child: Center(
-                                          child: Text("Residential",
+                                          child: Text(
+                                              controller.sharedLang.value ==
+                                                      'Arabic'
+                                                  ? 'سكني'
+                                                  : controller.sharedLang
+                                                              .value ==
+                                                          'Arabic_EG'
+                                                      ? 'نیشتەجێبوون'
+                                                      : 'Residential',
                                               style: TextStyle(
                                                 color: controller.buttonIndex
                                                             .value ==
@@ -396,7 +504,7 @@ class HomeView extends GetView<HomeController> {
                                                 fontFamily: GoogleFonts
                                                         .robotoCondensed()
                                                     .fontFamily,
-                                                fontSize: 18,
+                                                fontSize: 16,
                                               )),
                                         ),
                                       ),
@@ -421,7 +529,13 @@ class HomeView extends GetView<HomeController> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            'Commercial',
+                                            controller.sharedLang.value ==
+                                                    'Arabic'
+                                                ? 'تجاري'
+                                                : controller.sharedLang.value ==
+                                                        'Arabic_EG'
+                                                    ? 'کۆمێرسیاڵ'
+                                                    : 'Commercial',
                                             style: TextStyle(
                                               color: controller
                                                           .buttonIndex.value ==
@@ -431,7 +545,7 @@ class HomeView extends GetView<HomeController> {
                                               fontFamily:
                                                   GoogleFonts.robotoCondensed()
                                                       .fontFamily,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                             ),
                                           ),
                                         ),
@@ -457,7 +571,13 @@ class HomeView extends GetView<HomeController> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            'Tourism',
+                                            controller.sharedLang.value ==
+                                                    'Arabic'
+                                                ? 'سياحي'
+                                                : controller.sharedLang.value ==
+                                                        'Arabic_EG'
+                                                    ? 'گەشتیاری'
+                                                    : 'Tourism',
                                             style: TextStyle(
                                               color: controller
                                                           .buttonIndex.value ==
@@ -467,7 +587,7 @@ class HomeView extends GetView<HomeController> {
                                               fontFamily:
                                                   GoogleFonts.robotoCondensed()
                                                       .fontFamily,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                             ),
                                           ),
                                         ),
@@ -481,7 +601,8 @@ class HomeView extends GetView<HomeController> {
                               height: Get.height * 0.02,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
                               child: ElevatedButton(
                                 onPressed: () {
                                   controller.filterProperties(
@@ -490,16 +611,6 @@ class HomeView extends GetView<HomeController> {
                                       propertyType:
                                           controller.propertyType.value);
                                 },
-                                child: Text(
-                                  'Show Results',
-                                  style: TextStyle(
-                                    color: AppColors.goldColor,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: GoogleFonts.robotoCondensed()
-                                        .fontFamily,
-                                  ),
-                                ),
                                 style: ElevatedButton.styleFrom(
                                   primary: AppColors.greenColor,
                                   shape: RoundedRectangleBorder(
@@ -507,6 +618,21 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                   minimumSize:
                                       Size(Get.width * 0.9, Get.height * 0.07),
+                                ),
+                                child: Text(
+                                  controller.sharedLang.value == 'Arabic'
+                                      ? 'تطبيق'
+                                      : controller.sharedLang.value ==
+                                              'Arabic_EG'
+                                          ? 'پشاندان'
+                                          : 'Apply',
+                                  style: TextStyle(
+                                    color: AppColors.goldColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: GoogleFonts.robotoCondensed()
+                                        .fontFamily,
+                                  ),
                                 ),
                               ),
                             ),
@@ -523,7 +649,12 @@ class HomeView extends GetView<HomeController> {
                               child: Row(
                                 children: [
                                   Text(
-                                    'Featured Properties',
+                                    controller.sharedLang.value == 'Arabic'
+                                        ? 'العقارات المميزة'
+                                        : controller.sharedLang.value ==
+                                                'Arabic_EG'
+                                            ? 'موڵکە تایبەتەکان'
+                                            : 'Featured Properties',
                                     style: TextStyle(
                                       color: AppColors.greenColor,
                                       fontSize: 20,
@@ -540,7 +671,12 @@ class HomeView extends GetView<HomeController> {
                                               .featuredPropertiesItems);
                                     },
                                     child: Text(
-                                      'View All',
+                                      controller.sharedLang.value == 'Arabic'
+                                          ? 'عرض الكل'
+                                          : controller.sharedLang.value ==
+                                                  'Arabic_EG'
+                                              ? ' پیشاندانی هەمووی'
+                                              : 'View All',
                                       style: TextStyle(
                                         color: AppColors.greenColor,
                                         fontSize: 18,
@@ -708,7 +844,11 @@ class HomeView extends GetView<HomeController> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                'New Properties',
+                                controller.sharedLang.value == 'Arabic'
+                                    ? 'العقارات الحديثة'
+                                    : controller.sharedLang.value == 'Arabic_EG'
+                                        ? 'موڵکە نوێکان'
+                                        : 'New Properties',
                                 style: TextStyle(
                                   color: AppColors.greenColor,
                                   fontSize: 20,
