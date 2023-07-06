@@ -23,8 +23,10 @@ class HomeView extends GetView<HomeController> {
                   child: AppBar(
                       title: Text(
                         controller.title.value,
-                        style: const TextStyle(
-                          color: AppColors.greenColor,
+                        style: TextStyle(
+                          color: controller.isDarkMode.value
+                              ? AppColors.whiteColor
+                              : AppColors.greenColor,
                           fontSize: 20,
                         ),
                       ),
@@ -43,8 +45,10 @@ class HomeView extends GetView<HomeController> {
                       centerTitle: true,
                       backgroundColor: Theme.of(context).colorScheme.background,
                       elevation: 0,
-                      iconTheme: const IconThemeData(
-                        color: AppColors.greenColor,
+                      iconTheme: IconThemeData(
+                        color: controller.isDarkMode.value
+                            ? AppColors.whiteColor
+                            : AppColors.greenColor,
                       )),
                 ),
                 drawer: Drawer(
@@ -333,7 +337,7 @@ class HomeView extends GetView<HomeController> {
                                         ? 'بەخێر بێیت بۆ ڵس ئەقارات با شوێنێکی گونجاوت بۆ بدۆزینەوە'
                                         : 'Welcome to Aqarat Lets find your dream home',
                                 style: TextStyle(
-                                  color: AppColors.greenColor,
+                                  color: Theme.of(context).colorScheme.primary,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   fontFamily:
@@ -390,8 +394,12 @@ class HomeView extends GetView<HomeController> {
                                                     : 'Buy',
                                             style: TextStyle(
                                               color: controller.isPressed.value
-                                                  ? AppColors.goldColor
-                                                  : AppColors.greenColor,
+                                                  ? (controller.isDarkMode.value
+                                                      ? AppColors.whiteColor
+                                                      : AppColors.goldColor)
+                                                  : (controller.isDarkMode.value
+                                                      ? AppColors.whiteColor
+                                                      : AppColors.greenColor),
                                               fontFamily:
                                                   GoogleFonts.robotoCondensed()
                                                       .fontFamily,
@@ -430,8 +438,12 @@ class HomeView extends GetView<HomeController> {
                                                   : 'Rent',
                                           style: TextStyle(
                                             color: controller.isPressed.value
-                                                ? AppColors.greenColor
-                                                : AppColors.goldColor,
+                                                ? (controller.isDarkMode.value
+                                                    ? AppColors.whiteColor
+                                                    : AppColors.greenColor)
+                                                : (controller.isDarkMode.value
+                                                    ? AppColors.whiteColor
+                                                    : AppColors.goldColor),
                                             fontFamily:
                                                 GoogleFonts.robotoCondensed()
                                                     .fontFamily,
@@ -499,8 +511,14 @@ class HomeView extends GetView<HomeController> {
                                                 color: controller.buttonIndex
                                                             .value ==
                                                         0
-                                                    ? AppColors.goldColor
-                                                    : AppColors.greenColor,
+                                                    ? (controller
+                                                            .isDarkMode.value
+                                                        ? AppColors.whiteColor
+                                                        : AppColors.goldColor)
+                                                    : (controller
+                                                            .isDarkMode.value
+                                                        ? AppColors.whiteColor
+                                                        : AppColors.greenColor),
                                                 fontFamily: GoogleFonts
                                                         .robotoCondensed()
                                                     .fontFamily,
@@ -540,8 +558,12 @@ class HomeView extends GetView<HomeController> {
                                               color: controller
                                                           .buttonIndex.value ==
                                                       1
-                                                  ? AppColors.goldColor
-                                                  : AppColors.greenColor,
+                                                  ? (controller.isDarkMode.value
+                                                      ? AppColors.whiteColor
+                                                      : AppColors.goldColor)
+                                                  : (controller.isDarkMode.value
+                                                      ? AppColors.whiteColor
+                                                      : AppColors.greenColor),
                                               fontFamily:
                                                   GoogleFonts.robotoCondensed()
                                                       .fontFamily,
@@ -582,8 +604,12 @@ class HomeView extends GetView<HomeController> {
                                               color: controller
                                                           .buttonIndex.value ==
                                                       2
-                                                  ? AppColors.goldColor
-                                                  : AppColors.greenColor,
+                                                  ? (controller.isDarkMode.value
+                                                      ? AppColors.whiteColor
+                                                      : AppColors.goldColor)
+                                                  : (controller.isDarkMode.value
+                                                      ? AppColors.whiteColor
+                                                      : AppColors.greenColor),
                                               fontFamily:
                                                   GoogleFonts.robotoCondensed()
                                                       .fontFamily,
@@ -612,7 +638,9 @@ class HomeView extends GetView<HomeController> {
                                           controller.propertyType.value);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary: AppColors.greenColor,
+                                  primary: controller.isDarkMode.value
+                                      ? AppColors.goldColor
+                                      : AppColors.greenColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -627,7 +655,9 @@ class HomeView extends GetView<HomeController> {
                                           ? 'پشاندان'
                                           : 'Apply',
                                   style: TextStyle(
-                                    color: AppColors.goldColor,
+                                    color: controller.isDarkMode.value
+                                        ? AppColors.whiteColor
+                                        : AppColors.goldColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: GoogleFonts.robotoCondensed()
@@ -656,7 +686,9 @@ class HomeView extends GetView<HomeController> {
                                             ? 'موڵکە تایبەتەکان'
                                             : 'Featured Properties',
                                     style: TextStyle(
-                                      color: AppColors.greenColor,
+                                      color: controller.isDarkMode.value
+                                          ? AppColors.whiteColor
+                                          : AppColors.greenColor,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: GoogleFonts.robotoCondensed()
@@ -678,7 +710,9 @@ class HomeView extends GetView<HomeController> {
                                               ? ' پیشاندانی هەمووی'
                                               : 'View All',
                                       style: TextStyle(
-                                        color: AppColors.greenColor,
+                                        color: controller.isDarkMode.value
+                                            ? AppColors.whiteColor
+                                            : AppColors.greenColor,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                         fontFamily:
@@ -718,26 +752,55 @@ class HomeView extends GetView<HomeController> {
                                                       index]['type'],
                                                   controller
                                                           .featuredPropertiesItems[
-                                                      index]['location'],
+                                                      index]['address'],
                                                   controller
                                                           .featuredPropertiesItems[
                                                       index]['description'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['area'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['bedrooms'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['bathrooms'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['floors'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['rooms'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['rwgasore'],
+                                                  controller.isDarkMode.value
                                                 ]);
                                           },
                                           child: Container(
                                             height: Get.height * 0.4,
                                             width: Get.width * 0.5,
                                             decoration: BoxDecoration(
-                                              color:
-                                                  Colors.grey.withOpacity(0.2),
+                                              color: controller.isDarkMode.value
+                                                  ? Colors.grey.withOpacity(0.2)
+                                                  : AppColors.goldColor,
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.2),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 7,
+                                                  color: controller
+                                                          .isDarkMode.value
+                                                      ? AppColors.goldColor
+                                                      : Colors.grey
+                                                          .withOpacity(0.5),
+                                                  spreadRadius: controller
+                                                          .isDarkMode.value
+                                                      ? 0
+                                                      : 2,
+                                                  blurRadius: controller
+                                                          .isDarkMode.value
+                                                      ? 0
+                                                      : 5,
                                                   offset: const Offset(0, 3),
                                                 ),
                                               ],
@@ -787,8 +850,13 @@ class HomeView extends GetView<HomeController> {
                                                                   ['price']
                                                               .toString(),
                                                           style: TextStyle(
-                                                            color: AppColors
-                                                                .greenColor,
+                                                            color: controller
+                                                                    .isDarkMode
+                                                                    .value
+                                                                ? AppColors
+                                                                    .whiteColor
+                                                                : AppColors
+                                                                    .greenColor,
                                                             fontSize: 18,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -802,8 +870,13 @@ class HomeView extends GetView<HomeController> {
                                                                   .featuredPropertiesItems[
                                                               index]['category'],
                                                           style: TextStyle(
-                                                            color: AppColors
-                                                                .greenColor,
+                                                            color: controller
+                                                                    .isDarkMode
+                                                                    .value
+                                                                ? AppColors
+                                                                    .whiteColor
+                                                                : AppColors
+                                                                    .greenColor,
                                                             fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -817,8 +890,13 @@ class HomeView extends GetView<HomeController> {
                                                                   .featuredPropertiesItems[
                                                               index]['type'],
                                                           style: TextStyle(
-                                                            color: AppColors
-                                                                .greenColor,
+                                                            color: controller
+                                                                    .isDarkMode
+                                                                    .value
+                                                                ? AppColors
+                                                                    .whiteColor
+                                                                : AppColors
+                                                                    .greenColor,
                                                             fontSize: 14,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -850,7 +928,9 @@ class HomeView extends GetView<HomeController> {
                                         ? 'موڵکە نوێکان'
                                         : 'New Properties',
                                 style: TextStyle(
-                                  color: AppColors.greenColor,
+                                  color: controller.isDarkMode.value
+                                      ? AppColors.whiteColor
+                                      : AppColors.greenColor,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   fontFamily:
@@ -881,25 +961,48 @@ class HomeView extends GetView<HomeController> {
                                                   controller.properties[index]
                                                       ['type'],
                                                   controller.properties[index]
-                                                      ['location'],
+                                                      ['address'],
                                                   controller.properties[index]
                                                       ['description'],
+                                                  controller.properties[index]
+                                                      ['area'],
+                                                  controller.properties[index]
+                                                      ['bedrooms'],
+                                                  controller.properties[index]
+                                                      ['bathrooms'],
+                                                  controller.properties[index]
+                                                      ['floors'],
+                                                  controller.properties[index]
+                                                      ['rooms'],
+                                                  controller.properties[index]
+                                                      ['rwgasore'],
                                                 ]);
                                           },
                                           child: Container(
                                             height: Get.height * 0.33,
                                             width: Get.width,
                                             decoration: BoxDecoration(
-                                              color:
-                                                  Colors.grey.withOpacity(0.2),
+                                              color: controller.isDarkMode.value
+                                                  ? AppColors.goldColor
+                                                  : Colors.grey
+                                                      .withOpacity(0.2),
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.2),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 7,
+                                                  color: controller
+                                                          .isDarkMode.value
+                                                      ? AppColors.goldColor
+                                                      : Colors.grey
+                                                          .withOpacity(0.2),
+                                                  spreadRadius: controller
+                                                          .isDarkMode.value
+                                                      ? 0
+                                                      : 2,
+                                                  blurRadius: controller
+                                                          .isDarkMode.value
+                                                      ? 0
+                                                      : 7,
                                                   offset: const Offset(0, 3),
                                                 ),
                                               ],
@@ -932,11 +1035,16 @@ class HomeView extends GetView<HomeController> {
                                                     children: [
                                                       Row(
                                                         children: [
-                                                          const Icon(
+                                                          Icon(
                                                             Ionicons
                                                                 .cash_outline,
-                                                            color: AppColors
-                                                                .greenColor,
+                                                            color: controller
+                                                                    .isDarkMode
+                                                                    .value
+                                                                ? AppColors
+                                                                    .whiteColor
+                                                                : AppColors
+                                                                    .greenColor,
                                                           ),
                                                           const SizedBox(
                                                             width: 5,
@@ -948,8 +1056,13 @@ class HomeView extends GetView<HomeController> {
                                                                     ['price']
                                                                 .toString(),
                                                             style: TextStyle(
-                                                              color: AppColors
-                                                                  .greenColor,
+                                                              color: controller
+                                                                      .isDarkMode
+                                                                      .value
+                                                                  ? AppColors
+                                                                      .whiteColor
+                                                                  : AppColors
+                                                                      .greenColor,
                                                               fontSize: 18,
                                                               fontWeight:
                                                                   FontWeight
@@ -966,11 +1079,16 @@ class HomeView extends GetView<HomeController> {
                                                       ),
                                                       Row(
                                                         children: [
-                                                          const Icon(
+                                                          Icon(
                                                             Ionicons
                                                                 .home_outline,
-                                                            color: AppColors
-                                                                .greenColor,
+                                                            color: controller
+                                                                    .isDarkMode
+                                                                    .value
+                                                                ? AppColors
+                                                                    .whiteColor
+                                                                : AppColors
+                                                                    .greenColor,
                                                           ),
                                                           const SizedBox(
                                                             width: 5,
@@ -980,8 +1098,13 @@ class HomeView extends GetView<HomeController> {
                                                                     .properties[
                                                                 index]['type'],
                                                             style: TextStyle(
-                                                              color: AppColors
-                                                                  .greenColor,
+                                                              color: controller
+                                                                      .isDarkMode
+                                                                      .value
+                                                                  ? AppColors
+                                                                      .whiteColor
+                                                                  : AppColors
+                                                                      .greenColor,
                                                               fontSize: 16,
                                                               fontWeight:
                                                                   FontWeight
@@ -998,19 +1121,29 @@ class HomeView extends GetView<HomeController> {
                                                       ),
                                                       Row(
                                                         children: [
-                                                          const Icon(
+                                                          Icon(
                                                             Ionicons
                                                                 .location_outline,
-                                                            color: AppColors
-                                                                .greenColor,
+                                                            color: controller
+                                                                    .isDarkMode
+                                                                    .value
+                                                                ? AppColors
+                                                                    .whiteColor
+                                                                : AppColors
+                                                                    .greenColor,
                                                           ),
                                                           Text(
                                                             controller.properties[
                                                                     index]
-                                                                ['location'],
+                                                                ['address'],
                                                             style: TextStyle(
-                                                              color: AppColors
-                                                                  .greenColor,
+                                                              color: controller
+                                                                      .isDarkMode
+                                                                      .value
+                                                                  ? AppColors
+                                                                      .whiteColor
+                                                                  : AppColors
+                                                                      .greenColor,
                                                               fontSize: 14,
                                                               fontWeight:
                                                                   FontWeight
@@ -1036,8 +1169,13 @@ class HomeView extends GetView<HomeController> {
                                                                   'description']
                                                               .toString(),
                                                           style: TextStyle(
-                                                            color: AppColors
-                                                                .greenColor,
+                                                            color: controller
+                                                                    .isDarkMode
+                                                                    .value
+                                                                ? AppColors
+                                                                    .whiteColor
+                                                                : AppColors
+                                                                    .greenColor,
                                                             fontSize: 11,
                                                             fontWeight:
                                                                 FontWeight.bold,

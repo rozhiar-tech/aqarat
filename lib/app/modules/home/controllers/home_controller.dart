@@ -47,10 +47,8 @@ class HomeController extends GetxController {
   }
 
   Future fetchProperties() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('properties')
-        .where('vip', isEqualTo: false)
-        .get();
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('properties').get();
     properties.value = querySnapshot.docs;
   }
 

@@ -14,8 +14,15 @@ class SinglePropertyController extends GetxController {
   RxString price = ''.obs;
   RxString address = ''.obs;
   RxString propertyType = ''.obs;
+  RxString bedrooms = ''.obs;
+  RxString bathrooms = ''.obs;
+  RxString floors = ''.obs;
+  RxString area = ''.obs;
+  RxString rooms = ''.obs;
+  RxString rwgasore = ''.obs;
   RxString propertyId = ''.obs;
   RxString userId = ''.obs;
+  RxBool isDarkMode = false.obs;
 
   CarouselController carouselController = CarouselController();
 
@@ -27,7 +34,13 @@ class SinglePropertyController extends GetxController {
     propertyType.value = arguments[2];
     address.value = arguments[3];
     description.value = arguments[4];
-    // propertyId.value = arguments[5];
+    area.value = arguments[5].toString();
+    bedrooms.value = arguments[6].toString();
+    bathrooms.value = arguments[7].toString();
+    floors.value = arguments[8].toString();
+    rooms.value = arguments[9].toString();
+    rwgasore.value = arguments[10].toString();
+    isDarkMode.value = arguments[11];
   }
 
   isFavouriteToggle() {

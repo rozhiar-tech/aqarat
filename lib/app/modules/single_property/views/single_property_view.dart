@@ -17,6 +17,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
         init: SinglePropertyController(),
         builder: (controller) {
           return Scaffold(
+              backgroundColor: Theme.of(context).colorScheme.background,
               bottomNavigationBar: Container(
                 height: Get.height * 0.1,
                 width: Get.width,
@@ -238,8 +239,10 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                   children: [
                                     Text(
                                       '\$${controller.price.value} -',
-                                      style: const TextStyle(
-                                          color: AppColors.greenColor,
+                                      style: TextStyle(
+                                          color: controller.isDarkMode.value
+                                              ? Colors.white
+                                              : AppColors.greenColor,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -248,8 +251,10 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                     ),
                                     Text(
                                       '\$${controller.price.value} ',
-                                      style: const TextStyle(
-                                          color: AppColors.greenColor,
+                                      style: TextStyle(
+                                          color: controller.isDarkMode.value
+                                              ? Colors.white
+                                              : AppColors.greenColor,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -260,8 +265,10 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                 ),
                                 Text(
                                   controller.address.value,
-                                  style: const TextStyle(
-                                      color: AppColors.greenColor,
+                                  style: TextStyle(
+                                      color: controller.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColors.goldColor,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -289,7 +296,9 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             child: Text(
                               controller.description.value,
                               style: TextStyle(
-                                  color: AppColors.greenColor.withOpacity(0.5),
+                                  color: controller.isDarkMode.value
+                                      ? Colors.white
+                                      : AppColors.greenColor.withOpacity(0.5),
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -303,12 +312,14 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             color: Colors.grey.withOpacity(0.5),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(
                             "Features",
                             style: TextStyle(
-                                color: AppColors.greenColor,
+                                color: controller.isDarkMode.value
+                                    ? Colors.white
+                                    : AppColors.greenColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -319,10 +330,13 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            children: const [
-                              Text('Area: '),
+                            children: [
+                              const Icon(
+                                Ionicons.bed_outline,
+                                color: Color.fromARGB(255, 6, 26, 36),
+                              ),
                               Spacer(),
-                              Text("etr"),
+                              Text(controller.bedrooms.value),
                             ],
                           ),
                         ),
@@ -332,10 +346,13 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            children: const [
-                              Text('Bedrooms: '),
+                            children: [
+                              Icon(
+                                Icons.aspect_ratio_outlined,
+                                color: Color.fromARGB(255, 6, 26, 36),
+                              ),
                               Spacer(),
-                              Text("etr"),
+                              Text("${controller.area.value} m2"),
                             ],
                           ),
                         ),
@@ -345,22 +362,62 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            children: const [
-                              Text('Bathrooms: '),
+                            children: [
+                              Icon(
+                                Icons.bathtub_rounded,
+                                color: Color.fromARGB(255, 6, 26, 36),
+                              ),
                               Spacer(),
-                              Text("etr"),
+                              Text(controller.bathrooms.value),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.01,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.open_with_outlined,
+                                color: Color.fromARGB(255, 6, 26, 36),
+                              ),
+                              Spacer(),
+                              Text(controller.rwgasore.value),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.01,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.other_houses_outlined,
+                                color: Color.fromARGB(255, 6, 26, 36),
+                              ),
+                              Spacer(),
+                              Text(controller.rooms.value),
                             ],
                           ),
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
+                            color: controller.isDarkMode.value
+                                ? AppColors.greenColor
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            
+                          ),
                           height: Get.height * 0.3,
                           width: Get.width,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GoogleMap(
+                              padding: const EdgeInsets.all(3),
                               mapType: MapType.hybrid,
                               initialCameraPosition: const CameraPosition(
                                 target: LatLng(35.554652, 45.428541),

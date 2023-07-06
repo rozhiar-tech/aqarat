@@ -15,17 +15,18 @@ class FavouriteView extends GetView<FavouriteController> {
         init: FavouriteController(),
         builder: (controller) {
           return Scaffold(
+              backgroundColor: Theme.of(context).colorScheme.background,
               appBar: AppBar(
                 title: Text(
                   controller.title.value,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.greenColor,
+                    color: Theme.of(context).colorScheme.primary,
                     fontFamily: GoogleFonts.robotoCondensed().fontFamily,
                   ),
                 ),
-                backgroundColor: Colors.white,
+                backgroundColor: Theme.of(context).colorScheme.background,
                 elevation: 0,
                 centerTitle: true,
               ),
@@ -48,15 +49,21 @@ class FavouriteView extends GetView<FavouriteController> {
                                     as List,
                                 controller.favouriteList[index]['price'],
                                 controller.favouriteList[index]['type'],
-                                controller.favouriteList[index]['location'],
+                                controller.favouriteList[index]['address'],
                                 controller.favouriteList[index]['description'],
+                                controller.favouriteList[index]['area'],
+                                controller.favouriteList[index]['bedrooms'],
+                                controller.favouriteList[index]['bathrooms'],
+                                controller.favouriteList[index]['floors'],
+                                controller.favouriteList[index]['rooms'],
+                                controller.favouriteList[index]['rwgasore'],
                               ]);
                             },
                             child: Container(
                               height: Get.height * 0.33,
                               width: Get.width,
                               decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.2),
+                                color: Theme.of(context).colorScheme.onPrimary,
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
@@ -89,9 +96,11 @@ class FavouriteView extends GetView<FavouriteController> {
                                       children: [
                                         Row(
                                           children: [
-                                            const Icon(
+                                            Icon(
                                               Ionicons.cash_outline,
-                                              color: AppColors.greenColor,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -101,7 +110,9 @@ class FavouriteView extends GetView<FavouriteController> {
                                                       ['price']
                                                   .toString(),
                                               style: TextStyle(
-                                                color: AppColors.greenColor,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
                                                 fontFamily: GoogleFonts
@@ -116,9 +127,11 @@ class FavouriteView extends GetView<FavouriteController> {
                                         ),
                                         Row(
                                           children: [
-                                            const Icon(
+                                            Icon(
                                               Ionicons.home_outline,
-                                              color: AppColors.greenColor,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -127,7 +140,9 @@ class FavouriteView extends GetView<FavouriteController> {
                                               controller.favouriteList[index]
                                                   ['propertyType'],
                                               style: TextStyle(
-                                                color: AppColors.greenColor,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold,
                                                 fontFamily: GoogleFonts
@@ -142,15 +157,19 @@ class FavouriteView extends GetView<FavouriteController> {
                                         ),
                                         Row(
                                           children: [
-                                            const Icon(
+                                            Icon(
                                               Ionicons.location_outline,
-                                              color: AppColors.greenColor,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
                                             ),
                                             Text(
                                               controller.favouriteList[index]
                                                   ['address'],
                                               style: TextStyle(
-                                                color: AppColors.greenColor,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 fontFamily: GoogleFonts
@@ -171,7 +190,9 @@ class FavouriteView extends GetView<FavouriteController> {
                                                     ['description']
                                                 .toString(),
                                             style: TextStyle(
-                                              color: AppColors.greenColor,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
                                               fontSize: 11,
                                               fontWeight: FontWeight.bold,
                                               fontFamily:
