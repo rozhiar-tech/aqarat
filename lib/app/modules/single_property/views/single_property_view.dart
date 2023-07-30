@@ -268,7 +268,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                   style: TextStyle(
                                       color: controller.isDarkMode.value
                                           ? Colors.white
-                                          : AppColors.goldColor,
+                                          : AppColors.greenColor,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -298,7 +298,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                               style: TextStyle(
                                   color: controller.isDarkMode.value
                                       ? Colors.white
-                                      : AppColors.greenColor.withOpacity(0.5),
+                                      : Colors.grey[400],
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -331,9 +331,23 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Ionicons.bed_outline,
-                                color: Color.fromARGB(255, 6, 26, 36),
+                                color: controller.isDarkMode.value
+                                    ? Colors.white
+                                    : AppColors.blackColor,
+                              ),
+                              SizedBox(
+                                width: Get.width * 0.02,
+                              ),
+                              Text(
+                                ": Bedrooms",
+                                style: TextStyle(
+                                    color: controller.isDarkMode.value
+                                        ? Colors.white
+                                        : AppColors.greenColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
                               Spacer(),
                               Text(controller.bedrooms.value),
@@ -341,7 +355,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                           ),
                         ),
                         SizedBox(
-                          height: Get.height * 0.01,
+                          height: Get.height * 0.001,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -349,7 +363,21 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             children: [
                               Icon(
                                 Icons.aspect_ratio_outlined,
-                                color: Color.fromARGB(255, 6, 26, 36),
+                                color: controller.isDarkMode.value
+                                    ? Colors.white
+                                    : AppColors.blackColor,
+                              ),
+                              SizedBox(
+                                width: Get.width * 0.02,
+                              ),
+                              Text(
+                                ": Area",
+                                style: TextStyle(
+                                    color: controller.isDarkMode.value
+                                        ? Colors.white
+                                        : AppColors.greenColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
                               Spacer(),
                               Text("${controller.area.value} m2"),
@@ -357,7 +385,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                           ),
                         ),
                         SizedBox(
-                          height: Get.height * 0.01,
+                          height: Get.height * 0.001,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -365,7 +393,21 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             children: [
                               Icon(
                                 Icons.bathtub_rounded,
-                                color: Color.fromARGB(255, 6, 26, 36),
+                                color: controller.isDarkMode.value
+                                    ? Colors.white
+                                    : AppColors.blackColor,
+                              ),
+                              SizedBox(
+                                width: Get.width * 0.02,
+                              ),
+                              Text(
+                                ": Bathrooms",
+                                style: TextStyle(
+                                    color: controller.isDarkMode.value
+                                        ? Colors.white
+                                        : AppColors.greenColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
                               Spacer(),
                               Text(controller.bathrooms.value),
@@ -373,7 +415,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                           ),
                         ),
                         SizedBox(
-                          height: Get.height * 0.01,
+                          height: Get.height * 0.001,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -381,7 +423,21 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             children: [
                               Icon(
                                 Icons.open_with_outlined,
-                                color: Color.fromARGB(255, 6, 26, 36),
+                                color: controller.isDarkMode.value
+                                    ? Colors.white
+                                    : AppColors.blackColor,
+                              ),
+                              SizedBox(
+                                width: Get.width * 0.02,
+                              ),
+                              Text(
+                                ": Facing",
+                                style: TextStyle(
+                                    color: controller.isDarkMode.value
+                                        ? Colors.white
+                                        : AppColors.greenColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
                               Spacer(),
                               Text(controller.rwgasore.value),
@@ -389,7 +445,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                           ),
                         ),
                         SizedBox(
-                          height: Get.height * 0.01,
+                          height: Get.height * 0.001,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -397,7 +453,21 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             children: [
                               Icon(
                                 Icons.other_houses_outlined,
-                                color: Color.fromARGB(255, 6, 26, 36),
+                                color: controller.isDarkMode.value
+                                    ? Colors.white
+                                    : AppColors.blackColor,
+                              ),
+                              SizedBox(
+                                width: Get.width * 0.02,
+                              ),
+                              Text(
+                                ": Rooms",
+                                style: TextStyle(
+                                    color: controller.isDarkMode.value
+                                        ? Colors.white
+                                        : AppColors.greenColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
                               Spacer(),
                               Text(controller.rooms.value),
@@ -407,10 +477,9 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                         Container(
                           decoration: BoxDecoration(
                             color: controller.isDarkMode.value
-                                ? AppColors.greenColor
+                                ? AppColors.blackColor
                                 : Colors.white,
                             borderRadius: BorderRadius.circular(10),
-                            
                           ),
                           height: Get.height * 0.3,
                           width: Get.width,

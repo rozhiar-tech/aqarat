@@ -57,14 +57,15 @@ class DashboardView extends GetView<DashboardController> {
 
                   gap: 10,
                   color: AppColors.greenColor.withOpacity(0.5),
-                  activeColor: AppColors.goldColor,
+                  activeColor: AppColors.blackColor,
                   iconSize: 20,
-                  tabBackgroundColor: AppColors.greenColor.withOpacity(0.3),
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  // tabBackgroundColor: AppColors.greenColor.withOpacity(0.3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   duration: const Duration(milliseconds: 200),
                   tabBorderRadius: 10, curve: Curves.easeInOut,
-                  tabMargin:
-                      const EdgeInsets.only(top: 0, right: 10, left: 10, bottom: 0),
+                  tabMargin: const EdgeInsets.only(
+                      top: 0, right: 6, left: 6, bottom: 0),
                   selectedIndex: controller.pageIndex.value,
                   onTabChange: (index) => controller.pageIndex.value = index,
                 ),

@@ -1,6 +1,6 @@
 import 'package:aqarat/app/modules/single_property/views/single_property_view.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -37,16 +37,25 @@ class MapViewView extends GetView<MapViewController> {
                   target: LatLng(35.5558, 45.4351),
                   zoom: 14.0,
                 ),
+                onMapCreated: (GoogleMapController) {
+                  controller.mapController.complete();
+                },
                 markers: {
                   Marker(
                     markerId: MarkerId('1'),
                     position: LatLng(35.554480, 45.435876),
-                    infoWindow: InfoWindow(title: 'Marker 1'),
-                    icon: BitmapDescriptor.defaultMarkerWithHue(
-                        BitmapDescriptor.hueGreen),
                     onTap: () {
-                      Get.dialog(SinglePropertyView());
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return CustomInfoWindow(
+                            title: 'House',
+                            imagePath: 'assets/house.jpg',
+                          );
+                        },
+                      );
                     },
+                    icon: controller.customIcon.value,
                   ),
                   Marker(
                     markerId: MarkerId('2'),
@@ -92,5 +101,66 @@ class MapViewView extends GetView<MapViewController> {
             ),
           );
         });
+  }
+}
+
+class CustomInfoWindow extends StatelessWidget {
+  final String title;
+  final String imagePath;
+
+  CustomInfoWindow({required this.title, required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 250,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            offset: Offset(0, 2),
+            blurRadius: 6.0,
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Additional information goes here',
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -48,16 +48,19 @@ class HomeView extends GetView<HomeController> {
                       iconTheme: IconThemeData(
                         color: controller.isDarkMode.value
                             ? AppColors.whiteColor
-                            : AppColors.greenColor,
+                            : AppColors.blackColor,
                       )),
                 ),
                 drawer: Drawer(
+                  backgroundColor: Theme.of(context).colorScheme.background,
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: [
                       DrawerHeader(
-                        decoration: const BoxDecoration(
-                          color: AppColors.goldColor,
+                        decoration: BoxDecoration(
+                          color: controller.isDarkMode.value
+                              ? AppColors.blackColor
+                              : AppColors.whiteColor,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -118,9 +121,11 @@ class HomeView extends GetView<HomeController> {
                       ListTile(
                         title: Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Ionicons.language_outline,
-                              color: AppColors.greenColor,
+                              color: controller.isDarkMode.value
+                                  ? AppColors.whiteColor
+                                  : AppColors.greenColor,
                             ),
                             const SizedBox(
                               width: 10,
@@ -132,7 +137,9 @@ class HomeView extends GetView<HomeController> {
                                       ? 'گۆڕینی زمان'
                                       : 'Change Language',
                               style: TextStyle(
-                                color: AppColors.greenColor,
+                                color: controller.isDarkMode.value
+                                    ? AppColors.whiteColor
+                                    : AppColors.greenColor,
                                 fontSize: 16,
                                 fontFamily:
                                     GoogleFonts.robotoCondensed().fontFamily,
@@ -153,7 +160,9 @@ class HomeView extends GetView<HomeController> {
                                   title: Text(
                                     'English',
                                     style: TextStyle(
-                                      color: AppColors.greenColor,
+                                      color: controller.isDarkMode.value
+                                          ? AppColors.whiteColor
+                                          : AppColors.greenColor,
                                       fontSize: 16,
                                       fontFamily: GoogleFonts.robotoCondensed()
                                           .fontFamily,
@@ -168,7 +177,9 @@ class HomeView extends GetView<HomeController> {
                                   title: Text(
                                     'العربية',
                                     style: TextStyle(
-                                      color: AppColors.greenColor,
+                                      color: controller.isDarkMode.value
+                                          ? AppColors.whiteColor
+                                          : AppColors.greenColor,
                                       fontSize: 16,
                                       fontFamily: GoogleFonts.robotoCondensed()
                                           .fontFamily,
@@ -185,7 +196,9 @@ class HomeView extends GetView<HomeController> {
                                   title: Text(
                                     'کوردی',
                                     style: TextStyle(
-                                      color: AppColors.greenColor,
+                                      color: controller.isDarkMode.value
+                                          ? AppColors.whiteColor
+                                          : AppColors.greenColor,
                                       fontSize: 16,
                                       fontFamily: GoogleFonts.robotoCondensed()
                                           .fontFamily,
@@ -205,9 +218,11 @@ class HomeView extends GetView<HomeController> {
                       ListTile(
                         title: Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Ionicons.log_out_outline,
-                              color: AppColors.greenColor,
+                              color: controller.isDarkMode.value
+                                  ? AppColors.whiteColor
+                                  : AppColors.greenColor,
                             ),
                             const SizedBox(
                               width: 10,
@@ -219,7 +234,9 @@ class HomeView extends GetView<HomeController> {
                                       ? 'چوونە دەرەوە'
                                       : 'Logout',
                               style: TextStyle(
-                                color: AppColors.greenColor,
+                                color: controller.isDarkMode.value
+                                    ? AppColors.whiteColor
+                                    : AppColors.greenColor,
                                 fontSize: 16,
                                 fontFamily:
                                     GoogleFonts.robotoCondensed().fontFamily,
@@ -235,7 +252,7 @@ class HomeView extends GetView<HomeController> {
                         title: Row(
                           children: [
                             AnimatedContainer(
-                              duration: Duration(milliseconds: 500),
+                              duration: Duration(milliseconds: 100),
                               height: 35,
                               width: 64,
                               decoration: BoxDecoration(
@@ -335,10 +352,10 @@ class HomeView extends GetView<HomeController> {
                                     ? 'الملف الشخصي'
                                     : controller.sharedLang.value == 'Arabic_EG'
                                         ? 'بەخێر بێیت بۆ ڵس ئەقارات با شوێنێکی گونجاوت بۆ بدۆزینەوە'
-                                        : 'Welcome to Aqarat Lets find your dream home',
+                                        : 'Lets Find You The Best Home',
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.primary,
-                                  fontSize: 18,
+                                  fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                   fontFamily:
                                       GoogleFonts.robotoCondensed().fontFamily,
@@ -347,21 +364,13 @@ class HomeView extends GetView<HomeController> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 36, vertical: 5),
+                                  horizontal: 15, vertical: 5),
                               child: Container(
-                                height: Get.height * 0.07,
-                                width: Get.width * 0.8,
+                                height: Get.height * 0.09,
+                                width: Get.width * 0.9,
                                 decoration: BoxDecoration(
-                                  color: AppColors.goldColor,
+                                  color: Color(0xffF7F9F8),
                                   borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      spreadRadius: 2,
-                                      blurRadius: 7,
-                                      offset: const Offset(0, 3),
-                                    ),
-                                  ],
                                 ),
                                 child: Row(children: [
                                   GestureDetector(
@@ -369,42 +378,49 @@ class HomeView extends GetView<HomeController> {
                                       controller.isPressedChange();
                                       if (controller.isPressed.value) {
                                         controller.buyRentButton('Buy');
-                                        print(controller.buyRentButton.value);
                                       }
                                     },
-                                    child: AnimatedContainer(
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      height: Get.height * 0.1,
-                                      width: Get.width * 0.4,
-                                      decoration: BoxDecoration(
-                                        color: controller.isPressed.value
-                                            ? AppColors.greenColor
-                                            : AppColors.goldColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                            controller.sharedLang.value ==
-                                                    'Arabic'
-                                                ? 'يشتري'
-                                                : controller.sharedLang.value ==
-                                                        'Arabic_EG'
-                                                    ? 'کڕین'
-                                                    : 'Buy',
-                                            style: TextStyle(
-                                              color: controller.isPressed.value
-                                                  ? (controller.isDarkMode.value
-                                                      ? AppColors.whiteColor
-                                                      : AppColors.goldColor)
-                                                  : (controller.isDarkMode.value
-                                                      ? AppColors.whiteColor
-                                                      : AppColors.greenColor),
-                                              fontFamily:
-                                                  GoogleFonts.robotoCondensed()
-                                                      .fontFamily,
-                                              fontSize: 16,
-                                            )),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: AnimatedContainer(
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        height: Get.height * 0.09,
+                                        width: Get.width * 0.44,
+                                        decoration: BoxDecoration(
+                                          color: controller.isPressed.value
+                                              ? Color(0xffF7F9F8)
+                                              : AppColors.whiteColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                              controller.sharedLang.value ==
+                                                      'Arabic'
+                                                  ? 'يشتري'
+                                                  : controller.sharedLang
+                                                              .value ==
+                                                          'Arabic_EG'
+                                                      ? 'کڕین'
+                                                      : 'Buy',
+                                              style: TextStyle(
+                                                color: controller
+                                                        .isPressed.value
+                                                    ? (controller
+                                                            .isDarkMode.value
+                                                        ? Colors.grey[500]
+                                                        : Colors.grey[500])
+                                                    : (controller
+                                                            .isDarkMode.value
+                                                        ? AppColors.greenColor
+                                                        : AppColors.greenColor),
+                                                fontFamily: GoogleFonts
+                                                        .robotoCondensed()
+                                                    .fontFamily,
+                                                fontSize: 16,
+                                              )),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -416,38 +432,42 @@ class HomeView extends GetView<HomeController> {
                                         print(controller.buyRentButton.value);
                                       }
                                     },
-                                    child: AnimatedContainer(
-                                      duration:
-                                          const Duration(microseconds: 300),
-                                      height: Get.height * 0.1,
-                                      width: Get.width * 0.4,
-                                      decoration: BoxDecoration(
-                                        color: controller.isPressed.value
-                                            ? AppColors.goldColor
-                                            : AppColors.greenColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          controller.sharedLang.value ==
-                                                  'Arabic'
-                                              ? 'يستأجر'
-                                              : controller.sharedLang.value ==
-                                                      'Arabic_EG'
-                                                  ? 'کرێ گرتن'
-                                                  : 'Rent',
-                                          style: TextStyle(
-                                            color: controller.isPressed.value
-                                                ? (controller.isDarkMode.value
-                                                    ? AppColors.whiteColor
-                                                    : AppColors.greenColor)
-                                                : (controller.isDarkMode.value
-                                                    ? AppColors.whiteColor
-                                                    : AppColors.goldColor),
-                                            fontFamily:
-                                                GoogleFonts.robotoCondensed()
-                                                    .fontFamily,
-                                            fontSize: 16,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: AnimatedContainer(
+                                        duration:
+                                            const Duration(microseconds: 300),
+                                        height: Get.height * 0.1,
+                                        width: Get.width * 0.4,
+                                        decoration: BoxDecoration(
+                                          color: controller.isPressed.value
+                                              ? AppColors.whiteColor
+                                              : Color(0xffF7F9F8),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            controller.sharedLang.value ==
+                                                    'Arabic'
+                                                ? 'يستأجر'
+                                                : controller.sharedLang.value ==
+                                                        'Arabic_EG'
+                                                    ? 'کرێ گرتن'
+                                                    : 'Rent',
+                                            style: TextStyle(
+                                              color: controller.isPressed.value
+                                                  ? (controller.isDarkMode.value
+                                                      ? AppColors.greenColor
+                                                      : Colors.grey[500])
+                                                  : (controller.isDarkMode.value
+                                                      ? Colors.grey[500]
+                                                      : Colors.grey[500]),
+                                              fontFamily:
+                                                  GoogleFonts.robotoCondensed()
+                                                      .fontFamily,
+                                              fontSize: 16,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -463,19 +483,11 @@ class HomeView extends GetView<HomeController> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 5),
                               child: Container(
-                                height: Get.height * 0.07,
+                                height: Get.height * 0.1,
                                 width: Get.width * 0.9,
                                 decoration: BoxDecoration(
-                                  color: AppColors.goldColor,
+                                  color: Color(0xffF7F9F8),
                                   borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      spreadRadius: 2,
-                                      blurRadius: 7,
-                                      offset: const Offset(0, 3),
-                                    ),
-                                  ],
                                 ),
                                 child: Row(
                                   children: [
@@ -484,46 +496,51 @@ class HomeView extends GetView<HomeController> {
                                         controller.buttonIndexChange(0);
                                         controller.propertyType('Residential');
                                       },
-                                      child: AnimatedContainer(
-                                        duration:
-                                            const Duration(milliseconds: 300),
-                                        height: Get.height * 0.09,
-                                        width: Get.width * 0.3,
-                                        decoration: BoxDecoration(
-                                          color:
-                                              controller.buttonIndex.value == 0
-                                                  ? AppColors.greenColor
-                                                  : AppColors.goldColor,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                              controller.sharedLang.value ==
-                                                      'Arabic'
-                                                  ? 'سكني'
-                                                  : controller.sharedLang
-                                                              .value ==
-                                                          'Arabic_EG'
-                                                      ? 'نیشتەجێبوون'
-                                                      : 'Residential',
-                                              style: TextStyle(
-                                                color: controller.buttonIndex
-                                                            .value ==
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: AnimatedContainer(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          height: Get.height * 0.09,
+                                          width: Get.width * 0.3,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                controller.buttonIndex.value ==
                                                         0
-                                                    ? (controller
-                                                            .isDarkMode.value
-                                                        ? AppColors.whiteColor
-                                                        : AppColors.goldColor)
-                                                    : (controller
-                                                            .isDarkMode.value
-                                                        ? AppColors.whiteColor
-                                                        : AppColors.greenColor),
-                                                fontFamily: GoogleFonts
-                                                        .robotoCondensed()
-                                                    .fontFamily,
-                                                fontSize: 16,
-                                              )),
+                                                    ? AppColors.whiteColor
+                                                    : Color(0xffF7F9F8),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                                controller.sharedLang.value ==
+                                                        'Arabic'
+                                                    ? 'سكني'
+                                                    : controller.sharedLang
+                                                                .value ==
+                                                            'Arabic_EG'
+                                                        ? 'نیشتەجێبوون'
+                                                        : 'Residential',
+                                                style: TextStyle(
+                                                  color: controller.buttonIndex
+                                                              .value ==
+                                                          0
+                                                      ? (controller
+                                                              .isDarkMode.value
+                                                          ? AppColors.greenColor
+                                                          : Colors.grey[500])
+                                                      : (controller
+                                                              .isDarkMode.value
+                                                          ? Colors.grey[500]
+                                                          : AppColors
+                                                              .greenColor),
+                                                  fontFamily: GoogleFonts
+                                                          .robotoCondensed()
+                                                      .fontFamily,
+                                                  fontSize: 16,
+                                                )),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -532,42 +549,49 @@ class HomeView extends GetView<HomeController> {
                                         controller.buttonIndexChange(1);
                                         controller.propertyType('Commercial');
                                       },
-                                      child: AnimatedContainer(
-                                        duration:
-                                            const Duration(milliseconds: 300),
-                                        height: Get.height * 0.09,
-                                        width: Get.width * 0.3,
-                                        decoration: BoxDecoration(
-                                          color:
-                                              controller.buttonIndex.value == 1
-                                                  ? AppColors.greenColor
-                                                  : AppColors.goldColor,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            controller.sharedLang.value ==
-                                                    'Arabic'
-                                                ? 'تجاري'
-                                                : controller.sharedLang.value ==
-                                                        'Arabic_EG'
-                                                    ? 'کۆمێرسیاڵ'
-                                                    : 'Commercial',
-                                            style: TextStyle(
-                                              color: controller
-                                                          .buttonIndex.value ==
-                                                      1
-                                                  ? (controller.isDarkMode.value
-                                                      ? AppColors.whiteColor
-                                                      : AppColors.goldColor)
-                                                  : (controller.isDarkMode.value
-                                                      ? AppColors.whiteColor
-                                                      : AppColors.greenColor),
-                                              fontFamily:
-                                                  GoogleFonts.robotoCondensed()
-                                                      .fontFamily,
-                                              fontSize: 16,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: AnimatedContainer(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          height: Get.height * 0.09,
+                                          width: Get.width * 0.3,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                controller.buttonIndex.value ==
+                                                        1
+                                                    ? AppColors.whiteColor
+                                                    : Color(0xffF7F9F8),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              controller.sharedLang.value ==
+                                                      'Arabic'
+                                                  ? 'تجاري'
+                                                  : controller.sharedLang
+                                                              .value ==
+                                                          'Arabic_EG'
+                                                      ? 'کۆمێرسیاڵ'
+                                                      : 'Commercial',
+                                              style: TextStyle(
+                                                color: controller.buttonIndex
+                                                            .value ==
+                                                        1
+                                                    ? (controller
+                                                            .isDarkMode.value
+                                                        ? AppColors.greenColor
+                                                        : Colors.grey[500])
+                                                    : (controller
+                                                            .isDarkMode.value
+                                                        ? Colors.grey[500]
+                                                        : AppColors.greenColor),
+                                                fontFamily: GoogleFonts
+                                                        .robotoCondensed()
+                                                    .fontFamily,
+                                                fontSize: 16,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -578,42 +602,49 @@ class HomeView extends GetView<HomeController> {
                                         controller.buttonIndexChange(2);
                                         controller.propertyType('Tourism');
                                       },
-                                      child: AnimatedContainer(
-                                        duration:
-                                            const Duration(milliseconds: 300),
-                                        height: Get.height * 0.09,
-                                        width: Get.width * 0.3,
-                                        decoration: BoxDecoration(
-                                          color:
-                                              controller.buttonIndex.value == 2
-                                                  ? AppColors.greenColor
-                                                  : AppColors.goldColor,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            controller.sharedLang.value ==
-                                                    'Arabic'
-                                                ? 'سياحي'
-                                                : controller.sharedLang.value ==
-                                                        'Arabic_EG'
-                                                    ? 'گەشتیاری'
-                                                    : 'Tourism',
-                                            style: TextStyle(
-                                              color: controller
-                                                          .buttonIndex.value ==
-                                                      2
-                                                  ? (controller.isDarkMode.value
-                                                      ? AppColors.whiteColor
-                                                      : AppColors.goldColor)
-                                                  : (controller.isDarkMode.value
-                                                      ? AppColors.whiteColor
-                                                      : AppColors.greenColor),
-                                              fontFamily:
-                                                  GoogleFonts.robotoCondensed()
-                                                      .fontFamily,
-                                              fontSize: 16,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: AnimatedContainer(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          height: Get.height * 0.09,
+                                          width: Get.width * 0.25,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                controller.buttonIndex.value ==
+                                                        2
+                                                    ? AppColors.whiteColor
+                                                    : Color(0xffF7F9F8),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              controller.sharedLang.value ==
+                                                      'Arabic'
+                                                  ? 'سياحي'
+                                                  : controller.sharedLang
+                                                              .value ==
+                                                          'Arabic_EG'
+                                                      ? 'گەشتیاری'
+                                                      : 'Tourism',
+                                              style: TextStyle(
+                                                color: controller.buttonIndex
+                                                            .value ==
+                                                        2
+                                                    ? (controller
+                                                            .isDarkMode.value
+                                                        ? AppColors.greenColor
+                                                        : Colors.grey[500])
+                                                    : (controller
+                                                            .isDarkMode.value
+                                                        ? Colors.grey[500]
+                                                        : AppColors.greenColor),
+                                                fontFamily: GoogleFonts
+                                                        .robotoCondensed()
+                                                    .fontFamily,
+                                                fontSize: 16,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -638,14 +669,12 @@ class HomeView extends GetView<HomeController> {
                                           controller.propertyType.value);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary: controller.isDarkMode.value
-                                      ? AppColors.goldColor
-                                      : AppColors.greenColor,
+                                  primary: Color(0xff0886FE),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   minimumSize:
-                                      Size(Get.width * 0.9, Get.height * 0.07),
+                                      Size(Get.width * 0.9, Get.height * 0.09),
                                 ),
                                 child: Text(
                                   controller.sharedLang.value == 'Arabic'
@@ -655,9 +684,7 @@ class HomeView extends GetView<HomeController> {
                                           ? 'پشاندان'
                                           : 'Apply',
                                   style: TextStyle(
-                                    color: controller.isDarkMode.value
-                                        ? AppColors.whiteColor
-                                        : AppColors.goldColor,
+                                    color: AppColors.whiteColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: GoogleFonts.robotoCondensed()
@@ -667,6 +694,14 @@ class HomeView extends GetView<HomeController> {
                               ),
                             ),
                           ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 5),
+                          child: Divider(
+                            color: Colors.grey[200],
+                            thickness: 2,
+                          ),
                         ),
                         SizedBox(
                           height: Get.height * 0.02,
@@ -683,8 +718,8 @@ class HomeView extends GetView<HomeController> {
                                         ? 'العقارات المميزة'
                                         : controller.sharedLang.value ==
                                                 'Arabic_EG'
-                                            ? 'موڵکە تایبەتەکان'
-                                            : 'Featured Properties',
+                                            ? 'ئۆفەری تایبەت'
+                                            : 'Special Offer',
                                     style: TextStyle(
                                       color: controller.isDarkMode.value
                                           ? AppColors.whiteColor
@@ -782,28 +817,10 @@ class HomeView extends GetView<HomeController> {
                                             width: Get.width * 0.5,
                                             decoration: BoxDecoration(
                                               color: controller.isDarkMode.value
-                                                  ? Colors.grey.withOpacity(0.2)
-                                                  : AppColors.goldColor,
+                                                  ? AppColors.whiteColor
+                                                  : Color(0xffF5F5F5),
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: controller
-                                                          .isDarkMode.value
-                                                      ? AppColors.goldColor
-                                                      : Colors.grey
-                                                          .withOpacity(0.5),
-                                                  spreadRadius: controller
-                                                          .isDarkMode.value
-                                                      ? 0
-                                                      : 2,
-                                                  blurRadius: controller
-                                                          .isDarkMode.value
-                                                      ? 0
-                                                      : 5,
-                                                  offset: const Offset(0, 3),
-                                                ),
-                                              ],
                                             ),
                                             child: Column(
                                               children: [
@@ -843,67 +860,127 @@ class HomeView extends GetView<HomeController> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text(
-                                                          controller
-                                                              .featuredPropertiesItems[
-                                                                  index]
-                                                                  ['price']
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                            color: controller
-                                                                    .isDarkMode
-                                                                    .value
-                                                                ? AppColors
-                                                                    .whiteColor
-                                                                : AppColors
-                                                                    .greenColor,
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily: GoogleFonts
-                                                                    .robotoCondensed()
-                                                                .fontFamily,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          controller
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              Ionicons
+                                                                  .cash_outline,
+                                                              color: controller
+                                                                      .isDarkMode
+                                                                      .value
+                                                                  ? AppColors
+                                                                      .blackColor
+                                                                  : AppColors
+                                                                      .blackColor,
+                                                              size: 17,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Text(
+                                                              controller
                                                                   .featuredPropertiesItems[
-                                                              index]['category'],
-                                                          style: TextStyle(
-                                                            color: controller
-                                                                    .isDarkMode
-                                                                    .value
-                                                                ? AppColors
-                                                                    .whiteColor
-                                                                : AppColors
-                                                                    .greenColor,
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily: GoogleFonts
-                                                                    .robotoCondensed()
-                                                                .fontFamily,
-                                                          ),
+                                                                      index]
+                                                                      ['price']
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                color: controller
+                                                                        .isDarkMode
+                                                                        .value
+                                                                    ? AppColors
+                                                                        .blackColor
+                                                                    : AppColors
+                                                                        .greenColor,
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontFamily: GoogleFonts
+                                                                        .robotoCondensed()
+                                                                    .fontFamily,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        Text(
-                                                          controller
-                                                                  .featuredPropertiesItems[
-                                                              index]['type'],
-                                                          style: TextStyle(
-                                                            color: controller
-                                                                    .isDarkMode
-                                                                    .value
-                                                                ? AppColors
-                                                                    .whiteColor
-                                                                : AppColors
-                                                                    .greenColor,
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily: GoogleFonts
-                                                                    .robotoCondensed()
-                                                                .fontFamily,
-                                                          ),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons
+                                                                  .category_outlined,
+                                                              color: controller
+                                                                      .isDarkMode
+                                                                      .value
+                                                                  ? AppColors
+                                                                      .blackColor
+                                                                  : AppColors
+                                                                      .blackColor,
+                                                              size: 17,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Text(
+                                                              controller.featuredPropertiesItems[
+                                                                      index]
+                                                                  ['category'],
+                                                              style: TextStyle(
+                                                                color: controller
+                                                                        .isDarkMode
+                                                                        .value
+                                                                    ? AppColors
+                                                                        .blackColor
+                                                                    : AppColors
+                                                                        .greenColor,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontFamily: GoogleFonts
+                                                                        .robotoCondensed()
+                                                                    .fontFamily,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons
+                                                                  .home_outlined,
+                                                              color: controller
+                                                                      .isDarkMode
+                                                                      .value
+                                                                  ? AppColors
+                                                                      .blackColor
+                                                                  : AppColors
+                                                                      .blackColor,
+                                                              size: 17,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Text(
+                                                              controller
+                                                                      .featuredPropertiesItems[
+                                                                  index]['type'],
+                                                              style: TextStyle(
+                                                                color: controller
+                                                                        .isDarkMode
+                                                                        .value
+                                                                    ? AppColors
+                                                                        .blackColor
+                                                                    : AppColors
+                                                                        .greenColor,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontFamily: GoogleFonts
+                                                                        .robotoCondensed()
+                                                                    .fontFamily,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),
@@ -976,6 +1053,7 @@ class HomeView extends GetView<HomeController> {
                                                       ['rooms'],
                                                   controller.properties[index]
                                                       ['rwgasore'],
+                                                  controller.isDarkMode.value
                                                 ]);
                                           },
                                           child: Container(
@@ -983,29 +1061,10 @@ class HomeView extends GetView<HomeController> {
                                             width: Get.width,
                                             decoration: BoxDecoration(
                                               color: controller.isDarkMode.value
-                                                  ? AppColors.goldColor
-                                                  : Colors.grey
-                                                      .withOpacity(0.2),
+                                                  ? AppColors.whiteColor
+                                                  : Color(0xffF5F5F5),
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: controller
-                                                          .isDarkMode.value
-                                                      ? AppColors.goldColor
-                                                      : Colors.grey
-                                                          .withOpacity(0.2),
-                                                  spreadRadius: controller
-                                                          .isDarkMode.value
-                                                      ? 0
-                                                      : 2,
-                                                  blurRadius: controller
-                                                          .isDarkMode.value
-                                                      ? 0
-                                                      : 7,
-                                                  offset: const Offset(0, 3),
-                                                ),
-                                              ],
                                             ),
                                             child: Row(
                                               children: [
@@ -1042,9 +1101,10 @@ class HomeView extends GetView<HomeController> {
                                                                     .isDarkMode
                                                                     .value
                                                                 ? AppColors
-                                                                    .whiteColor
+                                                                    .blackColor
                                                                 : AppColors
                                                                     .greenColor,
+                                                            size: 17,
                                                           ),
                                                           const SizedBox(
                                                             width: 5,
@@ -1060,7 +1120,7 @@ class HomeView extends GetView<HomeController> {
                                                                       .isDarkMode
                                                                       .value
                                                                   ? AppColors
-                                                                      .whiteColor
+                                                                      .blackColor
                                                                   : AppColors
                                                                       .greenColor,
                                                               fontSize: 18,
@@ -1086,9 +1146,10 @@ class HomeView extends GetView<HomeController> {
                                                                     .isDarkMode
                                                                     .value
                                                                 ? AppColors
-                                                                    .whiteColor
+                                                                    .blackColor
                                                                 : AppColors
                                                                     .greenColor,
+                                                            size: 17,
                                                           ),
                                                           const SizedBox(
                                                             width: 5,
@@ -1102,7 +1163,7 @@ class HomeView extends GetView<HomeController> {
                                                                       .isDarkMode
                                                                       .value
                                                                   ? AppColors
-                                                                      .whiteColor
+                                                                      .blackColor
                                                                   : AppColors
                                                                       .greenColor,
                                                               fontSize: 16,
@@ -1128,9 +1189,10 @@ class HomeView extends GetView<HomeController> {
                                                                     .isDarkMode
                                                                     .value
                                                                 ? AppColors
-                                                                    .whiteColor
+                                                                    .blackColor
                                                                 : AppColors
                                                                     .greenColor,
+                                                            size: 17,
                                                           ),
                                                           Text(
                                                             controller.properties[
@@ -1141,7 +1203,7 @@ class HomeView extends GetView<HomeController> {
                                                                       .isDarkMode
                                                                       .value
                                                                   ? AppColors
-                                                                      .whiteColor
+                                                                      .blackColor
                                                                   : AppColors
                                                                       .greenColor,
                                                               fontSize: 14,
@@ -1173,7 +1235,7 @@ class HomeView extends GetView<HomeController> {
                                                                     .isDarkMode
                                                                     .value
                                                                 ? AppColors
-                                                                    .whiteColor
+                                                                    .blackColor
                                                                 : AppColors
                                                                     .greenColor,
                                                             fontSize: 11,
