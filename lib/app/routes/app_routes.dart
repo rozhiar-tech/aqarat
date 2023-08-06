@@ -14,6 +14,8 @@ abstract class Routes {
   static const FILTERED_PROPERTIES = _Paths.FILTERED_PROPERTIES;
   static const DASHBOARD = _Paths.DASHBOARD;
   static const MAP_VIEW = _Paths.MAP_VIEW;
+  static const PROJECTS = _Paths.PROJECTS;
+  static const PROJECT_DETAIL = _Paths.PROJECT_DETAIL;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const FILTERED_PROPERTIES = '/filtered-properties';
   static const DASHBOARD = '/dashboard';
   static const MAP_VIEW = '/map-view';
+  static const PROJECTS = '/projects';
+  static const PROJECT_DETAIL = '/project-detail';
 }

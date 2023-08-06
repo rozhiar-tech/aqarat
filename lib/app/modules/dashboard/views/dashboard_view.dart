@@ -36,8 +36,8 @@ class DashboardView extends GetView<DashboardController> {
                       text: 'Home',
                     ),
                     GButton(
-                      icon: Ionicons.chatbubbles_outline,
-                      text: 'Chat',
+                      icon: Ionicons.planet,
+                      text: 'Projects',
                     ),
                     GButton(
                       icon: Ionicons.heart_circle,

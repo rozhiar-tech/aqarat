@@ -7,6 +7,7 @@ import 'package:aqarat/app/modules/home/views/home_view.dart';
 import 'package:get/get.dart';
 
 import '../../map_view/views/map_view_view.dart';
+import '../../projects/views/projects_view.dart';
 
 class DashboardController extends GetxController {
   //TODO: Implement DashboardController
@@ -14,7 +15,7 @@ class DashboardController extends GetxController {
 
   final pages = [
     const HomeView(),
-    const ChatRoomView(),
+    const ProjectsView(),
     const FavouriteView(),
     const MapViewView(),
   ];

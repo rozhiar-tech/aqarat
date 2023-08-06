@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 class SinglePropertyController extends GetxController {
   //TODO: Implement SinglePropertyController
@@ -23,6 +25,8 @@ class SinglePropertyController extends GetxController {
   RxString propertyId = ''.obs;
   RxString userId = ''.obs;
   RxBool isDarkMode = false.obs;
+  RxString message = 'Hello, I am interested in your property'.obs;
+  RxString whatsAppUrl = "whatsapp://send?phone=+9647710207959&text=hello".obs;
 
   CarouselController carouselController = CarouselController();
 
@@ -80,15 +84,22 @@ class SinglePropertyController extends GetxController {
     });
   }
 
+  var whatsappUrl = "whatsapp://send?phone=+9647710207959&text=hello";
+
   // create a function to check if the user is looged in or not with firebase
   Future checkIfUserIsLoggedIn() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       userId.value = user.uid;
-      createChatRoom();
+      // createChatRoom();
+      launchWhatsApp();
     } else {
       Get.toNamed('/login');
     }
+  }
+
+  launchWhatsApp() async {
+    await launchUrl(Uri.parse(whatsappUrl));
   }
 
   // create a function to favorite a property

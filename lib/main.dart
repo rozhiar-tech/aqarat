@@ -68,14 +68,12 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Here, you can customize the Lottie animation as per your preferences
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: Image.asset(
-            'assets/LOGOO.gif',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
-        ));
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Lottie.network(
+          "https://lottie.host/0cc7dfcd-a73c-41c9-9971-57ad30b24e03/2sfTOLO6X4.json",
+        ),
+      ),
+    );
   }
 }

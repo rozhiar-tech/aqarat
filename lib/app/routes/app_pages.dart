@@ -20,6 +20,10 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/map_view/bindings/map_view_binding.dart';
 import '../modules/map_view/views/map_view_view.dart';
+import '../modules/projectDetail/bindings/project_detail_binding.dart';
+import '../modules/projectDetail/views/project_detail_view.dart';
+import '../modules/projects/bindings/projects_binding.dart';
+import '../modules/projects/views/projects_view.dart';
 import '../modules/single_property/bindings/single_property_binding.dart';
 import '../modules/single_property/views/single_property_view.dart';
 
@@ -87,11 +91,20 @@ class AppPages {
       page: () => const DashboardView(),
       binding: DashboardBinding(),
     ),
-  
     GetPage(
       name: _Paths.MAP_VIEW,
       page: () => const MapViewView(),
       binding: MapViewBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROJECTS,
+      page: () => const ProjectsView(),
+      binding: ProjectsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROJECT_DETAIL,
+      page: () => const ProjectDetailView(),
+      binding: ProjectDetailBinding(),
     ),
   ];
 }
