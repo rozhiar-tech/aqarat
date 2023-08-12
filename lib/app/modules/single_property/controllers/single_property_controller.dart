@@ -25,8 +25,9 @@ class SinglePropertyController extends GetxController {
   RxString propertyId = ''.obs;
   RxString userId = ''.obs;
   RxBool isDarkMode = false.obs;
-  RxString message = 'Hello, I am interested in your property'.obs;
-  RxString whatsAppUrl = "whatsapp://send?phone=+9647710207959&text=hello".obs;
+  RxString message = ''.obs;
+  RxString whatsAppUrl = "".obs;
+  
 
   CarouselController carouselController = CarouselController();
 
@@ -84,8 +85,6 @@ class SinglePropertyController extends GetxController {
     });
   }
 
-  var whatsappUrl = "whatsapp://send?phone=+9647710207959&text=hello";
-
   // create a function to check if the user is looged in or not with firebase
   Future checkIfUserIsLoggedIn() async {
     User? user = FirebaseAuth.instance.currentUser;
@@ -99,7 +98,10 @@ class SinglePropertyController extends GetxController {
   }
 
   launchWhatsApp() async {
-    await launchUrl(Uri.parse(whatsappUrl));
+    message.value =
+        "Hello, I'm interested in your property,${address.value}, ${propertyType.value}, ${price.value} ${images[0]}";
+    whatsAppUrl.value = "whatsapp://send?phone=+9647710207959&text=$message";
+    await launchUrl(Uri.parse(whatsAppUrl.value));
   }
 
   // create a function to favorite a property
