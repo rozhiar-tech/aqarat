@@ -16,6 +16,7 @@ abstract class Routes {
   static const MAP_VIEW = _Paths.MAP_VIEW;
   static const PROJECTS = _Paths.PROJECTS;
   static const PROJECT_DETAIL = _Paths.PROJECT_DETAIL;
+  static const SPLASH = _Paths.SPLASH;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const MAP_VIEW = '/map-view';
   static const PROJECTS = '/projects';
   static const PROJECT_DETAIL = '/project-detail';
+  static const SPLASH = '/splash';
 }

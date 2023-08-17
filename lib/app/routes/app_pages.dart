@@ -26,13 +26,15 @@ import '../modules/projects/bindings/projects_binding.dart';
 import '../modules/projects/views/projects_view.dart';
 import '../modules/single_property/bindings/single_property_binding.dart';
 import '../modules/single_property/views/single_property_view.dart';
+import '../modules/splash/bindings/splash_binding.dart';
+import '../modules/splash/views/splash_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.DASHBOARD;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -105,6 +107,11 @@ class AppPages {
       name: _Paths.PROJECT_DETAIL,
       page: () => const ProjectDetailView(),
       binding: ProjectDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH,
+      page: () => const SplashView(),
+      binding: SplashBinding(),
     ),
   ];
 }
