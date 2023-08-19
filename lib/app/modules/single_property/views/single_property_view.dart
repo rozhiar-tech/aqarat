@@ -474,6 +474,42 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             ],
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Container(
+                            width: Get.width * 0.9,
+                            height: Get.height * 0.2,
+                            decoration: BoxDecoration(
+                              color: Colors.red[300],
+                              borderRadius: BorderRadius.circular(24),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  controller.images[0],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child: Center(
+                                child: GestureDetector(
+                              onTap: () {
+                                controller.launchURL(controller.videoUrl.value);
+                              },
+                              child: Container(
+                                width: Get.width * 0.2,
+                                height: Get.height * 0.1,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: Icon(
+                                  Icons.play_arrow,
+                                  size: 50,
+                                  color: AppColors.goldColor,
+                                ),
+                              ),
+                            )),
+                          ),
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             color: controller.isDarkMode.value
@@ -488,14 +524,17 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             child: GoogleMap(
                               padding: const EdgeInsets.all(3),
                               mapType: MapType.hybrid,
-                              initialCameraPosition: const CameraPosition(
-                                target: LatLng(35.554652, 45.428541),
+                              initialCameraPosition: CameraPosition(
+                                target: LatLng(controller.latitude.value,
+                                    controller.longitude.value),
                                 zoom: 14.4746,
                               ),
                               markers: {
-                                const Marker(
+                                Marker(
                                     markerId: MarkerId('1'),
-                                    position: LatLng(35.554652, 45.428541),
+                                    position: LatLng(controller.latitude.value,
+                                        controller.longitude.value),
+                                    icon: controller.customIcon.value,
                                     infoWindow: InfoWindow(
                                         title: 'Property Location',
                                         snippet: '5 Star Rating'))
@@ -503,7 +542,8 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                               circles: {
                                 Circle(
                                     circleId: const CircleId('1'),
-                                    center: const LatLng(35.554652, 45.428541),
+                                    center: LatLng(controller.latitude.value,
+                                        controller.longitude.value),
                                     radius: 500,
                                     fillColor: Colors.blue.withOpacity(0.2),
                                     strokeColor: Colors.blue,

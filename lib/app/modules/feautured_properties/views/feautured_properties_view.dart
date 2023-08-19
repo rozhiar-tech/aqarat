@@ -61,9 +61,28 @@ class FeauturedPropertiesView extends GetView<FeauturedPropertiesController> {
                                 controller.feauturedPropertiesItems[index]
                                     ['type'],
                                 controller.feauturedPropertiesItems[index]
-                                    ['location'],
+                                    ['address'],
                                 controller.feauturedPropertiesItems[index]
                                     ['description'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['area'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['bedrooms'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['bathrooms'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['floors'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['rooms'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['rwgasore'],
+                                controller.isDarkMode.value,
+                                controller.feauturedPropertiesItems[index]
+                                    ['latitude'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['longtitude'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['videoUrl'],
                               ]);
                             },
                             child: Container(
@@ -166,7 +185,7 @@ class FeauturedPropertiesView extends GetView<FeauturedPropertiesController> {
                                             Text(
                                               controller
                                                       .feauturedPropertiesItems[
-                                                  index]['location'],
+                                                  index]['address'],
                                               style: TextStyle(
                                                 color: AppColors.greenColor,
                                                 fontSize: 14,

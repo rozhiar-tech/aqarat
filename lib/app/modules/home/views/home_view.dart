@@ -245,7 +245,7 @@ class HomeView extends GetView<HomeController> {
                           ],
                         ),
                         onTap: () {
-                          controller.logout();
+                          // controller.logout();
                         },
                       ),
                       ListTile(
@@ -733,9 +733,12 @@ class HomeView extends GetView<HomeController> {
                                   const Spacer(),
                                   GestureDetector(
                                     onTap: () {
-                                      Get.toNamed('/feautured-properties',
-                                          arguments: controller
-                                              .featuredPropertiesItems);
+                                      Get.toNamed(
+                                        '/feautured-properties',
+                                        arguments:
+                                            controller.featuredPropertiesItems,
+                                            
+                                      );
                                     },
                                     child: Text(
                                       controller.sharedLang.value == 'Arabic'
@@ -809,7 +812,16 @@ class HomeView extends GetView<HomeController> {
                                                   controller
                                                           .featuredPropertiesItems[
                                                       index]['rwgasore'],
-                                                  controller.isDarkMode.value
+                                                  controller.isDarkMode.value,
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['latitude'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['longtitude'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['videoUrl'],
                                                 ]);
                                           },
                                           child: Container(
@@ -874,7 +886,7 @@ class HomeView extends GetView<HomeController> {
                                                                       .blackColor,
                                                               size: 17,
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               width: 5,
                                                             ),
                                                             Text(
@@ -1015,100 +1027,123 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: Get.height * 0.4,
-                              width: Get.width,
-                              child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: controller.properties.length,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Get.toNamed('/single-property',
-                                                arguments: [
-                                                  controller.properties[index]
-                                                      ['photos'] as List,
-                                                  controller.properties[index]
-                                                      ['price'],
-                                                  controller.properties[index]
-                                                      ['type'],
-                                                  controller.properties[index]
-                                                      ['address'],
-                                                  controller.properties[index]
-                                                      ['description'],
-                                                  controller.properties[index]
-                                                      ['area'],
-                                                  controller.properties[index]
-                                                      ['bedrooms'],
-                                                  controller.properties[index]
-                                                      ['bathrooms'],
-                                                  controller.properties[index]
-                                                      ['floors'],
-                                                  controller.properties[index]
-                                                      ['rooms'],
-                                                  controller.properties[index]
-                                                      ['rwgasore'],
-                                                  controller.isDarkMode.value
-                                                ]);
-                                          },
-                                          child: Container(
-                                            height: Get.height * 0.33,
-                                            width: Get.width,
-                                            decoration: BoxDecoration(
-                                              color: controller.isDarkMode.value
-                                                  ? AppColors.whiteColor
-                                                  : Color(0xffF5F5F5),
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: Get.height * 0.33,
-                                                  width: Get.width * 0.4,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    image: DecorationImage(
-                                                      image: NetworkImage(
-                                                          controller.properties[
-                                                                  index]
-                                                              ['photos'][0]),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
+                            ToggleButtons(
+                              children: [
+                                Icon(Icons.view_agenda),
+                                Icon(Icons.view_module),
+                              ],
+                              color: controller.isDarkMode.value
+                                  ? AppColors.whiteColor
+                                  : AppColors.greenColor,
+                              isSelected: [
+                                controller.isGrid.value,
+                                !controller.isGrid.value
+                              ],
+                              borderWidth: 0,
+                              onPressed: (index) {
+                                controller.toggleViewMode();
+                              },
+                            ),
+                            controller.isGrid.value == false
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      height: Get.height * 0.4,
+                                      width: Get.width,
+                                      child: GridView.builder(
+                                          gridDelegate:
+                                              const SliverGridDelegateWithMaxCrossAxisExtent(
+                                                  maxCrossAxisExtent: 350,
+                                                  childAspectRatio: 3 / 4,
+                                                  crossAxisSpacing: 20,
+                                                  mainAxisSpacing: 30),
+                                          itemCount:
+                                              controller.properties.length,
+                                          itemBuilder:
+                                              (BuildContext ctx, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                Get.toNamed('/single-property',
+                                                    arguments: [
+                                                      controller
+                                                              .properties[index]
+                                                          ['photos'] as List,
+                                                      controller
+                                                              .properties[index]
+                                                          ['price'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['type'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['address'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['description'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['area'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['bedrooms'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['bathrooms'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['floors'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['rooms'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['rwgasore'],
+                                                      controller
+                                                          .isDarkMode.value,
+                                                      controller
+                                                              .properties[index]
+                                                          ['latitude'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['longtitude'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['videoUrl'],
+                                                    ]);
+                                              },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: controller
+                                                          .isDarkMode.value
+                                                      ? AppColors.whiteColor
+                                                      : Color(0xffF5F5F5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      height: Get.height * 0.16,
+                                                      width: Get.width,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        image: DecorationImage(
+                                                          image: NetworkImage(
+                                                            controller.properties[
+                                                                    index]
+                                                                ['photos'][0],
+                                                          ),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: Get.height * 0.1,
+                                                      width: Get.width,
+                                                      child: Column(
                                                         children: [
-                                                          Icon(
-                                                            Ionicons
-                                                                .cash_outline,
-                                                            color: controller
-                                                                    .isDarkMode
-                                                                    .value
-                                                                ? AppColors
-                                                                    .blackColor
-                                                                : AppColors
-                                                                    .greenColor,
-                                                            size: 17,
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 5,
-                                                          ),
                                                           Text(
                                                             controller
                                                                 .properties[
@@ -1132,28 +1167,6 @@ class HomeView extends GetView<HomeController> {
                                                                   .fontFamily,
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Icon(
-                                                            Ionicons
-                                                                .home_outline,
-                                                            color: controller
-                                                                    .isDarkMode
-                                                                    .value
-                                                                ? AppColors
-                                                                    .blackColor
-                                                                : AppColors
-                                                                    .greenColor,
-                                                            size: 17,
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 5,
-                                                          ),
                                                           Text(
                                                             controller
                                                                     .properties[
@@ -1174,25 +1187,6 @@ class HomeView extends GetView<HomeController> {
                                                                       .robotoCondensed()
                                                                   .fontFamily,
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Icon(
-                                                            Ionicons
-                                                                .location_outline,
-                                                            color: controller
-                                                                    .isDarkMode
-                                                                    .value
-                                                                ? AppColors
-                                                                    .blackColor
-                                                                : AppColors
-                                                                    .greenColor,
-                                                            size: 17,
                                                           ),
                                                           Text(
                                                             controller.properties[
@@ -1217,49 +1211,289 @@ class HomeView extends GetView<HomeController> {
                                                           ),
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                    ),
+                                  )
+                                : SizedBox(
+                                    height: Get.height * 0.4,
+                                    width: Get.width,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: controller.properties.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Get.toNamed(
+                                                      '/single-property',
+                                                      arguments: [
+                                                        controller.properties[
+                                                                index]['photos']
+                                                            as List,
+                                                        controller.properties[
+                                                            index]['price'],
+                                                        controller.properties[
+                                                            index]['type'],
+                                                        controller.properties[
+                                                            index]['address'],
+                                                        controller.properties[
+                                                                index]
+                                                            ['description'],
+                                                        controller.properties[
+                                                            index]['area'],
+                                                        controller.properties[
+                                                            index]['bedrooms'],
+                                                        controller.properties[
+                                                            index]['bathrooms'],
+                                                        controller.properties[
+                                                            index]['floors'],
+                                                        controller.properties[
+                                                            index]['rooms'],
+                                                        controller.properties[
+                                                            index]['rwgasore'],
+                                                        controller
+                                                            .isDarkMode.value,
+                                                        controller.properties[
+                                                            index]['latitude'],
+                                                        controller.properties[
+                                                                index]
+                                                            ['longtitude'],
+                                                        controller.properties[
+                                                            index]['videoUrl'],
+                                                      ]);
+                                                },
+                                                child: Container(
+                                                  height: Get.height * 0.33,
+                                                  width: Get.width,
+                                                  decoration: BoxDecoration(
+                                                    color: controller
+                                                            .isDarkMode.value
+                                                        ? AppColors.whiteColor
+                                                        : Color(0xffF5F5F5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                  child: Row(
+                                                    children: [
                                                       Container(
                                                         height:
-                                                            Get.height * 0.13,
+                                                            Get.height * 0.33,
                                                         width: Get.width * 0.4,
-                                                        child: Text(
-                                                          controller
-                                                              .properties[index]
-                                                                  [
-                                                                  'description']
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                            color: controller
-                                                                    .isDarkMode
-                                                                    .value
-                                                                ? AppColors
-                                                                    .blackColor
-                                                                : AppColors
-                                                                    .greenColor,
-                                                            fontSize: 11,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontFamily: GoogleFonts
-                                                                    .robotoCondensed()
-                                                                .fontFamily,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          image:
+                                                              DecorationImage(
+                                                            image: NetworkImage(
+                                                                controller.properties[
+                                                                        index][
+                                                                    'photos'][0]),
+                                                            fit: BoxFit.cover,
                                                           ),
                                                         ),
                                                       ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                  Ionicons
+                                                                      .cash_outline,
+                                                                  color: controller
+                                                                          .isDarkMode
+                                                                          .value
+                                                                      ? AppColors
+                                                                          .blackColor
+                                                                      : AppColors
+                                                                          .greenColor,
+                                                                  size: 17,
+                                                                ),
+                                                                const SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Text(
+                                                                  controller
+                                                                      .properties[
+                                                                          index]
+                                                                          [
+                                                                          'price']
+                                                                      .toString(),
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: controller
+                                                                            .isDarkMode
+                                                                            .value
+                                                                        ? AppColors
+                                                                            .blackColor
+                                                                        : AppColors
+                                                                            .greenColor,
+                                                                    fontSize:
+                                                                        18,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontFamily:
+                                                                        GoogleFonts.robotoCondensed()
+                                                                            .fontFamily,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 10,
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                  Ionicons
+                                                                      .home_outline,
+                                                                  color: controller
+                                                                          .isDarkMode
+                                                                          .value
+                                                                      ? AppColors
+                                                                          .blackColor
+                                                                      : AppColors
+                                                                          .greenColor,
+                                                                  size: 17,
+                                                                ),
+                                                                const SizedBox(
+                                                                  width: 5,
+                                                                ),
+                                                                Text(
+                                                                  controller.properties[
+                                                                          index]
+                                                                      ['type'],
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: controller
+                                                                            .isDarkMode
+                                                                            .value
+                                                                        ? AppColors
+                                                                            .blackColor
+                                                                        : AppColors
+                                                                            .greenColor,
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontFamily:
+                                                                        GoogleFonts.robotoCondensed()
+                                                                            .fontFamily,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 10,
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Icon(
+                                                                  Ionicons
+                                                                      .location_outline,
+                                                                  color: controller
+                                                                          .isDarkMode
+                                                                          .value
+                                                                      ? AppColors
+                                                                          .blackColor
+                                                                      : AppColors
+                                                                          .greenColor,
+                                                                  size: 17,
+                                                                ),
+                                                                Text(
+                                                                  controller.properties[
+                                                                          index]
+                                                                      [
+                                                                      'address'],
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: controller
+                                                                            .isDarkMode
+                                                                            .value
+                                                                        ? AppColors
+                                                                            .blackColor
+                                                                        : AppColors
+                                                                            .greenColor,
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontFamily:
+                                                                        GoogleFonts.robotoCondensed()
+                                                                            .fontFamily,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 10,
+                                                            ),
+                                                            Container(
+                                                              height:
+                                                                  Get.height *
+                                                                      0.13,
+                                                              width: Get.width *
+                                                                  0.4,
+                                                              child: Text(
+                                                                controller
+                                                                    .properties[
+                                                                        index][
+                                                                        'description']
+                                                                    .toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: controller
+                                                                          .isDarkMode
+                                                                          .value
+                                                                      ? AppColors
+                                                                          .blackColor
+                                                                      : AppColors
+                                                                          .greenColor,
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontFamily: GoogleFonts
+                                                                          .robotoCondensed()
+                                                                      .fontFamily,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
-                                                )
-                                              ],
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),
                           ],
                         ),
                       ],

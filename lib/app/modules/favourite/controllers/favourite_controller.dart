@@ -6,6 +6,7 @@ class FavouriteController extends GetxController {
   //TODO: Implement FavouriteController
   RxString title = 'Favourits'.obs;
   RxList favouriteList = [].obs;
+  RxBool isDarkMode = false.obs;
 
   changeIndex(int index) {
     switch (index) {

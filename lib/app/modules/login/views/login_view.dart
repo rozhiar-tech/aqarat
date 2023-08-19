@@ -37,7 +37,7 @@ class LoginView extends GetView<LoginController> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: const DecorationImage(
-                          image: AssetImage("assets/house.jpg"),
+                          image: AssetImage("assets/LSAQAR.png"),
                           fit: BoxFit.cover,
                         ),
                       ),

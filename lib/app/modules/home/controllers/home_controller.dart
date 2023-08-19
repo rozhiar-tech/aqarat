@@ -22,6 +22,11 @@ class HomeController extends GetxController {
   RxString sharedLang = 'English'.obs;
   RxString welcomeMessage = 'Welcome to Aqarat Lets find your dream home'.obs;
   RxBool isDarkMode = false.obs;
+  RxBool isGrid = false.obs;
+
+  toggleViewMode() {
+    isGrid.value = !isGrid.value;
+  }
 
   Future fetchUserData(userId) async {
     DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance

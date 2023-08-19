@@ -1,3 +1,5 @@
+import 'package:aqarat/app/theme/app_colors.dart';
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,12 +16,21 @@ class SplashView extends GetView<SplashController> {
         builder: (controller) {
           return Scaffold(
             body: Center(
-              child: controller.controllerInitialized.value
-                  ? AspectRatio(
-                      aspectRatio: controller.controller.value.aspectRatio,
-                      child: VideoPlayer(controller.controller),
+              child: controller.chewieController != null &&
+                      controller.chewieController!.videoPlayerController.value
+                          .isInitialized
+                  ? Chewie(
+                      controller: controller.chewieController!,
                     )
-                  : CircularProgressIndicator(),
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CircularProgressIndicator(),
+                        const SizedBox(height: 20),
+                        Text(controller.Loading.value,
+                            style: TextStyle(color: AppColors.blackColor)),
+                      ],
+                    ),
             ),
           );
         });

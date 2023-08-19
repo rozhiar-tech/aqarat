@@ -57,6 +57,10 @@ class FavouriteView extends GetView<FavouriteController> {
                                 controller.favouriteList[index]['floors'],
                                 controller.favouriteList[index]['rooms'],
                                 controller.favouriteList[index]['rwgasore'],
+                                controller.isDarkMode.value,
+                                controller.favouriteList[index]['latitude'],
+                                controller.favouriteList[index]['longitude'],
+                                controller.favouriteList[index]['videoUrl'],
                               ]);
                             },
                             child: Container(

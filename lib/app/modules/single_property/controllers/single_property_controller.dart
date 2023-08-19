@@ -1,8 +1,12 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -27,7 +31,10 @@ class SinglePropertyController extends GetxController {
   RxBool isDarkMode = false.obs;
   RxString message = ''.obs;
   RxString whatsAppUrl = "".obs;
-  
+  RxDouble latitude = 0.0.obs;
+  RxDouble longitude = 0.0.obs;
+  RxString videoUrl = ''.obs;
+  Rx<BitmapDescriptor> customIcon = BitmapDescriptor.defaultMarker.obs;
 
   CarouselController carouselController = CarouselController();
 
@@ -46,6 +53,17 @@ class SinglePropertyController extends GetxController {
     rooms.value = arguments[9].toString();
     rwgasore.value = arguments[10].toString();
     isDarkMode.value = arguments[11];
+    latitude.value = arguments[12];
+    longitude.value = arguments[13];
+    videoUrl.value = arguments[14];
+  }
+
+  launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   isFavouriteToggle() {
@@ -176,11 +194,28 @@ class SinglePropertyController extends GetxController {
     }
   }
 
+  Future getBytesFromAsset(String path, int width) async {
+    final data = await rootBundle.load(path);
+    final codec = await instantiateImageCodec(
+      data.buffer.asUint8List(),
+      targetWidth: width,
+    );
+    final frameInfo = await codec.getNextFrame();
+    final image = await frameInfo.image.toByteData(format: ImageByteFormat.png);
+    return image!.buffer.asUint8List();
+  }
+
+  Future getMarkerIcon() async {
+    final Uint8List markerIcon =
+        await getBytesFromAsset('assets/marker.png', 100);
+    customIcon.value = BitmapDescriptor.fromBytes(markerIcon);
+  }
+
   final count = 0.obs;
   @override
   void onInit() {
     retrieveArguments();
-
+    getMarkerIcon();
     super.onInit();
   }
 

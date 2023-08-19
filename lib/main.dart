@@ -1,13 +1,17 @@
 import 'dart:async';
 
+import 'package:aqarat/app/theme/dark_theme.dart';
+import 'package:aqarat/app/theme/light_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:video_player/video_player.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lottie/lottie.dart';
-
+import 'package:aqarat/app/theme/dark_theme.dart';
+import 'package:aqarat/app/theme/light_theme.dart';
 import 'app/modules/dashboard/views/dashboard_view.dart';
+import 'app/routes/app_pages.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -29,18 +33,16 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      theme: lightTheme,
+      darkTheme: darkTheme,
       supportedLocales: [
         const Locale('en', ''), // Add your supported locales here
       ],
       debugShowCheckedModeBanner: false,
       title: "Aqarat",
       defaultTransition: Transition.fade,
-      initialRoute: '/splash', // Use the splash route as the initial route
-      getPages: [
-        GetPage(name: '/splash', page: () => VideoSplashScreen()),
-        GetPage(name: '/dashboard', page: () => DashboardView()),
-        // Add other routes here
-      ],
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
     );
   }
 }
