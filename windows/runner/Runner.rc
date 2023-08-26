@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "aqarat" "\0"
-            VALUE "FileDescription", "aqarat" "\0"
+            VALUE "FileDescription", "Ls Aqar" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "aqarat" "\0"
+            VALUE "InternalName", "Ls Aqar" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 aqarat. All rights reserved." "\0"
             VALUE "OriginalFilename", "aqarat.exe" "\0"
-            VALUE "ProductName", "aqarat" "\0"
+            VALUE "ProductName", "Ls Aqar" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

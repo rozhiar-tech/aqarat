@@ -118,7 +118,7 @@ class SinglePropertyController extends GetxController {
   launchWhatsApp() async {
     message.value =
         "Hello, I'm interested in your property,${address.value}, ${propertyType.value}, ${price.value} ${images[0]}";
-    whatsAppUrl.value = "whatsapp://send?phone=+9647710207959&text=$message";
+    whatsAppUrl.value = "whatsapp://send?phone=+9647501501212&text=$message";
     await launchUrl(Uri.parse(whatsAppUrl.value));
   }
 
