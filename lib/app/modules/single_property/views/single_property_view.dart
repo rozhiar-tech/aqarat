@@ -34,9 +34,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                     children: [
                       const CircleAvatar(
                         radius: 24,
-                        backgroundImage: NetworkImage(
-                          'https://firebasestorage.googleapis.com/v0/b/happy-47972.appspot.com/o/pro.jpg?alt=media&token=e56be66f-aea0-494a-b260-8ddc3e2a3557&_gl=1*176jevk*_ga*MTAzODkwODYxNS4xNjY4OTQ5NDIz*_ga_CW55HF8NVT*MTY4NTg2ODUwOS4yMC4xLjE2ODU4Njg1MjcuMC4wLjA.',
-                        ),
+                        backgroundImage: AssetImage('assets/house.jpg'),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -44,7 +42,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Yaho',
+                              'LS',
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -55,7 +53,11 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Real Estate Agent',
+                              controller.sharedLang.value == 'Arabic'
+                                  ? 'سمسار'
+                                  : controller.sharedLang.value == 'Arabic_EG'
+                                      ? 'ڕاوێژکار لە خانو بەرە'
+                                      : 'Real Estate Agent',
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
@@ -70,7 +72,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                       const Spacer(),
                       GestureDetector(
                         onTap: () async {
-                          await controller.checkIfUserIsLoggedIn();
+                          await controller.launchWhatsApp();
                         },
                         child: CircleAvatar(
                           radius: 24,
@@ -315,7 +317,11 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Features",
+                            controller.sharedLang.value == 'Arabic'
+                                ? 'معلومات العقار'
+                                : controller.sharedLang.value == 'Arabic_EG'
+                                    ? 'زانیارییەکانی خانوبەر'
+                                    : 'Property Information',
                             style: TextStyle(
                                 color: controller.isDarkMode.value
                                     ? Colors.white
@@ -341,7 +347,11 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                 width: Get.width * 0.02,
                               ),
                               Text(
-                                ": Bedrooms",
+                                controller.sharedLang.value == 'Arabic'
+                                    ? ': غرف النوم'
+                                    : controller.sharedLang.value == 'Arabic_EG'
+                                        ? ': ژوری نوستن'
+                                        : ": Bedrooms",
                                 style: TextStyle(
                                     color: controller.isDarkMode.value
                                         ? Colors.white
@@ -349,7 +359,7 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(controller.bedrooms.value),
                             ],
                           ),
@@ -371,7 +381,11 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                 width: Get.width * 0.02,
                               ),
                               Text(
-                                ": Area",
+                                controller.sharedLang.value == 'Arabic'
+                                    ? ': المساحة'
+                                    : controller.sharedLang.value == 'Arabic_EG'
+                                        ? ': ڕووبەر'
+                                        : ": Area",
                                 style: TextStyle(
                                     color: controller.isDarkMode.value
                                         ? Colors.white
@@ -401,7 +415,11 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                 width: Get.width * 0.02,
                               ),
                               Text(
-                                ": Bathrooms",
+                                controller.sharedLang.value == 'Arabic'
+                                    ? ': الحمامات'
+                                    : controller.sharedLang.value == 'Arabic_EG'
+                                        ? ': دەستشۆر'
+                                        : ": Bathrooms",
                                 style: TextStyle(
                                     color: controller.isDarkMode.value
                                         ? Colors.white
@@ -431,7 +449,11 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                 width: Get.width * 0.02,
                               ),
                               Text(
-                                ": Facing",
+                                controller.sharedLang.value == 'Arabic'
+                                    ? ': الواجهة'
+                                    : controller.sharedLang.value == 'Arabic_EG'
+                                        ? ': ڕوو'
+                                        : ": Facing",
                                 style: TextStyle(
                                     color: controller.isDarkMode.value
                                         ? Colors.white
@@ -461,7 +483,11 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                                 width: Get.width * 0.02,
                               ),
                               Text(
-                                ": Rooms",
+                                controller.sharedLang.value == 'Arabic'
+                                    ? ': الغرف'
+                                    : controller.sharedLang.value == 'Arabic_EG'
+                                        ? ': ژوور'
+                                        : ": Rooms",
                                 style: TextStyle(
                                     color: controller.isDarkMode.value
                                         ? Colors.white

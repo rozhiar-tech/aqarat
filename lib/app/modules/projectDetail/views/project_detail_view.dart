@@ -16,7 +16,11 @@ class ProjectDetailView extends GetView<ProjectDetailController> {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                controller.title.value,
+                controller.sharedLang.value == 'Arabic'
+                    ? controller.arabicTitle.value
+                    : controller.sharedLang.value == 'Arabic_EG'
+                        ? controller.kurdishTitle.value
+                        : controller.title.value,
                 style: TextStyle(color: Colors.black),
               ),
               elevation: 0,

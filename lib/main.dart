@@ -38,7 +38,9 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       supportedLocales: const [
-        const Locale('en', ''), // Add your supported locales here
+        Locale('en', 'US'),
+        Locale('ar', 'IQ'),
+        Locale('ar', 'EG'),
       ],
       debugShowCheckedModeBanner: false,
       title: "Aqarat",

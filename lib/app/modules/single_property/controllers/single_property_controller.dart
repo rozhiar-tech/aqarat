@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -35,12 +36,13 @@ class SinglePropertyController extends GetxController {
   RxDouble longitude = 0.0.obs;
   RxString videoUrl = ''.obs;
   Rx<BitmapDescriptor> customIcon = BitmapDescriptor.defaultMarker.obs;
+  RxString sharedLang = 'English'.obs;
+  RxString countryCode = ''.obs;
 
   CarouselController carouselController = CarouselController();
 
   retrieveArguments() {
     final arguments = Get.arguments;
-    print(arguments);
     images.value = arguments[0];
     price.value = arguments[1].toString();
     propertyType.value = arguments[2];
@@ -109,7 +111,7 @@ class SinglePropertyController extends GetxController {
     if (user != null) {
       userId.value = user.uid;
       // createChatRoom();
-      launchWhatsApp();
+     
     } else {
       Get.toNamed('/login');
     }
@@ -211,12 +213,53 @@ class SinglePropertyController extends GetxController {
     customIcon.value = BitmapDescriptor.fromBytes(markerIcon);
   }
 
+  changeLanguage(lang, {countryCode = ''}) {
+    Get.updateLocale(Locale(lang));
+    SharedPreferences.getInstance().then((prefs) {
+      print(lang);
+      if (lang == 'ar' && countryCode == 'IQ') {
+        Get.updateLocale(
+            Locale.fromSubtags(languageCode: 'ar', countryCode: 'IQ'));
+        prefs.setString('lang', 'Arabic');
+        countryCode.value = 'IQ';
+      } else if (lang == 'ar' && countryCode == 'EG') {
+        Get.updateLocale(
+            Locale.fromSubtags(languageCode: 'ar', countryCode: 'EG'));
+        prefs.setString('lang', 'Arabic_EG');
+        countryCode.value = 'EG';
+      } else if (lang == 'en') {
+        Get.updateLocale(Locale('en', 'US'));
+        prefs.setString('lang', 'English');
+        countryCode.value = 'US';
+      }
+    });
+    SharedPreferences.getInstance().then((prefs) {
+      sharedLang.value = prefs.getString('lang') ?? 'English';
+      // Use the retrieved language value
+      print(sharedLang.value);
+    });
+  }
+
   final count = 0.obs;
   @override
   void onInit() {
+    super.onInit();
     retrieveArguments();
     getMarkerIcon();
-    super.onInit();
+    SharedPreferences.getInstance().then((prefs) {
+      sharedLang.value = prefs.getString('lang') ?? 'English';
+      changeLanguage(sharedLang.value, countryCode: "IQ");
+      if (sharedLang.value == 'Arabic') {
+        Get.updateLocale(
+            const Locale.fromSubtags(languageCode: 'ar', countryCode: 'IQ'));
+      } else if (sharedLang.value == 'Arabic_EG') {
+        Get.updateLocale(
+            const Locale.fromSubtags(languageCode: 'ar', countryCode: 'EG'));
+      } else if (sharedLang.value == 'English') {
+        Get.updateLocale(
+            const Locale.fromSubtags(languageCode: 'en', countryCode: 'US'));
+      }
+    });
   }
 
   @override

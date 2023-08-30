@@ -14,7 +14,11 @@ class ProjectsView extends GetView<ProjectsController> {
           return Scaffold(
               appBar: AppBar(
                 title: Text(
-                  controller.title.value,
+                  controller.sharedLang.value == 'Arabic'
+                      ? controller.arabicTitle.value
+                      : controller.sharedLang.value == 'Arabic_EG'
+                          ? controller.kurdishTitle.value
+                          : controller.title.value,
                   style: TextStyle(color: Colors.black),
                 ),
                 backgroundColor: Colors.white,
@@ -119,7 +123,7 @@ class ProjectsView extends GetView<ProjectsController> {
                                                 controller.projects[index]
                                                     ['location'],
                                                 style: const TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 12,
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
@@ -127,12 +131,19 @@ class ProjectsView extends GetView<ProjectsController> {
                                           ),
                                           Row(
                                             children: [
-                                              const Icon(
-                                                Icons.grass_outlined,
-                                                color: Colors.grey,
-                                              ),
-                                              const SizedBox(
-                                                width: 5,
+                                              Text(
+                                                controller.sharedLang.value ==
+                                                        'Arabic'
+                                                    ? 'مساحة العشب'
+                                                    : controller.sharedLang
+                                                                .value ==
+                                                            'Arabic_EG'
+                                                        ? 'ڕووبەری سەوزای'
+                                                        : 'Grass Area',
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
                                               Text(
                                                 controller.projects[index]
@@ -140,7 +151,7 @@ class ProjectsView extends GetView<ProjectsController> {
                                                         .toString() +
                                                     '%',
                                                 style: const TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 12,
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
@@ -165,7 +176,7 @@ class ProjectsView extends GetView<ProjectsController> {
                                                 controller.projects[index]
                                                     ['client'],
                                                 style: const TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 12,
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
@@ -181,9 +192,16 @@ class ProjectsView extends GetView<ProjectsController> {
                                                 width: 5,
                                               ),
                                               Text(
-                                                'Price on Request',
+                                                controller.sharedLang.value ==
+                                                        'Arabic'
+                                                    ? 'السعر عند الطلب'
+                                                    : controller.sharedLang
+                                                                .value ==
+                                                            'Arabic_EG'
+                                                        ? 'نرخ لەسەر داواکاری'
+                                                        : 'Price on Request',
                                                 style: const TextStyle(
-                                                  fontSize: 15,
+                                                  fontSize: 12,
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),

@@ -22,6 +22,17 @@ class MapViewController extends GetxController {
   RxList markerList = [].obs;
   RxList locationList = [].obs;
   RxList circles = [].obs;
+  RxList selectedProperty = [].obs;
+  RxBool isInfoWindowShown = false.obs;
+
+  Future<void> getPropertiesFromFirebase(double latitude) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('properties')
+        .where('latitude', isEqualTo: latitude)
+        .get();
+    selectedProperty.value = querySnapshot.docs;
+    print('property found');
+  }
 
   Future<void> getLocationsFromFirebase() async {
     QuerySnapshot querySnapshot =
@@ -32,10 +43,17 @@ class MapViewController extends GetxController {
       List<dynamic> property = location['property'];
       double latitude = property[0];
       double longitude = property[1];
+
+      // Fetch properties from 'properties' collection with the same location
+
       Marker marker = Marker(
         markerId: MarkerId(location.id),
         position: LatLng(latitude, longitude),
-        icon: customIcon.value, // Use your custom marker icon
+        icon: customIcon.value,
+        onTap: () {
+          isInfoWindowShown.value = true;
+          getPropertiesFromFirebase(property[0]);
+        },
       );
       markers.add(marker);
     }
@@ -61,10 +79,10 @@ class MapViewController extends GetxController {
   final count = 0.obs;
   @override
   Future<void> onInit() async {
-    getMarkerIcon();
-
-    getLocationsFromFirebase();
     super.onInit();
+    getMarkerIcon();
+    await getLocationsFromFirebase();
+    print(selectedProperty);
   }
 
   @override
