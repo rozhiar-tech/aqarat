@@ -5,8 +5,7 @@ class FilteredPropertiesController extends GetxController {
   RxList filteredPropertiesItems = [].obs;
   final argument = Get.arguments;
   RxString title = 'Filter'.obs;
-
-
+  RxBool isDarkMode = false.obs;
 
   final count = 0.obs;
   @override

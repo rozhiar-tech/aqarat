@@ -391,9 +391,7 @@ class HomeView extends GetView<HomeController> {
                                 GestureDetector(
                                   onTap: () {
                                     controller.isPressedChange();
-                                    if (controller.isPressed.value) {
-                                      controller.buyRentButton('Buy');
-                                    }
+                                    controller.buyRentButton('Buy');
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
@@ -437,10 +435,7 @@ class HomeView extends GetView<HomeController> {
                                 GestureDetector(
                                   onTap: () {
                                     controller.isPressedChange();
-                                    if (!controller.isPressed.value) {
-                                      controller.buyRentButton('Rent');
-                                      print(controller.buyRentButton.value);
-                                    }
+                                    controller.buyRentButton.value = 'Rent';
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
@@ -661,6 +656,8 @@ class HomeView extends GetView<HomeController> {
                                 horizontal: 15, vertical: 5),
                             child: ElevatedButton(
                               onPressed: () {
+                                print(
+                                    "pressed" + controller.buyRentButton.value);
                                 controller.filterProperties(
                                     buyRentButton:
                                         controller.buyRentButton.value,

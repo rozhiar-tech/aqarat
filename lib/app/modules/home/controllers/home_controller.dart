@@ -15,8 +15,8 @@ class HomeController extends GetxController {
   RxString userName = ''.obs;
   RxString userImage = ''.obs;
   RxString userEmail = ''.obs;
-  RxString buyRentButton = ''.obs;
-  RxString propertyType = ''.obs;
+  RxString buyRentButton = 'Residential'.obs;
+  RxString propertyType = 'Buy'.obs;
   RxList filteredPropertiesItems = [].obs;
   RxList featuredPropertiesItems = [].obs;
   RxString sharedLang = 'English'.obs;
@@ -94,8 +94,8 @@ class HomeController extends GetxController {
 
   // create a function to show the result of the filters and send it to filtered properties page
   Future filterProperties({
-    String? propertyType,
-    String? buyRentButton,
+    propertyType,
+    buyRentButton,
   }) async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('properties')
@@ -104,6 +104,8 @@ class HomeController extends GetxController {
         .get();
     filteredPropertiesItems.value = querySnapshot.docs;
     if (filteredPropertiesItems.length == 0) {
+      print("filter properties" + propertyType! + buyRentButton!);
+
       Get.snackbar('No Properties Found', 'Please try again',
           snackPosition: SnackPosition.BOTTOM);
       return;
@@ -145,13 +147,12 @@ class HomeController extends GetxController {
 
   @override
   Future<void> onReady() async {
+    super.onReady();
     await fetchProperties();
     await fetchFeaturedProperties();
     User? user = await FirebaseAuth.instance.currentUser;
     userId.value = user!.uid;
     await fetchUserData(userId);
-
-    super.onReady();
   }
 
   @override

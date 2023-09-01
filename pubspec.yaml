@@ -1,5 +1,5 @@
 name: aqarat
-version: 1.0.0+1
+version: 1.0.0+2
 publish_to: none
 description: A new Flutter project.
 environment:
@@ -30,7 +30,6 @@ dependencies:
   whatsapp_unilink: ^2.1.0
   video_player: ^2.7.0
   chewie: ^1.7.0
-
 
 dev_dependencies:
   flutter_lints: 2.0.1

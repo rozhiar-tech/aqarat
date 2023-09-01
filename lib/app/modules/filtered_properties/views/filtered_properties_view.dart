@@ -53,14 +53,49 @@ class FilteredPropertiesView extends GetView<FilteredPropertiesController> {
                       child: GestureDetector(
                         onTap: () {
                           Get.toNamed('/single-property', arguments: [
-                            controller.filteredPropertiesItems[index]['photos']
-                                as List,
-                            controller.filteredPropertiesItems[index]['price'],
-                            controller.filteredPropertiesItems[index]['type'],
-                            controller.filteredPropertiesItems[index]
-                                ['location'],
-                            controller.filteredPropertiesItems[index]
-                                ['description'],
+                            controller
+                                                        .filteredPropertiesItems[
+                                                    index]['photos'] as List,
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['price'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['type'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['address'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['description'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['area'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['bedrooms'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['bathrooms'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['floors'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['rooms'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['rwgasore'],
+                                                controller.isDarkMode.value,
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['latitude'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['longtitude'],
+                                                controller
+                                                        .filteredPropertiesItems[
+                                                    index]['videoUrl'],
                           ]);
                         },
                         child: Container(
@@ -160,7 +195,7 @@ class FilteredPropertiesView extends GetView<FilteredPropertiesController> {
                                         ),
                                         Text(
                                           controller.filteredPropertiesItems[
-                                              index]['location'],
+                                              index]['address'],
                                           style: TextStyle(
                                             color: AppColors.greenColor,
                                             fontSize: 14,
