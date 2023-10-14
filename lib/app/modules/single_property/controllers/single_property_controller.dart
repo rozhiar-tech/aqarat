@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_controller.dart';
@@ -38,6 +39,9 @@ class SinglePropertyController extends GetxController {
   Rx<BitmapDescriptor> customIcon = BitmapDescriptor.defaultMarker.obs;
   RxString sharedLang = 'English'.obs;
   RxString countryCode = ''.obs;
+  RxString id = ''.obs;
+  RxList properties = [].obs;
+  RxList similarProperties = [].obs;
 
   CarouselController carouselController = CarouselController();
 
@@ -58,6 +62,8 @@ class SinglePropertyController extends GetxController {
     latitude.value = arguments[12];
     longitude.value = arguments[13];
     videoUrl.value = arguments[14];
+    id.value = arguments[15].toString();
+    properties.value = arguments[16];
   }
 
   launchURL(String url) async {
@@ -81,14 +87,12 @@ class SinglePropertyController extends GetxController {
         .get()
         .then((value) {
       if (value.docs.isNotEmpty) {
-        print("chatroom already created");
         Get.toNamed('/chat', arguments: value.docs[0].id);
         return;
       }
     });
     // create a chatroom id
     String chatRoomId = '${userId.value}-xA5lRs5krEa3LKEeVhvT';
-    print(chatRoomId);
     // create a map to store the chatroom id and the users id
     Map<String, dynamic> chatRoomMap = {
       'users': [userId.value, "xA5lRs5krEa3LKEeVhvT"]
@@ -100,7 +104,6 @@ class SinglePropertyController extends GetxController {
         .doc(chatRoomId)
         .set(chatRoomMap)
         .then((value) {
-      print("chatroom created");
       Get.toNamed('/chat', arguments: chatRoomId);
     });
   }
@@ -111,7 +114,6 @@ class SinglePropertyController extends GetxController {
     if (user != null) {
       userId.value = user.uid;
       // createChatRoom();
-     
     } else {
       Get.toNamed('/login');
     }
@@ -216,7 +218,6 @@ class SinglePropertyController extends GetxController {
   changeLanguage(lang, {countryCode = ''}) {
     Get.updateLocale(Locale(lang));
     SharedPreferences.getInstance().then((prefs) {
-      print(lang);
       if (lang == 'ar' && countryCode == 'IQ') {
         Get.updateLocale(
             Locale.fromSubtags(languageCode: 'ar', countryCode: 'IQ'));
@@ -236,16 +237,59 @@ class SinglePropertyController extends GetxController {
     SharedPreferences.getInstance().then((prefs) {
       sharedLang.value = prefs.getString('lang') ?? 'English';
       // Use the retrieved language value
-      print(sharedLang.value);
     });
+  }
+
+  List<Map<String, dynamic>> fetchSimilarProperties(double targetPrice) {
+    return properties
+        .where((property) {
+          double propertyPrice = 4000.0;
+          return (propertyPrice >= targetPrice - 10000) &&
+              (propertyPrice <= targetPrice + 10000);
+        })
+        .map((property) => property.data() as Map<String, dynamic>)
+        .toList();
+  }
+
+  void setSimilarProperties(List<Map<String, dynamic>> properties) {
+    similarProperties.value = properties;
+  }
+
+  void loadSimilarProperties() {
+    double targetPrice = 4000.0; // Assuming price is a double
+    setSimilarProperties(fetchSimilarProperties(targetPrice));
+  }
+
+  void showSimilarProperty(int index) {
+    // Update property details in the controller
+    images.value = similarProperties[index]['photos'];
+    price.value = similarProperties[index]['price'];
+    propertyType.value = similarProperties[index]['type'];
+    address.value = similarProperties[index]['address'];
+    description.value = similarProperties[index]['description'];
+    area.value = similarProperties[index]['area'];
+    bedrooms.value = similarProperties[index]['bedrooms'];
+    bathrooms.value = similarProperties[index]['bathrooms'];
+    floors.value = similarProperties[index]['floors'];
+    rooms.value = similarProperties[index]['rooms'];
+    rwgasore.value = similarProperties[index]['rwgasore'];
+    id.value = similarProperties[index]['id'];
+    latitude.value = similarProperties[index]['latitude'];
+    longitude.value = similarProperties[index]['longtitude'];
+    videoUrl.value = similarProperties[index]['videoUrl'];
+
+    // If you have any UI elements that rely on these properties,
+    // they will automatically update due to reactive programming.
   }
 
   final count = 0.obs;
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     retrieveArguments();
     getMarkerIcon();
+
+    loadSimilarProperties();
     SharedPreferences.getInstance().then((prefs) {
       sharedLang.value = prefs.getString('lang') ?? 'English';
       changeLanguage(sharedLang.value, countryCode: "IQ");

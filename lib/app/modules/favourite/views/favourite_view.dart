@@ -45,7 +45,7 @@ class FavouriteView extends GetView<FavouriteController> {
                           child: GestureDetector(
                             onTap: () {
                               Get.toNamed('/single-property', arguments: [
-                                controller.favouriteList[index]['photos']
+                                controller.favouriteList[index]['images']
                                     as List,
                                 controller.favouriteList[index]['price'],
                                 controller.favouriteList[index]['type'],
@@ -61,6 +61,8 @@ class FavouriteView extends GetView<FavouriteController> {
                                 controller.favouriteList[index]['latitude'],
                                 controller.favouriteList[index]['longitude'],
                                 controller.favouriteList[index]['videoUrl'],
+                                controller.favouriteList[index]['id'],
+                                controller.favouriteList,
                               ]);
                             },
                             child: Container(

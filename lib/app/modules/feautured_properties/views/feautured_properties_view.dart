@@ -83,6 +83,9 @@ class FeauturedPropertiesView extends GetView<FeauturedPropertiesController> {
                                     ['longtitude'],
                                 controller.feauturedPropertiesItems[index]
                                     ['videoUrl'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['id'],
+                                controller.feauturedPropertiesItems,
                               ]);
                             },
                             child: Container(

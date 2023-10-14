@@ -17,6 +17,7 @@ abstract class Routes {
   static const PROJECTS = _Paths.PROJECTS;
   static const PROJECT_DETAIL = _Paths.PROJECT_DETAIL;
   static const SPLASH = _Paths.SPLASH;
+  static const FORM = _Paths.FORM;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const PROJECTS = '/projects';
   static const PROJECT_DETAIL = '/project-detail';
   static const SPLASH = '/splash';
+  static const FORM = '/form';
 }

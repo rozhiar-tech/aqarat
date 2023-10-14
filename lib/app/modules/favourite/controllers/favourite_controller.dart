@@ -39,9 +39,9 @@ class FavouriteController extends GetxController {
           .collection('favorites')
           .get()
           .then((value) {
-        value.docs.forEach((element) {
+        for (var element in value.docs) {
           favouriteList.add(element.data());
-        });
+        }
       });
     }
   }
@@ -77,6 +77,9 @@ class FavouriteController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    await fetchFavouritProperties();
+    print(favouriteList.length);
+
     SharedPreferences.getInstance().then((prefs) {
       sharedLang.value = prefs.getString('lang') ?? 'English';
       changeLanguage(sharedLang.value, countryCode: "IQ");
@@ -95,8 +98,6 @@ class FavouriteController extends GetxController {
 
   @override
   Future<void> onReady() async {
-    await fetchFavouritProperties();
-
     super.onReady();
   }
 

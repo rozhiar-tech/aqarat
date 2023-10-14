@@ -40,6 +40,8 @@ class ProjectsView extends GetView<ProjectsController> {
                             controller.projects[index]['client'],
                             controller.projects[index]['photos'],
                             controller.projects[index]['videoUrl'],
+                            controller.projects[index]['latitude'],
+                            controller.projects[index]['longtitude'],
                           ]);
                         },
                         child: Container(

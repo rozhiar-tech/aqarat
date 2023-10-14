@@ -14,6 +14,8 @@ import '../modules/feautured_properties/bindings/feautured_properties_binding.da
 import '../modules/feautured_properties/views/feautured_properties_view.dart';
 import '../modules/filtered_properties/bindings/filtered_properties_binding.dart';
 import '../modules/filtered_properties/views/filtered_properties_view.dart';
+import '../modules/form/bindings/form_binding.dart';
+import '../modules/form/views/form_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -112,6 +114,11 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORM,
+      page: () => const FormView(),
+      binding: FormBinding(),
     ),
   ];
 }

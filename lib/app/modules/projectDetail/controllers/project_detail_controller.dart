@@ -1,7 +1,10 @@
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,6 +22,10 @@ class ProjectDetailController extends GetxController {
   RxInt selectedImageIndex = 0.obs;
   RxString videoUrl = ''.obs;
   RxString sharedLang = 'English'.obs;
+  RxString id = ''.obs;
+  RxDouble latitude = 0.0.obs;
+  RxDouble longitude = 0.0.obs;
+  Rx<BitmapDescriptor> customIcon = BitmapDescriptor.defaultMarker.obs;
 
   CarouselController carouselController = CarouselController();
 
@@ -32,6 +39,25 @@ class ProjectDetailController extends GetxController {
     client.value = arguments[4];
     images.value = arguments[5];
     videoUrl.value = arguments[6];
+    latitude.value = arguments[7];
+    longitude.value = arguments[8];
+  }
+
+  Future getBytesFromAsset(String path, int width) async {
+    final data = await rootBundle.load(path);
+    final codec = await instantiateImageCodec(
+      data.buffer.asUint8List(),
+      targetWidth: width,
+    );
+    final frameInfo = await codec.getNextFrame();
+    final image = await frameInfo.image.toByteData(format: ImageByteFormat.png);
+    return image!.buffer.asUint8List();
+  }
+
+  Future getMarkerIcon() async {
+    final Uint8List markerIcon =
+        await getBytesFromAsset('assets/marker.png', 100);
+    customIcon.value = BitmapDescriptor.fromBytes(markerIcon);
   }
 
   launchURL(String url) async {
@@ -74,6 +100,8 @@ class ProjectDetailController extends GetxController {
   void onInit() {
     super.onInit();
     retrieveArguments();
+    getMarkerIcon();
+
     SharedPreferences.getInstance().then((prefs) {
       sharedLang.value = prefs.getString('lang') ?? 'English';
       changeLanguage(sharedLang.value, countryCode: "IQ");
