@@ -26,6 +26,8 @@ import '../modules/projectDetail/bindings/project_detail_binding.dart';
 import '../modules/projectDetail/views/project_detail_view.dart';
 import '../modules/projects/bindings/projects_binding.dart';
 import '../modules/projects/views/projects_view.dart';
+import '../modules/registration/bindings/registration_binding.dart';
+import '../modules/registration/views/registration_view.dart';
 import '../modules/single_property/bindings/single_property_binding.dart';
 import '../modules/single_property/views/single_property_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -119,6 +121,11 @@ class AppPages {
       name: _Paths.FORM,
       page: () => const FormView(),
       binding: FormBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGISTRATION,
+      page: () => const RegistrationView(),
+      binding: RegistrationBinding(),
     ),
   ];
 }

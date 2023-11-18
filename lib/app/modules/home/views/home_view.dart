@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../L10n/l10n.dart';
+
 import '../controllers/home_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -376,6 +374,42 @@ class HomeView extends GetView<HomeController> {
                           ],
                         ),
                         onTap: () => Get.toNamed('form'),
+                      ),
+                      ListTile(
+                        title: Row(
+                          children: [
+                            Icon(Icons.delete),
+                            const SizedBox(width: 10),
+                            Text(
+                              controller.sharedLang.value == 'Arabic'
+                                  ? 'حذف الحساب'
+                                  : controller.sharedLang.value == 'Arabic_EG'
+                                      ? 'سڕینەوەی هەژمار'
+                                      : 'delete account',
+                              style: TextStyle(
+                                color: controller.isDarkMode.value
+                                    ? AppColors.whiteColor
+                                    : AppColors.greenColor,
+                                fontSize: 16,
+                                fontFamily:
+                                    GoogleFonts.robotoCondensed().fontFamily,
+                              ),
+                            )
+                          ],
+                        ),
+                        onTap: () async {
+                          Get.defaultDialog(
+                              title: 'Confirmation',
+                              middleText:
+                                  'Are you sure you want to delete your account?',
+                              textConfirm: 'Yes',
+                              textCancel: 'No',
+                              confirmTextColor: Colors.white,
+                              cancelTextColor: Colors.black,
+                              onConfirm: (() {
+                                controller.logout();
+                              }));
+                        },
                       )
                     ],
                   ),
@@ -408,8 +442,8 @@ class HomeView extends GetView<HomeController> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 5),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Get.width * 0.02, vertical: 5),
                               child: Container(
                                 height: Get.height * 0.09,
                                 width: Get.width * 0.9,
@@ -429,7 +463,7 @@ class HomeView extends GetView<HomeController> {
                                         duration:
                                             const Duration(milliseconds: 300),
                                         height: Get.height * 0.09,
-                                        width: Get.width * 0.44,
+                                        width: Get.width * 0.4,
                                         decoration: BoxDecoration(
                                           color: controller.isPressed.value
                                               ? const Color(0xffF7F9F8)
@@ -520,8 +554,8 @@ class HomeView extends GetView<HomeController> {
                               height: Get.height * 0.02,
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 5),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Get.width * 0.02, vertical: 5),
                               child: Container(
                                 height: Get.height * 0.1,
                                 width: Get.width * 0.9,
@@ -866,6 +900,12 @@ class HomeView extends GetView<HomeController> {
                                                       index]['id'],
                                                   controller
                                                       .featuredPropertiesItems,
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['createdAt'],
+                                                  controller
+                                                          .featuredPropertiesItems[
+                                                      index]['agent'],
                                                 ]);
                                           },
                                           child: Container(
@@ -1194,6 +1234,9 @@ class HomeView extends GetView<HomeController> {
                                                               property["id"],
                                                               controller
                                                                   .properties,
+                                                              property[
+                                                                  'createdAt'],
+                                                              property['agent'],
                                                             ]);
                                                       },
                                                       child: Container(
@@ -1413,6 +1456,12 @@ class HomeView extends GetView<HomeController> {
                                                               .properties[index]
                                                           ['id'],
                                                       controller.properties,
+                                                      controller
+                                                              .properties[index]
+                                                          ['createdAt'],
+                                                      controller
+                                                              .properties[index]
+                                                          ['agent'],
                                                     ]);
                                               },
                                               child: Container(

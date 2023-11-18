@@ -526,6 +526,39 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                       ),
                     ),
                     Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.date_range,
+                            color: controller.isDarkMode.value
+                                ? Colors.white
+                                : AppColors.blackColor,
+                          ),
+                          SizedBox(
+                            width: Get.width * 0.02,
+                          ),
+                          Text(
+                            controller.sharedLang.value == 'Arabic'
+                                ? ': تاريخ'
+                                : controller.sharedLang.value == 'Arabic_EG'
+                                    ? ': بەروار'
+                                    : ": Date",
+                            style: TextStyle(
+                                color: controller.isDarkMode.value
+                                    ? Colors.white
+                                    : AppColors.greenColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const Spacer(),
+                          Text(controller.date.value
+                              .toString()
+                              .substring(0, 10)),
+                        ],
+                      ),
+                    ),
+                    Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Container(
                         width: Get.width * 0.9,

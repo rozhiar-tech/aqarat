@@ -24,6 +24,7 @@ class HomeController extends GetxController {
   RxBool isDarkMode = false.obs;
   RxBool isGrid = false.obs;
   RxString countryCodeValue = 'US'.obs;
+  User? user = FirebaseAuth.instance.currentUser;
 
   toggleViewMode() {
     isGrid.value = !isGrid.value;
@@ -164,6 +165,6 @@ class HomeController extends GetxController {
 
   void logout() {
     FirebaseAuth.instance.signOut();
-    Get.offAllNamed('/home');
+    Get.offAllNamed('/dashboard');
   }
 }

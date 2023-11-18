@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
@@ -42,6 +43,8 @@ class SinglePropertyController extends GetxController {
   RxString id = ''.obs;
   RxList properties = [].obs;
   RxList similarProperties = [].obs;
+  RxString date = ''.obs;
+  RxString agent = ''.obs;
 
   CarouselController carouselController = CarouselController();
 
@@ -64,6 +67,14 @@ class SinglePropertyController extends GetxController {
     videoUrl.value = arguments[14];
     id.value = arguments[15].toString();
     properties.value = arguments[16];
+    Timestamp timestamp = arguments[17];
+
+    DateTime dateTime = timestamp.toDate();
+
+    String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
+    date.value = formattedDate;
+
+    agent.value = arguments[18];
   }
 
   launchURL(String url) async {
@@ -122,7 +133,8 @@ class SinglePropertyController extends GetxController {
   launchWhatsApp() async {
     message.value =
         "Hello, I'm interested in your property,${address.value}, ${propertyType.value}, ${price.value} ${images[0]}";
-    whatsAppUrl.value = "whatsapp://send?phone=+9647501501212&text=$message";
+    whatsAppUrl.value =
+        "whatsapp://send?phone=+964${agent.value}&text=$message";
     await launchUrl(Uri.parse(whatsAppUrl.value));
   }
 
@@ -135,6 +147,7 @@ class SinglePropertyController extends GetxController {
             .collection('users')
             .doc(userId.value)
             .collection('favorites')
+            // ignore: invalid_use_of_protected_member
             .where('images', isEqualTo: images.value)
             .get()
             .then((value) {
@@ -160,6 +173,7 @@ class SinglePropertyController extends GetxController {
           .collection('favorites')
           .doc()
           .set({
+        // ignore: invalid_use_of_protected_member
         'images': images.value,
         'price': price.value,
         'propertyType': propertyType.value,
@@ -220,16 +234,16 @@ class SinglePropertyController extends GetxController {
     SharedPreferences.getInstance().then((prefs) {
       if (lang == 'ar' && countryCode == 'IQ') {
         Get.updateLocale(
-            Locale.fromSubtags(languageCode: 'ar', countryCode: 'IQ'));
+            const Locale.fromSubtags(languageCode: 'ar', countryCode: 'IQ'));
         prefs.setString('lang', 'Arabic');
         countryCode.value = 'IQ';
       } else if (lang == 'ar' && countryCode == 'EG') {
         Get.updateLocale(
-            Locale.fromSubtags(languageCode: 'ar', countryCode: 'EG'));
+            const Locale.fromSubtags(languageCode: 'ar', countryCode: 'EG'));
         prefs.setString('lang', 'Arabic_EG');
         countryCode.value = 'EG';
       } else if (lang == 'en') {
-        Get.updateLocale(Locale('en', 'US'));
+        Get.updateLocale(const Locale('en', 'US'));
         prefs.setString('lang', 'English');
         countryCode.value = 'US';
       }
