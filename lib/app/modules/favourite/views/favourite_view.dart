@@ -1,4 +1,4 @@
-import 'package:aqarat/app/theme/app_colors.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

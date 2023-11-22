@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_controller.dart';
@@ -11,7 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+
 
 class SinglePropertyController extends GetxController {
   //TODO: Implement SinglePropertyController

@@ -1,11 +1,9 @@
-import 'package:aqarat/app/modules/single_property/views/single_property_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../../../widgets/customeinfo.dart';
 import '../../../theme/app_colors.dart';
 import '../controllers/map_view_controller.dart';
 

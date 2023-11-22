@@ -7,6 +7,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 class LoginController extends GetxController {
   RxString title = 'Login'.obs;
   RxBool isLoggingIn = false.obs;
+  RxBool isLoading = false.obs;
 
   // check if user is already logged in
 

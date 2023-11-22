@@ -1,7 +1,4 @@
-import 'dart:collection';
 
-import 'package:aqarat/app/modules/chat/views/chat_view.dart';
-import 'package:aqarat/app/modules/chatRoom/views/chat_room_view.dart';
 import 'package:aqarat/app/modules/favourite/views/favourite_view.dart';
 import 'package:aqarat/app/modules/home/views/home_view.dart';
 import 'package:get/get.dart';

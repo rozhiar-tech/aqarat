@@ -2,7 +2,7 @@ import 'package:aqarat/app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
+
 
 import '../controllers/chat_room_controller.dart';
 

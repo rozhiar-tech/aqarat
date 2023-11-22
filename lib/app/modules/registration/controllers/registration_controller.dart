@@ -5,8 +5,15 @@ import 'package:get/get.dart';
 class RegistrationController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  RxBool isLoading = false.obs;
 
-  Future<bool> register(String email, String password) async {
+  Future<bool> register(
+    String email,
+    String password,
+    String name,
+    String lastName,
+    String phone,
+  ) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -17,7 +24,9 @@ class RegistrationController extends GetxController {
       // Store user information in Firestore after successful registration
       await _firestore.collection('users').doc(userCredential.user!.uid).set({
         'email': email,
-        'name': email.toString().substring(0, 3),
+        'name': name,
+        'lastName': lastName,
+        'phone': phone,
         'id': userCredential.user?.uid,
         // Add other user details here
       });
