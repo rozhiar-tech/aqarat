@@ -1,4 +1,4 @@
-package aqarat.aqarat
+package com.aqarat.aqarat
 
 import io.flutter.embedding.android.FlutterActivity
 

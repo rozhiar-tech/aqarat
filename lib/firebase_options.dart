@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBrbYzjy-mg5FLoalvEoAR835E5Xp0wf5M',
-    appId: '1:548052095349:android:9fb3394f003f9d73fc433c',
+    appId: '1:548052095349:android:d55d207baf6d7f52fc433c',
     messagingSenderId: '548052095349',
     projectId: 'aqarat-5f021',
     storageBucket: 'aqarat-5f021.appspot.com',
@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '548052095349',
     projectId: 'aqarat-5f021',
     storageBucket: 'aqarat-5f021.appspot.com',
+    androidClientId: '548052095349-eu6r5f1436unm8irot7bkudeqvth3et5.apps.googleusercontent.com',
     iosClientId: '548052095349-pbtj2kfdeepeoij59eukriaik2dgvcic.apps.googleusercontent.com',
     iosBundleId: 'aqarat.aqarat',
   );

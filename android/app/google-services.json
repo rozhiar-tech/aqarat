@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "548052095349-pbtj2kfdeepeoij59eukriaik2dgvcic.apps.googleusercontent.com",
+              "client_id": "548052095349-ma3r91l774ifsavvdbeh2it736orbgbu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "aqarat.aqarat"
+                "bundle_id": "com.aqaratadmin.aqaratAdmin"
               }
             }
           ]
@@ -75,10 +75,82 @@
               "client_type": 3
             },
             {
-              "client_id": "548052095349-pbtj2kfdeepeoij59eukriaik2dgvcic.apps.googleusercontent.com",
+              "client_id": "548052095349-ma3r91l774ifsavvdbeh2it736orbgbu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "aqarat.aqarat"
+                "bundle_id": "com.aqaratadmin.aqaratAdmin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548052095349:android:d55d207baf6d7f52fc433c",
+        "android_client_info": {
+          "package_name": "com.aqarat.aqarat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrbYzjy-mg5FLoalvEoAR835E5Xp0wf5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548052095349-ma3r91l774ifsavvdbeh2it736orbgbu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aqaratadmin.aqaratAdmin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548052095349:android:a1e8a4d01ccbd38bfc433c",
+        "android_client_info": {
+          "package_name": "com.aqaratadmin.aqarat_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrbYzjy-mg5FLoalvEoAR835E5Xp0wf5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548052095349-ma3r91l774ifsavvdbeh2it736orbgbu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aqaratadmin.aqaratAdmin"
               }
             }
           ]
