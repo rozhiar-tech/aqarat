@@ -24,7 +24,10 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for android - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
@@ -49,22 +52,14 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBrbYzjy-mg5FLoalvEoAR835E5Xp0wf5M',
-    appId: '1:548052095349:android:d55d207baf6d7f52fc433c',
-    messagingSenderId: '548052095349',
-    projectId: 'aqarat-5f021',
-    storageBucket: 'aqarat-5f021.appspot.com',
-  );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBdJr7VSaN-uBueT0d13iQuUG9TNjsp_rM',
-    appId: '1:548052095349:ios:01562363853e909efc433c',
+    appId: '1:548052095349:ios:d9f662b5c6222493fc433c',
     messagingSenderId: '548052095349',
     projectId: 'aqarat-5f021',
     storageBucket: 'aqarat-5f021.appspot.com',
     androidClientId: '548052095349-eu6r5f1436unm8irot7bkudeqvth3et5.apps.googleusercontent.com',
-    iosClientId: '548052095349-pbtj2kfdeepeoij59eukriaik2dgvcic.apps.googleusercontent.com',
-    iosBundleId: 'aqarat.aqarat',
+    iosClientId: '548052095349-g82noemjdcalt7uu126vbdtdb1unvlqm.apps.googleusercontent.com',
+    iosBundleId: 'com.aqarat.aqarats',
   );
 }
