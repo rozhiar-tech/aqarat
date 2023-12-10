@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_controller.dart';
@@ -11,7 +10,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 class SinglePropertyController extends GetxController {
   //TODO: Implement SinglePropertyController
@@ -148,7 +146,7 @@ class SinglePropertyController extends GetxController {
             .doc(userId.value)
             .collection('favorites')
             // ignore: invalid_use_of_protected_member
-            .where('images', isEqualTo: images.value)
+            .where('address', isEqualTo: address.value)
             .get()
             .then((value) {
           value.docs.forEach((element) {
@@ -157,7 +155,7 @@ class SinglePropertyController extends GetxController {
         });
         isFavourite.value = true;
         Get.snackbar(
-          'Error',
+          'Success',
           'Property removed from favorites',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
@@ -166,6 +164,13 @@ class SinglePropertyController extends GetxController {
 
         return;
       }
+      String formattedDate =
+          date.value; // Assuming this is the formatted date string
+
+      DateTime parsedDateTime =
+          DateFormat('yyyy-MM-dd HH:mm:ss').parse(formattedDate);
+      Timestamp timestamp = Timestamp.fromDate(parsedDateTime);
+
       userId.value = user.uid;
       await FirebaseFirestore.instance
           .collection('users')
@@ -179,7 +184,22 @@ class SinglePropertyController extends GetxController {
         'propertyType': propertyType.value,
         'address': address.value,
         'description': description.value,
-        'propertyId': propertyId.value,
+        'area': area.value,
+        'bedrooms': bedrooms.value,
+        'bathrooms': bathrooms.value,
+        'floors': floors.value,
+        'rooms': rooms.value,
+        'rwgasore': rwgasore.value,
+
+        'latitude': latitude.value,
+        'longitude': longitude.value,
+        'videoUrl': videoUrl.value,
+        'id': id.value,
+        // // ignore: invalid_use_of_protected_member
+        // 'properties': properties.value,
+        'createdAt': timestamp,
+        'agent': agent.value,
+        // You may also include other fields if needed
       }).then((value) {
         Get.snackbar(
           'Success',

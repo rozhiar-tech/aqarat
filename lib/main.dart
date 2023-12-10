@@ -1,4 +1,3 @@
-import 'package:aqarat/app/theme/dark_theme.dart';
 import 'package:aqarat/app/theme/light_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       theme: lightTheme,
-      darkTheme: darkTheme,
+      themeMode: ThemeMode.light, // Set theme mode to always light
       supportedLocales: const [
         Locale('en', 'US'),
         Locale('ar', 'IQ'),

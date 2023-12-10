@@ -12,6 +12,7 @@ class FormView extends GetView<FormController> {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
+            iconTheme: IconThemeData(color: Colors.white),
             title: Text(
               controller.title.value,
               style: const TextStyle(color: Colors.white),
@@ -59,6 +60,19 @@ class FormView extends GetView<FormController> {
                     },
                     onSaved: (value) {
                       controller.location.value = value!;
+                    },
+                  ),
+                  TextFormField(
+                    decoration:
+                        const InputDecoration(labelText: 'phone number'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a phone number';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      controller.phone.value = value!;
                     },
                   ),
                   TextFormField(

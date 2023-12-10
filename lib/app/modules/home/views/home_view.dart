@@ -68,7 +68,7 @@ class HomeView extends GetView<HomeController> {
                               Row(
                                 children: [
                                   Text(
-                                    'LS Aqarat',
+                                    'LS Aqar',
                                     style: TextStyle(
                                       color: AppColors.greenColor,
                                       fontSize: 24,
@@ -428,9 +428,9 @@ class HomeView extends GetView<HomeController> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 controller.sharedLang.value == 'Arabic'
-                                    ? 'الملف الشخصي'
+                                    ? 'دعنا نجد لك أفضل منزل'
                                     : controller.sharedLang.value == 'Arabic_EG'
-                                        ? 'بەخێر بێیت بۆ ڵس ئەقارات با شوێنێکی گونجاوت بۆ بدۆزینەوە'
+                                        ? 'بەخێر بێیت بۆ ڵ.س ئەقار با شوێنێکی گونجاوت بۆ بدۆزینەوە'
                                         : 'Lets Find You The Best Home',
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.primary,

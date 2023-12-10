@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -48,7 +47,7 @@ class FavouriteView extends GetView<FavouriteController> {
                                 controller.favouriteList[index]['images']
                                     as List,
                                 controller.favouriteList[index]['price'],
-                                controller.favouriteList[index]['type'],
+                                controller.favouriteList[index]['propertyType'],
                                 controller.favouriteList[index]['address'],
                                 controller.favouriteList[index]['description'],
                                 controller.favouriteList[index]['area'],
@@ -63,6 +62,8 @@ class FavouriteView extends GetView<FavouriteController> {
                                 controller.favouriteList[index]['videoUrl'],
                                 controller.favouriteList[index]['id'],
                                 controller.favouriteList,
+                                controller.favouriteList[index]['createdAt'],
+                                controller.favouriteList[index]['agent'],
                               ]);
                             },
                             child: Container(

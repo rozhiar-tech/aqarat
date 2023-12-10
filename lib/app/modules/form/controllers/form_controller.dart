@@ -11,6 +11,7 @@ class FormController extends GetxController {
   RxDouble price = 0.0.obs;
   RxString location = ''.obs;
   RxString description = ''.obs;
+  RxString phone =''.obs;
 
   Future<void> saveFormToFirebase() async {
     try {
@@ -19,6 +20,7 @@ class FormController extends GetxController {
         'price': price.value,
         'location': location.value,
         'description': description.value,
+        'phone':phone.value
       });
 
       // Reset form fields after successful submission
