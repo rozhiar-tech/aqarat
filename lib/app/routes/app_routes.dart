@@ -19,6 +19,7 @@ abstract class Routes {
   static const SPLASH = _Paths.SPLASH;
   static const FORM = _Paths.FORM;
   static const REGISTRATION = _Paths.REGISTRATION;
+  static const EXCHANGE_RATE = _Paths.EXCHANGE_RATE;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const SPLASH = '/splash';
   static const FORM = '/form';
   static const REGISTRATION = '/registration';
+  static const EXCHANGE_RATE = '/exchange-rate';
 }

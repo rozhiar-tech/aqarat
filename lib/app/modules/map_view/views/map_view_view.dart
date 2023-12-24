@@ -35,14 +35,14 @@ class MapViewView extends GetView<MapViewController> {
                   width: Get.width,
                   child: controller.locationList.length > 0
                       ? GoogleMap(
-                          initialCameraPosition: CameraPosition(
+                          initialCameraPosition: const CameraPosition(
                             target: LatLng(35.5558, 45.4351),
                             zoom: 12.0,
                           ),
                           markers: controller.markers,
                           mapType: MapType.hybrid,
                         )
-                      : Center(
+                      : const Center(
                           child: CircularProgressIndicator(),
                         ),
                 ),
@@ -51,31 +51,28 @@ class MapViewView extends GetView<MapViewController> {
                   left: 0,
                   right: 0,
                   child: Container(
-                    padding: EdgeInsets.all(10),
-                    color: Colors.white,
-                    child: controller.selectedProperty.isNotEmpty
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Property Information',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                'Price: ${controller.selectedProperty[0]['price'].toString()}',
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                  'Type: ${controller.selectedProperty[0]['type']}'),
-                              // Add more property details here
-                            ],
-                          )
-                        : const SizedBox.shrink(),
-                  ),
+                      padding: const EdgeInsets.all(10),
+                      color: Colors.white,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Property Information',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Price: ${controller.selectedProperty[0]['price'].toString()}',
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                              'Type: ${controller.selectedProperty[0]['type']}'),
+                          // Add more property details here
+                        ],
+                      )),
                 ),
               ],
             ),

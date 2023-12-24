@@ -8,6 +8,8 @@ import '../modules/chatRoom/bindings/chat_room_binding.dart';
 import '../modules/chatRoom/views/chat_room_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/exchange_rate/bindings/exchange_rate_binding.dart';
+import '../modules/exchange_rate/views/exchange_rate_view.dart';
 import '../modules/favourite/bindings/favourite_binding.dart';
 import '../modules/favourite/views/favourite_view.dart';
 import '../modules/feautured_properties/bindings/feautured_properties_binding.dart';
@@ -126,6 +128,11 @@ class AppPages {
       name: _Paths.REGISTRATION,
       page: () => const RegistrationView(),
       binding: RegistrationBinding(),
+    ),
+    GetPage(
+      name: _Paths.EXCHANGE_RATE,
+      page: () => const ExchangeRateView(),
+      binding: ExchangeRateBinding(),
     ),
   ];
 }

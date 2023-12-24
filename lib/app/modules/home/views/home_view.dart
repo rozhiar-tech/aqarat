@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/home_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +12,51 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Widget _buildPhoneNumberTile(String phoneNumber, BuildContext context) {
+      return GestureDetector(
+        onTap: () {
+          // Trigger a call when the phone number tile is tapped
+          launch('tel:$phoneNumber');
+          Navigator.of(context).pop(); // Close the modal bottom sheet
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Text(
+            phoneNumber,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.blue, // Change the color as needed
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ),
+      );
+    }
+
+    void _showContactNumbers(BuildContext context) {
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: 200, // Adjust the height as needed
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildPhoneNumberTile('07703241212', context),
+                  _buildPhoneNumberTile('07705241212', context),
+                  _buildPhoneNumberTile('07705261212', context),
+                  _buildPhoneNumberTile('07501501212', context),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
     return SafeArea(
       child: GetX(
           init: HomeController(),
@@ -28,14 +74,14 @@ class HomeView extends GetView<HomeController> {
                           fontSize: 20,
                         ),
                       ),
-                      actions: [
+                      actions: const [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                              controller.userImage.value == ''
-                                  ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
-                                  : controller.userImage.value,
+                            backgroundColor: Colors.white,
+                            child: Icon(
+                              Ionicons.search,
+                              color: AppColors.goldColor,
                             ),
                           ),
                         ),
@@ -46,7 +92,7 @@ class HomeView extends GetView<HomeController> {
                       iconTheme: IconThemeData(
                         color: controller.isDarkMode.value
                             ? AppColors.whiteColor
-                            : AppColors.blackColor,
+                            : AppColors.goldColor,
                       )),
                 ),
                 drawer: Drawer(
@@ -83,12 +129,9 @@ class HomeView extends GetView<HomeController> {
                               ),
                               Row(
                                 children: [
-                                  CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                      controller.userImage.value == ''
-                                          ? 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
-                                          : controller.userImage.value,
-                                    ),
+                                  const CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage("assets/app_logo.png"),
                                   ),
                                   const SizedBox(
                                     width: 10,
@@ -350,7 +393,7 @@ class HomeView extends GetView<HomeController> {
                       ListTile(
                         title: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.add,
                             ),
                             const SizedBox(
@@ -378,7 +421,7 @@ class HomeView extends GetView<HomeController> {
                       ListTile(
                         title: Row(
                           children: [
-                            Icon(Icons.delete),
+                            const Icon(Icons.delete),
                             const SizedBox(width: 10),
                             Text(
                               controller.sharedLang.value == 'Arabic'
@@ -410,7 +453,153 @@ class HomeView extends GetView<HomeController> {
                                 controller.logout();
                               }));
                         },
-                      )
+                      ),
+                      ListTile(
+                        title: Row(
+                          children: [
+                            // Icon for Exchange Rate
+                            Icon(Icons.monetization_on),
+                            const SizedBox(width: 10),
+                            Text(
+                              controller.sharedLang.value == 'Arabic'
+                                  ? 'سعر الصرف'
+                                  : controller.sharedLang.value == 'Arabic_EG'
+                                      ? 'ئاڵوگۆڕی دراو'
+                                      : 'Exchange Rate',
+                              style: TextStyle(
+                                color: controller.isDarkMode.value
+                                    ? AppColors.whiteColor
+                                    : AppColors.greenColor,
+                                fontSize: 16,
+                                fontFamily:
+                                    GoogleFonts.robotoCondensed().fontFamily,
+                              ),
+                            )
+                          ],
+                        ),
+                        onTap: () {
+                          // Handle Exchange Rate tile tap
+                          Get.toNamed('exchange-rate');
+                        },
+                      ),
+                      ListTile(
+                        title: Row(
+                          children: [
+                            // Icon for About Us
+                            Icon(Icons.info_outline),
+                            const SizedBox(width: 10),
+                            Text(
+                              controller.sharedLang.value == 'Arabic'
+                                  ? 'معلومات عنا'
+                                  : controller.sharedLang.value == 'Arabic_EG'
+                                      ? 'زانیاری دەربارەی ئێمە'
+                                      : 'About Us',
+                              style: TextStyle(
+                                color: controller.isDarkMode.value
+                                    ? AppColors.whiteColor
+                                    : AppColors.greenColor,
+                                fontSize: 16,
+                                fontFamily:
+                                    GoogleFonts.robotoCondensed().fontFamily,
+                              ),
+                            )
+                          ],
+                        ),
+                        onTap: () {
+                          // Handle About Us tile tap
+                        },
+                      ),
+                      ListTile(
+                        title: Row(
+                          children: [
+                            // Icon for Contact Us
+                            Icon(Icons.phone),
+                            const SizedBox(width: 10),
+                            Text(
+                              controller.sharedLang.value == 'Arabic'
+                                  ? 'اتصل بنا'
+                                  : controller.sharedLang.value == 'Arabic_EG'
+                                      ? 'په‌یوه‌ندیمان بکه‌'
+                                      : 'Contact Us',
+                              style: TextStyle(
+                                color: controller.isDarkMode.value
+                                    ? AppColors.whiteColor
+                                    : AppColors.greenColor,
+                                fontSize: 16,
+                                fontFamily:
+                                    GoogleFonts.robotoCondensed().fontFamily,
+                              ),
+                            )
+                          ],
+                        ),
+                        onTap: () {
+                          // Handle Contact Us tile tap
+                          _showContactNumbers(context);
+                        },
+                      ),
+                      // Separator line
+                      const Divider(),
+                      // Facebook logo ListTile
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          // Facebook
+                          GestureDetector(
+                            onTap: () {
+                              // Handle Facebook tap
+                            },
+                            child: Icon(
+                              Ionicons.logo_facebook,
+                              size: 40, // Adjust size as needed
+                              color: controller.isDarkMode.value
+                                  ? AppColors.whiteColor
+                                  : AppColors.greenColor,
+                            ),
+                          ),
+
+                          // TikTok
+                          GestureDetector(
+                            onTap: () {
+                              // Handle TikTok tap
+                            },
+                            child: Icon(
+                              Ionicons.logo_tiktok,
+                              size: 40, // Adjust size as needed
+                              color: controller.isDarkMode.value
+                                  ? AppColors.whiteColor
+                                  : AppColors.greenColor,
+                            ),
+                          ),
+
+                          // Instagram
+                          GestureDetector(
+                            onTap: () {
+                              // Handle Instagram tap
+                            },
+                            child: Icon(
+                              Ionicons.logo_instagram,
+                              size: 40, // Adjust size as needed
+                              color: controller.isDarkMode.value
+                                  ? AppColors.whiteColor
+                                  : AppColors.greenColor,
+                            ),
+                          ),
+
+                          // Website
+                          GestureDetector(
+                            onTap: () {
+                              // Handle website tap
+                            },
+                            child: Icon(
+                              Ionicons.logo_web_component,
+                              size: 40, // Adjust size as needed
+                              color: controller.isDarkMode.value
+                                  ? AppColors.whiteColor
+                                  : AppColors.greenColor,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -428,10 +617,10 @@ class HomeView extends GetView<HomeController> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 controller.sharedLang.value == 'Arabic'
-                                    ? 'دعنا نجد لك أفضل منزل'
+                                    ? 'مرحبا بكم في ال اس عقار دعنا نجد لك أفضل منزل '
                                     : controller.sharedLang.value == 'Arabic_EG'
-                                        ? 'بەخێر بێیت بۆ ڵ.س ئەقار با شوێنێکی گونجاوت بۆ بدۆزینەوە'
-                                        : 'Lets Find You The Best Home',
+                                        ? 'بەخێر بێیت بۆ ئێڵ ئێس عقار با باشترین ماڵت بۆ بدۆزینەوە'
+                                        : 'Welcome to LS Aqar Lets Find You The Best Home',
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.primary,
                                   fontSize: 24,
@@ -647,7 +836,7 @@ class HomeView extends GetView<HomeController> {
                                                   : controller.sharedLang
                                                               .value ==
                                                           'Arabic_EG'
-                                                      ? 'کۆمێرسیاڵ'
+                                                      ? 'بازرگانی'
                                                       : 'Commercial',
                                               style: TextStyle(
                                                 color: controller.buttonIndex
@@ -743,7 +932,7 @@ class HomeView extends GetView<HomeController> {
                                           controller.propertyType.value);
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xff0886FE),
+                                  backgroundColor: AppColors.blackColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),

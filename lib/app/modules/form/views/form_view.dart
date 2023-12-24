@@ -14,7 +14,11 @@ class FormView extends GetView<FormController> {
           appBar: AppBar(
             iconTheme: IconThemeData(color: Colors.white),
             title: Text(
-              controller.title.value,
+              controller.sharedLang.value == 'Arabic'
+                  ? 'نموذج طلب ملكية'
+                  : controller.sharedLang.value == 'Arabic_EG'
+                      ? 'فۆڕمی داوا کردنی موڵک'
+                      : controller.title.value,
               style: const TextStyle(color: Colors.white),
             ),
           ),
@@ -25,8 +29,13 @@ class FormView extends GetView<FormController> {
               child: Column(
                 children: [
                   TextFormField(
-                    decoration:
-                        const InputDecoration(labelText: 'Property Name'),
+                    decoration: InputDecoration(
+                      labelText: controller.sharedLang.value == 'Arabic'
+                          ? 'اسم العقار'
+                          : controller.sharedLang.value == 'Arabic_EG'
+                              ? 'ناوی موڵک'
+                              : "Property Name",
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a property name';
@@ -38,7 +47,13 @@ class FormView extends GetView<FormController> {
                     },
                   ),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Price (\$)'),
+                    decoration: InputDecoration(
+                      labelText: controller.sharedLang.value == 'Arabic'
+                          ? 'سعر'
+                          : controller.sharedLang.value == 'Arabic_EG'
+                              ? 'نرخ'
+                              : "'Price (\$)'",
+                    ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -51,7 +66,13 @@ class FormView extends GetView<FormController> {
                     },
                   ),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Location'),
+                    decoration: InputDecoration(
+                      labelText: controller.sharedLang.value == 'Arabic'
+                          ? 'مکان'
+                          : controller.sharedLang.value == 'Arabic_EG'
+                              ? 'شوێن'
+                              : "Location",
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a location';
@@ -63,8 +84,13 @@ class FormView extends GetView<FormController> {
                     },
                   ),
                   TextFormField(
-                    decoration:
-                        const InputDecoration(labelText: 'phone number'),
+                    decoration: InputDecoration(
+                      labelText: controller.sharedLang.value == 'Arabic'
+                          ? 'رقم الهاتف'
+                          : controller.sharedLang.value == 'Arabic_EG'
+                              ? 'ژمارە تەلەفون'
+                              : "Phone Number",
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a phone number';
@@ -76,7 +102,13 @@ class FormView extends GetView<FormController> {
                     },
                   ),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: 'Description'),
+                    decoration: InputDecoration(
+                      labelText: controller.sharedLang.value == 'Arabic'
+                          ? 'وصف'
+                          : controller.sharedLang.value == 'Arabic_EG'
+                              ? 'درێژە'
+                              : "Description",
+                    ),
                     maxLines: 3,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -99,8 +131,12 @@ class FormView extends GetView<FormController> {
                             .saveFormToFirebase(); // Define this function in the controller
                       }
                     },
-                    child: const Text(
-                      'Submit',
+                    child: Text(
+                      controller.sharedLang.value == 'Arabic'
+                          ? 'تقدیم'
+                          : controller.sharedLang.value == 'Arabic_EG'
+                              ? 'پێشکەش کردن'
+                              : "Submit",
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),

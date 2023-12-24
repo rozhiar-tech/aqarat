@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
-  RxString title = 'LS Aqarat'.obs;
+  RxString title = 'LS Aqar'.obs;
 
   RxBool isPressed = false.obs;
   RxList properties = [].obs;
