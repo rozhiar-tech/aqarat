@@ -8,8 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
-
 class MapViewController extends GetxController {
   RxInt id = 0.obs;
   //TODO: Implement MapViewController
@@ -30,8 +28,20 @@ class MapViewController extends GetxController {
         .collection('properties')
         .where('latitude', isEqualTo: latitude)
         .get();
-    selectedProperty.value = querySnapshot.docs;
-    print('property found');
+
+    // Fetching the first document from the query snapshot
+    final propertyDoc =
+        querySnapshot.docs.isNotEmpty ? querySnapshot.docs[0] : null;
+
+    if (propertyDoc != null) {
+      // Assuming 'selectedProperty' is a List<dynamic> variable
+      selectedProperty.value = querySnapshot.docs;
+
+      // Print the fetched property data
+      print(selectedProperty);
+    } else {
+      print('No property found');
+    }
   }
 
   Future<void> getLocationsFromFirebase() async {
@@ -43,16 +53,15 @@ class MapViewController extends GetxController {
       List<dynamic> property = location['property'];
       double latitude = property[0];
       double longitude = property[1];
-
-      // Fetch properties from 'properties' collection with the same location
-
+      print("location id ${location.id}");
       Marker marker = Marker(
         markerId: MarkerId(location.id),
         position: LatLng(latitude, longitude),
         icon: customIcon.value,
-        onTap: () {
+        onTap: () async {
           isInfoWindowShown.value = true;
-          getPropertiesFromFirebase(property[0]);
+          await getPropertiesFromFirebase(latitude);
+          // Fetch details for the tapped marker
         },
       );
       markers.add(marker);
@@ -82,7 +91,6 @@ class MapViewController extends GetxController {
     super.onInit();
     getMarkerIcon();
     await getLocationsFromFirebase();
-    print(selectedProperty);
   }
 
   @override

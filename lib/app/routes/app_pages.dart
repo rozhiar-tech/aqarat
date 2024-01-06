@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/about_us/bindings/about_us_binding.dart';
+import '../modules/about_us/views/about_us_view.dart';
 import '../modules/all_properties/bindings/all_properties_binding.dart';
 import '../modules/all_properties/views/all_properties_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
@@ -28,6 +30,8 @@ import '../modules/projectDetail/bindings/project_detail_binding.dart';
 import '../modules/projectDetail/views/project_detail_view.dart';
 import '../modules/projects/bindings/projects_binding.dart';
 import '../modules/projects/views/projects_view.dart';
+import '../modules/propetyForm/bindings/propety_form_binding.dart';
+import '../modules/propetyForm/views/propety_form_view.dart';
 import '../modules/registration/bindings/registration_binding.dart';
 import '../modules/registration/views/registration_view.dart';
 import '../modules/single_property/bindings/single_property_binding.dart';
@@ -133,6 +137,16 @@ class AppPages {
       name: _Paths.EXCHANGE_RATE,
       page: () => const ExchangeRateView(),
       binding: ExchangeRateBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROPETY_FORM,
+      page: () => const PropetyFormView(),
+      binding: PropetyFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABOUT_US,
+      page: () => const AboutUsView(),
+      binding: AboutUsBinding(),
     ),
   ];
 }

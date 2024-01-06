@@ -46,11 +46,13 @@ class MapViewView extends GetView<MapViewController> {
                           child: CircularProgressIndicator(),
                         ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
+                Visibility(
+                  visible: controller.isInfoWindowShown.value,
+                  child: Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
                       padding: const EdgeInsets.all(10),
                       color: Colors.white,
                       child: Column(
@@ -64,15 +66,20 @@ class MapViewView extends GetView<MapViewController> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Text(
-                            'Price: ${controller.selectedProperty[0]['price'].toString()}',
-                          ),
+                          if (controller.selectedProperty.isNotEmpty)
+                            Text(
+                              'Price: ${controller.selectedProperty[0]['price'].toString()}',
+                            ),
                           const SizedBox(height: 10),
-                          Text(
-                              'Type: ${controller.selectedProperty[0]['type']}'),
+                          if (controller.selectedProperty.isNotEmpty)
+                            Text(
+                              'Type: ${controller.selectedProperty[0]['type']}',
+                            ),
                           // Add more property details here
                         ],
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

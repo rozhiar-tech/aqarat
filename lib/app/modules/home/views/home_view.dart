@@ -24,7 +24,7 @@ class HomeView extends GetView<HomeController> {
           child: Text(
             phoneNumber,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               color: Colors.blue, // Change the color as needed
               decoration: TextDecoration.underline,
@@ -65,24 +65,76 @@ class HomeView extends GetView<HomeController> {
                 appBar: PreferredSize(
                   preferredSize: const Size.fromHeight(90),
                   child: AppBar(
-                      title: Text(
-                        controller.title.value,
-                        style: TextStyle(
-                          color: controller.isDarkMode.value
-                              ? AppColors.whiteColor
-                              : AppColors.greenColor,
-                          fontSize: 20,
+                      title: GestureDetector(
+                        onTap: () {
+                          controller.isExpanded.value =
+                              !controller.isExpanded.value;
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.23,
+                          height: MediaQuery.of(context).size.width * 0.2,
+                          child: Image.asset("assets/tt.jpeg"),
                         ),
                       ),
-                      actions: const [
+                      actions: [
                         Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Ionicons.search,
-                              color: AppColors.goldColor,
-                            ),
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 600),
+                            width: controller.isExpanded.value
+                                ? MediaQuery.of(context).size.width * 0.80
+                                : kToolbarHeight,
+                            child: controller.isExpanded.value
+                                ? TextField(
+                                    // Customize your text field here
+                                    decoration: const InputDecoration(
+                                      hintText: 'Search',
+                                      border: OutlineInputBorder(),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                    ),
+                                    onChanged: (value) {
+                                      // Handle text field changes here
+                                    },
+                                    onSubmitted: (value) async {
+                                      controller.isExpanded.value =
+                                          value.isNotEmpty;
+
+                                      // Call the method with the entered text to search for properties
+                                      await controller.searchProperties(value);
+                                      print(value);
+                                      if (controller.properties.isNotEmpty) {
+                                        print("hell");
+                                        Get.to(() => TempScreen(
+                                            properties: controller.properties));
+                                      }
+
+                                      // Submit logic here
+                                      // For example, search based on the entered value
+                                    },
+                                    // Clearing the text field will minimize it
+                                    // You might need to adapt this to your exact use case
+                                    onTap: () {
+                                      // if (controller
+                                      //         .textEditingController.text !=
+                                      //     '') {
+                                      //   controller.isExpanded.value = false;
+                                      // }
+                                    },
+                                  )
+                                : CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        controller.isExpanded.value =
+                                            !controller.isExpanded.value;
+                                      },
+                                      icon: const Icon(
+                                        Ionicons.search,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
                           ),
                         ),
                       ],
@@ -421,6 +473,34 @@ class HomeView extends GetView<HomeController> {
                       ListTile(
                         title: Row(
                           children: [
+                            const Icon(
+                              Icons.add_box_sharp,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              controller.sharedLang.value == 'Arabic'
+                                  ? 'أضف الممتلكات الخاصة بك'
+                                  : controller.sharedLang.value == 'Arabic_EG'
+                                      ? 'پێشکەش کردنی موڵک بۆ بڵاو کردنەوە'
+                                      : 'add your property',
+                              style: TextStyle(
+                                color: controller.isDarkMode.value
+                                    ? AppColors.whiteColor
+                                    : AppColors.greenColor,
+                                fontSize: 16,
+                                fontFamily:
+                                    GoogleFonts.robotoCondensed().fontFamily,
+                              ),
+                            )
+                          ],
+                        ),
+                        onTap: () => Get.toNamed('propety-form'),
+                      ),
+                      ListTile(
+                        title: Row(
+                          children: [
                             const Icon(Icons.delete),
                             const SizedBox(width: 10),
                             Text(
@@ -458,7 +538,7 @@ class HomeView extends GetView<HomeController> {
                         title: Row(
                           children: [
                             // Icon for Exchange Rate
-                            Icon(Icons.monetization_on),
+                            const Icon(Icons.monetization_on),
                             const SizedBox(width: 10),
                             Text(
                               controller.sharedLang.value == 'Arabic'
@@ -486,7 +566,7 @@ class HomeView extends GetView<HomeController> {
                         title: Row(
                           children: [
                             // Icon for About Us
-                            Icon(Icons.info_outline),
+                            const Icon(Icons.info_outline),
                             const SizedBox(width: 10),
                             Text(
                               controller.sharedLang.value == 'Arabic'
@@ -507,13 +587,14 @@ class HomeView extends GetView<HomeController> {
                         ),
                         onTap: () {
                           // Handle About Us tile tap
+                          Get.toNamed("/about-us");
                         },
                       ),
                       ListTile(
                         title: Row(
                           children: [
                             // Icon for Contact Us
-                            Icon(Icons.phone),
+                            const Icon(Icons.phone),
                             const SizedBox(width: 10),
                             Text(
                               controller.sharedLang.value == 'Arabic'
@@ -547,6 +628,7 @@ class HomeView extends GetView<HomeController> {
                           GestureDetector(
                             onTap: () {
                               // Handle Facebook tap
+                              launch('https://www.facebook.com/ls.aqarat/');
                             },
                             child: Icon(
                               Ionicons.logo_facebook,
@@ -561,6 +643,7 @@ class HomeView extends GetView<HomeController> {
                           GestureDetector(
                             onTap: () {
                               // Handle TikTok tap
+                              launch('https://www.tiktok.com/@ls.aqar?lang=ar');
                             },
                             child: Icon(
                               Ionicons.logo_tiktok,
@@ -575,6 +658,8 @@ class HomeView extends GetView<HomeController> {
                           GestureDetector(
                             onTap: () {
                               // Handle Instagram tap
+                              launch(
+                                  'https://www.instagram.com/ls_aqar/?next=%2Fropa.deportiva.medellin%2F');
                             },
                             child: Icon(
                               Ionicons.logo_instagram,
@@ -589,6 +674,7 @@ class HomeView extends GetView<HomeController> {
                           GestureDetector(
                             onTap: () {
                               // Handle website tap
+                              launch('http://www.lsaqar.com/');
                             },
                             child: Icon(
                               Ionicons.logo_web_component,
@@ -1110,7 +1196,7 @@ class HomeView extends GetView<HomeController> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  height: Get.height * 0.3,
+                                                  height: Get.height * 0.24,
                                                   width: Get.width * 0.5,
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -1871,6 +1957,67 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ));
           }),
+    );
+  }
+}
+
+class TempScreen extends StatelessWidget {
+  final List<dynamic> properties;
+
+  const TempScreen({Key? key, required this.properties}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Searched Property"),
+        centerTitle: true,
+      ),
+      body: ListView.builder(
+        itemCount: properties.length,
+        itemBuilder: (context, index) {
+          final property = properties[index];
+          final imageUrl = property['photos'][0];
+
+          return ListTile(
+            onTap: () {
+              // Navigate to a new screen with property details
+              Get.toNamed('/single-property', arguments: [
+                properties[index]['photos'] as List,
+                properties[index]['price'],
+                properties[index]['type'],
+                properties[index]['address'],
+                properties[index]['description'],
+                properties[index]['area'],
+                properties[index]['bedrooms'],
+                properties[index]['bathrooms'],
+                properties[index]['floors'],
+                properties[index]['rooms'],
+                properties[index]['rwgasore'],
+                false,
+                properties[index]['latitude'],
+                properties[index]['longtitude'],
+                properties[index]['videoUrl'],
+                properties[index]['id'],
+                properties,
+                properties[index]['createdAt'],
+                properties[index]['agent'],
+              ]);
+            },
+            leading: imageUrl != null
+                ? Image.network(
+                    imageUrl,
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                  )
+                : Container(),
+            title: Text(property['address']),
+            subtitle: Text(property['description']),
+            trailing: Text(property['id'].toString()),
+          );
+        },
+      ),
     );
   }
 }

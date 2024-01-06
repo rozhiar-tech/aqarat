@@ -86,6 +86,10 @@ class FeauturedPropertiesView extends GetView<FeauturedPropertiesController> {
                                 controller.feauturedPropertiesItems[index]
                                     ['id'],
                                 controller.feauturedPropertiesItems,
+                                controller.feauturedPropertiesItems[index]
+                                    ['createdAt'],
+                                controller.feauturedPropertiesItems[index]
+                                    ['agent'],
                               ]);
                             },
                             child: Container(

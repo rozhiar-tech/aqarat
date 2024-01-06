@@ -1,27 +1,19 @@
-import 'package:aqarat/app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/form_controller.dart';
+import '../controllers/propety_form_controller.dart';
 
-class FormView extends GetView<FormController> {
-  const FormView({Key? key}) : super(key: key);
+class PropetyFormView extends GetView<PropetyFormController> {
+  const PropetyFormView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetX(
-      init: FormController(),
+      init: PropetyFormController(), // Initialize your controller here
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            iconTheme: IconThemeData(color: AppColors.blackColor),
-            title: Text(
-              controller.sharedLang.value == 'Arabic'
-                  ? 'نموذج طلب ملكية'
-                  : controller.sharedLang.value == 'Arabic_EG'
-                      ? 'فۆڕمی داوا کردنی موڵک'
-                      : controller.title.value,
-              style: const TextStyle(color: AppColors.blackColor),
-            ),
+            title: Text(controller.title.value),
+            centerTitle: true,
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -31,11 +23,7 @@ class FormView extends GetView<FormController> {
                 children: [
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: controller.sharedLang.value == 'Arabic'
-                          ? 'اسم العقار'
-                          : controller.sharedLang.value == 'Arabic_EG'
-                              ? 'ناوی موڵک'
-                              : "Property Name",
+                      labelText: 'Property Name',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -49,11 +37,7 @@ class FormView extends GetView<FormController> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: controller.sharedLang.value == 'Arabic'
-                          ? 'سعر'
-                          : controller.sharedLang.value == 'Arabic_EG'
-                              ? 'نرخ'
-                              : "Price (\$)",
+                      labelText: 'Price (\$)',
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
@@ -68,11 +52,7 @@ class FormView extends GetView<FormController> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: controller.sharedLang.value == 'Arabic'
-                          ? 'مکان'
-                          : controller.sharedLang.value == 'Arabic_EG'
-                              ? 'شوێن'
-                              : "Location",
+                      labelText: 'Location',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -86,11 +66,7 @@ class FormView extends GetView<FormController> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: controller.sharedLang.value == 'Arabic'
-                          ? 'رقم الهاتف'
-                          : controller.sharedLang.value == 'Arabic_EG'
-                              ? 'ژمارە تەلەفون'
-                              : "Phone Number",
+                      labelText: 'Phone Number',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -104,11 +80,7 @@ class FormView extends GetView<FormController> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: controller.sharedLang.value == 'Arabic'
-                          ? 'وصف'
-                          : controller.sharedLang.value == 'Arabic_EG'
-                              ? 'درێژە'
-                              : "Description",
+                      labelText: 'Description',
                     ),
                     maxLines: 3,
                     validator: (value) {
@@ -126,20 +98,14 @@ class FormView extends GetView<FormController> {
                     onPressed: () {
                       // Validate the form
                       if (controller.formKey.currentState!.validate()) {
-                        // Save the form data to Firebase
+                        // Save the form data
                         controller.formKey.currentState!.save();
+                        // You can call a function in the controller to save data or perform actions
                         controller
-                            .saveFormToFirebase(); // Define this function in the controller
+                            .saveFormToFirebase(); // Define this function in your controller
                       }
                     },
-                    child: Text(
-                      controller.sharedLang.value == 'Arabic'
-                          ? 'تقدیم'
-                          : controller.sharedLang.value == 'Arabic_EG'
-                              ? 'پێشکەش کردن'
-                              : "Submit",
-                      style: const TextStyle(color: AppColors.blackColor),
-                    ),
+                    child: const Text('Submit'),
                   ),
                 ],
               ),

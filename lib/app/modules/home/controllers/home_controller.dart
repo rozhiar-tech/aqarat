@@ -25,6 +25,8 @@ class HomeController extends GetxController {
   RxBool isGrid = false.obs;
   RxString countryCodeValue = 'US'.obs;
   User? user = FirebaseAuth.instance.currentUser;
+  RxBool isExpanded = false.obs;
+  TextEditingController textEditingController = TextEditingController();
 
   toggleViewMode() {
     isGrid.value = !isGrid.value;
@@ -124,6 +126,41 @@ class HomeController extends GetxController {
 
   changeTheme() {
     Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
+  }
+
+  Future searchProperties(String searchText) async {
+    if (int.tryParse(searchText) != null) {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('properties')
+          .where('id', isEqualTo: int.parse(searchText)) // Filter by ID
+          .get();
+
+      if (querySnapshot.docs.isEmpty) {
+        Get.snackbar(
+          'No Matches Found',
+          'No properties matched the ID: $searchText',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        properties.value = querySnapshot.docs;
+      }
+    } else {
+      QuerySnapshot nameQuerySnapshot = await FirebaseFirestore.instance
+          .collection('properties')
+          .where('address',
+              isGreaterThanOrEqualTo: searchText) // Filter by name
+          .get();
+
+      if (nameQuerySnapshot.docs.isEmpty) {
+        Get.snackbar(
+          'No Matches Found',
+          'No properties matched the search criteria for text: $searchText',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        properties.value = nameQuerySnapshot.docs;
+      }
+    }
   }
 
   final count = 0.obs;

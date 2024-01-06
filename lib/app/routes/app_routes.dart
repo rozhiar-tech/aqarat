@@ -20,6 +20,8 @@ abstract class Routes {
   static const FORM = _Paths.FORM;
   static const REGISTRATION = _Paths.REGISTRATION;
   static const EXCHANGE_RATE = _Paths.EXCHANGE_RATE;
+  static const PROPETY_FORM = _Paths.PROPETY_FORM;
+  static const ABOUT_US = _Paths.ABOUT_US;
 }
 
 abstract class _Paths {
@@ -41,4 +43,6 @@ abstract class _Paths {
   static const FORM = '/form';
   static const REGISTRATION = '/registration';
   static const EXCHANGE_RATE = '/exchange-rate';
+  static const PROPETY_FORM = '/propety-form';
+  static const ABOUT_US = '/about-us';
 }
