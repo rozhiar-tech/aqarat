@@ -1,3 +1,4 @@
+import 'package:aqarat/app/modules/map_view/views/map_view_view.dart';
 import 'package:aqarat/app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -558,86 +559,101 @@ class SinglePropertyView extends GetView<SinglePropertyController> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Container(
-                        width: Get.width * 0.9,
-                        height: Get.height * 0.2,
-                        decoration: BoxDecoration(
-                          color: Colors.red[300],
-                          borderRadius: BorderRadius.circular(24),
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              controller.images[0],
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Center(
-                            child: GestureDetector(
-                          onTap: () {
-                            controller.launchURL(controller.videoUrl.value);
-                          },
-                          child: Container(
-                            width: Get.width * 0.2,
-                            height: Get.height * 0.1,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            child: const Icon(
-                              Icons.play_arrow,
-                              size: 50,
-                              color: AppColors.goldColor,
-                            ),
-                          ),
-                        )),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: controller.isDarkMode.value
-                            ? AppColors.blackColor
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      height: Get.height * 0.3,
-                      width: Get.width,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GoogleMap(
-                          padding: const EdgeInsets.all(3),
-                          mapType: MapType.hybrid,
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(controller.latitude.value,
-                                controller.longitude.value),
-                            zoom: 14.4746,
-                          ),
-                          markers: {
-                            Marker(
-                                markerId: const MarkerId('1'),
-                                position: LatLng(controller.latitude.value,
-                                    controller.longitude.value),
-                                icon: controller.customIcon.value,
-                                infoWindow: const InfoWindow(
-                                    title: 'Property Location',
-                                    snippet: '5 Star Rating'))
-                          },
-                          circles: {
-                            Circle(
-                                circleId: const CircleId('1'),
-                                center: LatLng(controller.latitude.value,
-                                    controller.longitude.value),
-                                radius: 500,
-                                fillColor: Colors.blue.withOpacity(0.2),
-                                strokeColor: Colors.blue,
-                                strokeWidth: 2,
+                    controller.videoUrl.value == ''
+                        ? Container()
+                        : Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Container(
+                              width: Get.width * 0.9,
+                              height: Get.height * 0.2,
+                              decoration: BoxDecoration(
+                                color: Colors.red[300],
+                                borderRadius: BorderRadius.circular(24),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    controller.images[0],
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              child: Center(
+                                  child: GestureDetector(
                                 onTap: () {
-                                  print('Circle tapped');
+                                  controller
+                                      .launchURL(controller.videoUrl.value);
                                 },
-                                consumeTapEvents: true,
-                                visible: true)
+                                child: Container(
+                                  width: Get.width * 0.2,
+                                  height: Get.height * 0.1,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  child: const Icon(
+                                    Icons.play_arrow,
+                                    size: 50,
+                                    color: AppColors.goldColor,
+                                  ),
+                                ),
+                              )),
+                            ),
+                          ),
+                    GestureDetector(
+                      onTap: (() {
+                        print('clicked');
+                        Get.to(
+                          MapViewView(),
+                          arguments: {
+                            'latitude': controller.latitude.value,
+                            'longitude': controller.longitude.value,
                           },
+                        );
+                      }),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: controller.isDarkMode.value
+                              ? AppColors.blackColor
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        height: Get.height * 0.3,
+                        width: Get.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GoogleMap(
+                            padding: const EdgeInsets.all(3),
+                            mapType: MapType.hybrid,
+                            initialCameraPosition: CameraPosition(
+                              target: LatLng(controller.latitude.value,
+                                  controller.longitude.value),
+                              zoom: 14.4746,
+                            ),
+                            markers: {
+                              Marker(
+                                  markerId: const MarkerId('1'),
+                                  position: LatLng(controller.latitude.value,
+                                      controller.longitude.value),
+                                  icon: controller.customIcon.value,
+                                  infoWindow: const InfoWindow(
+                                      title: 'Property Location',
+                                      snippet: '5 Star Rating'))
+                            },
+                            circles: {
+                              Circle(
+                                  circleId: const CircleId('1'),
+                                  center: LatLng(controller.latitude.value,
+                                      controller.longitude.value),
+                                  radius: 500,
+                                  fillColor: Colors.blue.withOpacity(0.2),
+                                  strokeColor: Colors.blue,
+                                  strokeWidth: 2,
+                                  onTap: () {
+                                    print('Circle tapped');
+                                  },
+                                  consumeTapEvents: true,
+                                  visible: true)
+                            },
+                          ),
                         ),
                       ),
                     ),

@@ -85,6 +85,20 @@ class MapViewController extends GetxController {
     customIcon.value = BitmapDescriptor.fromBytes(markerIcon);
   }
 
+  void moveToPropertyLocation(double latitude, double longitude) async {
+    final GoogleMapController? controller = await this.mapController.future;
+    if (controller != null) {
+      controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(latitude, longitude),
+            zoom: 16.0, // Set your desired zoom level
+          ),
+        ),
+      );
+    }
+  }
+
   final count = 0.obs;
   @override
   Future<void> onInit() async {

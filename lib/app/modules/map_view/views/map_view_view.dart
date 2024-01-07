@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,8 +11,35 @@ import '../controllers/map_view_controller.dart';
 
 class MapViewView extends GetView<MapViewController> {
   const MapViewView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final arguments = Get.arguments as Map<String, dynamic>?;
+
+    void moveToPropertyLocation(double latitude, double longitude) async {
+      final GoogleMapController? controller =
+          await this.controller.mapController.future;
+      if (controller != null) {
+        controller.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: LatLng(latitude, longitude),
+              zoom: 16.0, // Set your desired zoom level
+            ),
+          ),
+        );
+      }
+    }
+
+    double latitude = 35.5558; // Default latitude
+    double longitude = 45.4351; // Default longitude
+
+    // Check if arguments are available and assign them
+    if (arguments != null) {
+      latitude = arguments['latitude'] ?? 35.5558;
+      longitude = arguments['longitude'] ?? 45.4351;
+      print(latitude);
+    }
     return GetX<MapViewController>(
         init: MapViewController(),
         builder: (controller) {
@@ -35,12 +64,15 @@ class MapViewView extends GetView<MapViewController> {
                   width: Get.width,
                   child: controller.locationList.length > 0
                       ? GoogleMap(
-                          initialCameraPosition: const CameraPosition(
-                            target: LatLng(35.5558, 45.4351),
+                          initialCameraPosition: CameraPosition(
+                            target: LatLng(latitude, longitude),
                             zoom: 12.0,
                           ),
                           markers: controller.markers,
                           mapType: MapType.hybrid,
+                          onMapCreated: (GoogleMapController controller) {
+                            this.controller.mapController.complete(controller);
+                          },
                         )
                       : const Center(
                           child: CircularProgressIndicator(),
@@ -65,16 +97,33 @@ class MapViewView extends GetView<MapViewController> {
                               fontSize: 18,
                             ),
                           ),
-                          const SizedBox(height: 10),
-                          if (controller.selectedProperty.isNotEmpty)
-                            Text(
-                              'Price: ${controller.selectedProperty[0]['price'].toString()}',
-                            ),
-                          const SizedBox(height: 10),
-                          if (controller.selectedProperty.isNotEmpty)
-                            Text(
-                              'Type: ${controller.selectedProperty[0]['type']}',
-                            ),
+                          Row(
+                            children: [
+                              if (controller.selectedProperty.isNotEmpty)
+                                Image.network(
+                                  controller.selectedProperty[0]['photos'][0],
+                                  width: 100,
+                                  height: 100,
+                                ),
+                              const SizedBox(width: 10),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (controller.selectedProperty.isNotEmpty)
+                                    Text(
+                                      'Price: ${controller.selectedProperty[0]['price'].toString()}',
+                                    ),
+                                  const SizedBox(height: 10),
+                                  if (controller.selectedProperty.isNotEmpty)
+                                    Text(
+                                      'Type: ${controller.selectedProperty[0]['type']}',
+                                    ),
+                                ],
+                              )
+                            ],
+                          ),
+
                           // Add more property details here
                         ],
                       ),
