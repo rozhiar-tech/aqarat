@@ -43,6 +43,42 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:548052095349:android:ca76d039eff9b6cefc433c",
+        "android_client_info": {
+          "package_name": "com.aqarat.ls"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrbYzjy-mg5FLoalvEoAR835E5Xp0wf5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548052095349-6cp2sm2amm56jjqapljb68r4j6fkpive.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548052095349-g82noemjdcalt7uu126vbdtdb1unvlqm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aqarat.aqarats"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:548052095349:android:a1e8a4d01ccbd38bfc433c",
         "android_client_info": {
           "package_name": "com.aqaratadmin.aqarat_admin"
